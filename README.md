@@ -130,6 +130,8 @@ YES-side imbalance, approximate forward midpoint movement and a post-quote
 adverse-selection proxy. JSON paths resolve from `packages/research`; existing
 files are never overwritten. These are not fill or trade P&L estimates. See
 [research documentation](packages/research/README.md) for query limits and units.
+The dated [EXP-002 result](experiments/EXP-002-production-microstructure/result-2026-09-27.md)
+applies the predefined criteria to a stopped two-hour production-public run.
 
 ## Existing demo CLI
 
