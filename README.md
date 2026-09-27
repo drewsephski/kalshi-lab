@@ -1,67 +1,105 @@
 # Kalshi Lab
 
-Kalshi Lab is an experimental prediction-market research system. Its current
-execution environment is **Kalshi demo only**; it is not production-ready and
-does not claim profitability.
+Kalshi Lab is an experimental prediction-market research system. **Authenticated
+trading is Kalshi demo only.** The market recorder collects data without placing
+orders. Demo liquidity is not representative of production liquidity, and this
+lab makes no profitability claims.
 
-## Current milestone
+The initial experiment bankroll remains **$100 mock funds**. No recorder or
+migration resets or changes that record or the live demo balance.
 
-The first milestone is a small, reusable TypeScript client and explicit CLI
-smoke checks for authenticated demo access. The only account-mutating command
-places one tiny demo order, retrieves it, and cancels it.
+## Workspace and architecture
 
-Experiment metadata records an **initial experiment bankroll of $100**. This is
-the demo account's starting mock bankroll, not a promise about the current API
-balance. Orders and fills may change the live demo balance; the CLI reads that
-value from Kalshi and never resets it.
+- `apps/web`: unchanged Next.js research shell.
+- `apps/cli`: explicit demo balance, markets, and bounded smoke-order commands.
+- `apps/worker`: executable recorder with continuous and one-shot modes.
+- `packages/kalshi`: demo authentication, REST market data, demo WebSocket
+  protocol, exact normalization, and a separate credential-free public client.
+- `packages/db`: Drizzle schema, SQL migrations, Postgres.js connections, and
+  transactional recorder queries compatible with Neon Postgres.
+- `docs/market-data.md`: sources, fields, timing, reliability, and verification.
+- `experiments/EXP-001-market-recorder`: data-quality question and success criteria.
 
-## Workspace
+```text
+REST discovery / metadata          Demo ticker + orderbook + trade WebSocket
+              └───────────────────────┬──────────────────────┘
+                            normalized in-memory state
+                                      │
+                         snapshot scheduler (default 5s)
+                                      │
+                            bounded persistence queue
+                                      │
+                        Neon Postgres: markets / snapshots / runs
+```
 
-- `apps/web`: Next.js shell for future research surfaces.
-- `apps/cli`: explicit balance, market-list, and smoke-order commands.
-- `apps/worker`: reserved for later market-data and research jobs.
-- `packages/kalshi`: the monorepo's sole Kalshi API boundary. It owns demo
-  configuration, request signing, API types, and REST calls.
-- `packages/ui`, `packages/eslint-config`, `packages/typescript-config`: shared
-  workspace packages.
-
-Authenticated requests use a hard-coded demo origin in `packages/kalshi`; the
-client accepts no configurable host. `KALSHI_ENV` must be exactly `demo`.
-Signing supports Kalshi Ed25519 and RSA private keys using Node's built-in
-crypto module.
+Production-public recording uses unsigned REST polling instead of WebSockets;
+Kalshi currently requires authentication for every WebSocket connection. That
+client accepts no credentials or custom host and exposes no order methods.
+The authenticated client and signed WebSocket connection have fixed demo hosts.
 
 ## Setup
 
-Use Node 24 or newer and pnpm 11. Install dependencies, copy the example
-environment file, then set your API credentials:
+Use Node 24 or newer and pnpm 11, retaining the workspace lockfile:
 
 ```sh
 pnpm install
-cp .env.example .env
+cp .env.example .env.local
 ```
 
-Create an API key for the **Kalshi demo account** and save the downloaded
-private key locally. Keep the private key outside version control (for example,
-under `.secrets/`, which Git ignores). Fill in `.env`:
+Commands load the root `.env`, then `.env.local` if present; `.env.local` takes
+precedence, and exported shell variables take precedence over both. Never commit
+credentials, private keys, or environment files. Save an unencrypted demo Ed25519
+or RSA PEM outside version control, preferably with restrictive file permissions.
 
 ```env
+DATABASE_URL=your-neon-postgres-url
 KALSHI_ENV=demo
-KALSHI_API_KEY_ID=your-demo-api-key-id
-KALSHI_PRIVATE_KEY_PATH=../../.secrets/kalshi-demo.pem
+KALSHI_API_KEY_ID=your-demo-key-id
+KALSHI_PRIVATE_KEY_PATH=/absolute/path/to/kalshi-demo.pem
+KALSHI_RECORDER_SOURCE=demo
+KALSHI_RECORDER_MAX_MARKETS=25
+MARKET_SNAPSHOT_INTERVAL_MS=5000
 ```
 
-The CLI resolves a relative private-key path from `apps/cli`; an absolute path
-also works.
+Use an absolute private-key path to share the same configuration between the CLI
+and worker. Relative paths resolve from the invoked package (`apps/cli` or
+`apps/worker`). No authentication/users/organizations are added by this milestone.
+The worker uses only `DATABASE_URL`; existing Neon Auth settings are unrelated.
 
-Never commit `.env`, private keys, or API secrets. The key must be an
-unencrypted PEM in Ed25519 or RSA format. If a key is encrypted, use a local
-unencrypted key file with restrictive filesystem permissions for this initial
-CLI workflow.
+Generate/validate migrations, apply them to the configured research database,
+then write one snapshot per selected market:
 
-## Demo commands
+```sh
+pnpm db:generate
+pnpm db:check
+pnpm db:migrate
+pnpm worker:once
+pnpm worker:record
+```
 
-These commands are explicit; development, lint, type checking, tests, and builds
-never place orders.
+`worker:record` runs until SIGINT/SIGTERM (Ctrl+C). Defaults select at most 25 open
+$1 binary markets from a bounded pool of at most three 200-market pages, excluding
+MVE combinations. Ranking is descending 24-hour volume, total volume, open
+interest, then ascending ticker. This is a ranking within that pool, not all of
+Kalshi. The universe is fixed for each run. Explicit tickers are also supported:
+
+```sh
+KALSHI_TRACK_TICKERS=TICKER-A,TICKER-B pnpm worker:once
+```
+
+Credential-free production data is an explicit separate dataset:
+
+```sh
+KALSHI_RECORDER_SOURCE=production_public pnpm worker:once
+KALSHI_RECORDER_SOURCE=production_public pnpm worker:record
+```
+
+Those commands require a database but do not use Kalshi API keys. Research must
+filter or group by source and reject stale observations as appropriate. See
+[market-data documentation](docs/market-data.md) for SQL proving rows were written
+and for gaps, freshness, depth, trade-summary, and reconnect limitations.
+
+## Existing demo CLI
 
 ```sh
 pnpm kalshi:balance
@@ -69,32 +107,33 @@ pnpm kalshi:markets
 pnpm kalshi:smoke-order
 ```
 
-The balance and markets commands are read-only. The smoke-order command is the
-only mutating command: it deterministically picks an open demo market and
-submits one post-only YES buy for one contract at a 1¢ limit. It then retrieves,
-cancels, and checks that same order. If a later step fails after creation, it
-makes a best-effort cancellation attempt. Kalshi demo liquidity is not
-representative of production liquidity.
+Balance and markets are read-only. **The last command places an order** and is
+never part of recorder checks or CI. It buys one post-only YES contract at a 1¢
+limit, retrieves it, cancels it, and checks the same order. A failed cancellation
+gets one best-effort cleanup retry; a successful cancellation is not repeated.
+Cleanup can never create another order.
 
-## Development checks
+## Development verification
 
 ```sh
+pnpm install
+pnpm test
 pnpm lint
 pnpm check-types
-pnpm test
 pnpm build
+pnpm db:generate
+pnpm db:check
 ```
 
-## Safety and future work
+Tests require neither Kalshi nor Neon credentials. Persistence tests apply the
+actual generated SQL migration to isolated PGlite PostgreSQL and exercise source
+constraints, exact numerics, upserts, transactions, and retry idempotency.
 
-This integration has no production mode and no user-supplied base URL. Do not
-add authenticated production endpoints. Preserve prior experiment results and
-the starting bankroll record; document a hypothesis, evaluation metrics,
-strategy version, and Git commit SHA for every future strategy change. Do not
-hide losing experiments or treat demo results as evidence of production
-performance.
+## Research boundaries
 
-Later milestones may add market recording, immutable experiment tracking,
-strategy research, WeatherNext data, and research tooling. Persistence,
-workers, WebSockets, automated strategies, and dashboard work are outside the
-current milestone.
+This milestone has no strategies, automated orders, backtesting engine, P&L
+optimization, WeatherNext, Grok/xAI, external sports/economic feeds, user auth,
+billing, or dashboard redesign. Preserve prior results and the starting bankroll.
+Future strategy changes must record a hypothesis, evaluation metrics, strategy
+version, and Git commit SHA before interpreting results. Never weaken the
+hard-coded demo boundary to enable authenticated production access.

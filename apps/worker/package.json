@@ -1,0 +1,25 @@
+{
+  "name": "@kalshi-lab/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint --max-warnings 0 .",
+    "check-types": "tsc --noEmit",
+    "build": "tsc --noEmit",
+    "test": "node --test src/*.test.ts",
+    "record": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts",
+    "once": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts --once"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "26.4.1",
+    "eslint": "10.9.1",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "@kalshi-lab/kalshi": "workspace:*",
+    "@kalshi-lab/db": "workspace:*"
+  }
+}

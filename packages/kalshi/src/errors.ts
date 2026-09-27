@@ -16,3 +16,12 @@ export class KalshiConfigError extends Error {
     this.name = "KalshiConfigError";
   }
 }
+
+export class KalshiPublicMarketDataError extends Error {
+  readonly status: number;
+  constructor(status: number) {
+    super(`Kalshi public market data HTTP ${status}.`);
+    this.name = "KalshiPublicMarketDataError";
+    this.status = status;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@kalshi-lab/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint --max-warnings 0 .",
+    "check-types": "tsc --noEmit",
+    "build": "tsc --noEmit",
+    "test": "node --test src/*.test.ts",
+    "generate": "drizzle-kit generate",
+    "migrate": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/migrate.ts",
+    "migration:check": "drizzle-kit check"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "26.4.1",
+    "eslint": "10.9.1",
+    "typescript": "7.0.2",
+    "drizzle-kit": "0.31.11",
+    "@electric-sql/pglite": "0.5.8"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.45.3",
+    "postgres": "3.4.9"
+  }
+}

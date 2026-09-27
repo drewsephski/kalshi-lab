@@ -1,3 +1,10 @@
+import {
+  listMarkets,
+  normalizeMarket,
+  normalizeOrderbook,
+  record,
+  text,
+} from "./market-data.ts";
 import { randomUUID, type KeyObject } from "node:crypto";
 import { signRequest } from "./auth.ts";
 import { loadKalshiPrivateKey, parseKalshiConfig } from "./config.ts";
@@ -82,6 +89,7 @@ export function generateClientOrderId(): string {
 }
 
 export class KalshiClient {
+  readonly source = "kalshi_demo" as const;
   private readonly apiKeyId: string;
   private readonly privateKey: KeyObject;
   private readonly fetchImplementation: typeof globalThis.fetch;
@@ -141,6 +149,29 @@ export class KalshiClient {
       title: requireString(market.title, "market title"),
       ...(typeof market.status === "string" ? { status: market.status } : {}),
     }));
+  }
+
+  listMarkets(options: { limit?: number; cursor?: string } = {}) {
+    return listMarkets((path) => this.request("GET", path), options);
+  }
+
+  async getMarket(ticker: string) {
+    const raw = record(
+      await this.request(
+        "GET",
+        `${API_PREFIX}markets/${encodeURIComponent(text(ticker))}`,
+      ),
+    );
+    return normalizeMarket(raw.market);
+  }
+
+  async getOrderbook(ticker: string) {
+    return normalizeOrderbook(
+      await this.request(
+        "GET",
+        `${API_PREFIX}markets/${encodeURIComponent(text(ticker))}/orderbook`,
+      ),
+    );
   }
 
   async createOrder(input: CreateOrderInput): Promise<CreatedOrder> {

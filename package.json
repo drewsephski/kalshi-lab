@@ -7,10 +7,15 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "test": "pnpm --filter @kalshi-lab/kalshi test",
+    "test": "turbo run test",
     "kalshi:balance": "pnpm --filter @kalshi-lab/cli balance",
     "kalshi:markets": "pnpm --filter @kalshi-lab/cli markets",
-    "kalshi:smoke-order": "pnpm --filter @kalshi-lab/cli smoke-order"
+    "kalshi:smoke-order": "pnpm --filter @kalshi-lab/cli smoke-order",
+    "db:generate": "pnpm --filter @kalshi-lab/db generate",
+    "db:migrate": "pnpm --filter @kalshi-lab/db migrate",
+    "db:check": "pnpm --filter @kalshi-lab/db migration:check",
+    "worker:record": "pnpm --filter @kalshi-lab/worker record",
+    "worker:once": "pnpm --filter @kalshi-lab/worker once"
   },
   "devDependencies": {
     "prettier": "3.9.6",
@@ -20,5 +25,9 @@
   "packageManager": "pnpm@11.25.0",
   "engines": {
     "node": ">=24"
+  },
+  "dependencies": {
+    "@neon/config": "^1.8.2",
+    "@neon/env": "^1.4.7"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "types": ["node"],
+    "erasableSyntaxOnly": true
+  },
+  "include": ["src/**/*.ts", "drizzle.config.ts"]
+}

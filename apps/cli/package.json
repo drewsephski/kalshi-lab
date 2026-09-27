@@ -6,9 +6,11 @@
   "scripts": {
     "lint": "eslint --max-warnings 0 .",
     "check-types": "tsc --noEmit",
-    "balance": "node --env-file-if-exists=../../.env src/index.ts balance",
-    "markets": "node --env-file-if-exists=../../.env src/index.ts markets",
-    "smoke-order": "node --env-file-if-exists=../../.env src/index.ts smoke-order"
+    "balance": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts balance",
+    "markets": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts markets",
+    "smoke-order": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts smoke-order",
+    "test": "node --test src/*.test.ts",
+    "build": "tsc --noEmit"
   },
   "dependencies": {
     "@kalshi-lab/kalshi": "workspace:*"
