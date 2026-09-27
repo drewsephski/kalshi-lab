@@ -12,7 +12,7 @@ pnpm research:microstructure \
 ```
 
 Both UTC dates are required. Selection is `[from,to)`, at most seven days and
-250,000 rows; narrow it with `--runs` or `--tickers`. `--source` accepts only
+250,000 rows, 100 markets and 100 worker runs; narrow it with `--runs` or `--tickers`. `--source` accepts only
 `kalshi_production_public`. The command loads root `.env` then `.env.local`, with
 exported environment variables taking precedence. JSON paths are relative to
 `packages/research` when using the root pnpm script. Reports never overwrite
@@ -31,6 +31,9 @@ clean-SHA recorder runs with the predefined cadence. It rejects timing overrides
 Exploratory reports may use `--cadence-ms`, `--gap-ms`, and
 `--forward-tolerance-ms`; those values always appear in provenance. Formal EXP-002
 uses the immutable [protocol](../../experiments/EXP-002-production-microstructure/README.md).
+Full-duration decision coverage must occur within one continuous worker run;
+multiple short runs cannot be joined to fabricate it. Volume changes require at least two fresh connected observations per run; missing
+volume context is unavailable and decreasing counters are flagged.
 A formal invocation describes reproducibility, not sufficient sample size or an
 endorsement of any outcome.
 

@@ -37,6 +37,7 @@ const EXCLUSIONS = [
 ] as const;
 type Exclusion = (typeof EXCLUSIONS)[number];
 export interface Sample {
+  workerRunId: string;
   time: number;
   segment: number;
   spread: number;
@@ -97,6 +98,7 @@ export function prepare(
         const bid = priceUnits(row.yesBid!);
         const spread = spreadUnits(row.yesBid!, row.yesAsk!);
         samples.push({
+          workerRunId: row.workerRunId,
           time,
           segment,
           bid,

@@ -87,11 +87,17 @@ export async function queryResearch<
         .innerJoin(m, eq(s.marketId, m.id))
         .where(filters)
         .orderBy(asc(m.ticker));
+      if (universe.length > 100)
+        throw new Error(
+          "Selected markets exceed 100; narrow the window/tickers.",
+        );
       const runIds = await tx
         .selectDistinct({ id: s.workerRunId })
         .from(s)
         .innerJoin(m, eq(s.marketId, m.id))
         .where(filters);
+      if (runIds.length > 100)
+        throw new Error("Selected runs exceed 100; narrow the window/runs.");
       const runs = runIds.length
         ? await tx
             .select()

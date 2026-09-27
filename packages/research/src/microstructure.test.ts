@@ -231,7 +231,10 @@ test("predefined decision criteria distinguish preliminary, sufficient, rare, th
   assert.equal(verdict(fixture("rare")).verdict, "DEPRIORITIZE SPREAD CAPTURE");
   assert.equal(verdict(fixture("thin")).verdict, "DEPRIORITIZE SPREAD CAPTURE");
   const preliminary = structuredClone(qualifying);
-  preliminary.perMarket.forEach((m) => (m.eligibleSpanMs = 7199999));
+  preliminary.perMarket.forEach((m) => {
+    m.eligibleSpanMs = 7199999;
+    m.eligibleRunCoverage.forEach((r) => (r.spanMs = 7199999));
+  });
   assert.equal(verdict(preliminary).verdict, "COLLECT MORE DATA");
   const adverse = structuredClone(qualifying);
   adverse.perMarket.forEach((m) => {
@@ -245,4 +248,29 @@ test("predefined decision criteria distinguish preliminary, sufficient, rare, th
     (g) => g.group === "wide >=2c",
   )!.horizons[3]!.matched = 99;
   assert.equal(verdict(adverse).verdict, "PROCEED TO FILL SIMULATOR");
+});
+
+test("separate short runs cannot fabricate full-duration coverage; missing volume stays unavailable", () => {
+  const a = createAnalysis();
+  for (const ticker of ["A", "B", "C"])
+    a.consume(
+      ticker,
+      Array.from({ length: 1442 }, (_, i) =>
+        row(i < 721 ? i * 5 : (i - 721) * 5 + 10800, {
+          workerRunId: i < 721 ? "a" : "b",
+          volume: null,
+          yesBid: i % 13 === 12 ? "0.4900" : "0.4700",
+        }),
+      ),
+    );
+  const result = a.finish();
+  assert.equal(result.perMarket[0]!.observedVolumeChangeContracts, null);
+  assert.equal(
+    result.perMarket[0]!.volumeContext.missingFreshConnectedObservations,
+    1442,
+  );
+  assert.equal(result.perMarket[0]!.eligibleRunCoverage.length, 2);
+  assert.ok(result.perMarket[0]!.eligibleSpanMs > 7200000);
+  assert.equal(verdict(result).coveredMarkets, 0);
+  assert.equal(verdict(result).verdict, "COLLECT MORE DATA");
 });

@@ -41,15 +41,51 @@ export function createAnalysis(options: Options = DEFAULT_OPTIONS) {
   function analyzeMarket(ticker: string, rows: Observation[]) {
     const quality = prepare(rows, options);
     const times = quality.samples.map((s) => s.time);
-    const volumeByRun = new Map<string, { first: bigint; last: bigint }>();
+    const volumeByRun = new Map<
+      string,
+      { first: bigint; last: bigint; observations: number }
+    >();
+    let missingVolumeObservations = 0;
+    const coverage = new Map<
+      string,
+      { eligible: number; first: number; last: number }
+    >();
+    for (const sample of quality.samples) {
+      const existing = coverage.get(sample.workerRunId);
+      if (existing) {
+        existing.eligible++;
+        existing.last = sample.time;
+      } else
+        coverage.set(sample.workerRunId, {
+          eligible: 1,
+          first: sample.time,
+          last: sample.time,
+        });
+    }
+    const eligibleRunCoverage = [...coverage].map(([workerRunId, c]) => ({
+      workerRunId,
+      eligible: c.eligible,
+      spanMs: c.last - c.first,
+    }));
     for (const row of [...rows].sort(
       (a, b) => a.observedAt.getTime() - b.observedAt.getTime(),
     )) {
-      if (row.stale || !row.connected || row.volume === null) continue;
+      if (row.stale || !row.connected) continue;
+      if (row.volume === null) {
+        missingVolumeObservations++;
+        continue;
+      }
       const value = fixed(row.volume, 2),
         existing = volumeByRun.get(row.workerRunId);
-      if (existing) existing.last = value;
-      else volumeByRun.set(row.workerRunId, { first: value, last: value });
+      if (existing) {
+        existing.last = value;
+        existing.observations++;
+      } else
+        volumeByRun.set(row.workerRunId, {
+          first: value,
+          last: value,
+          observations: 1,
+        });
     }
     return {
       ticker,
@@ -61,10 +97,26 @@ export function createAnalysis(options: Options = DEFAULT_OPTIONS) {
       firstEligible: times.length ? new Date(times[0]!).toISOString() : null,
       lastEligible: times.length ? new Date(times.at(-1)!).toISOString() : null,
       eligibleSpanMs: times.length ? times.at(-1)! - times[0]! : 0,
-      observedVolumeChangeContracts: [...volumeByRun.values()].reduce(
-        (sum, v) => sum + Number(v.last - v.first) / 100,
-        0,
-      ),
+      eligibleRunCoverage,
+      volumeContext: {
+        missingFreshConnectedObservations: missingVolumeObservations,
+        availableRuns: [...volumeByRun.values()].filter(
+          (v) => v.observations >= 2,
+        ).length,
+        singleObservationRuns: [...volumeByRun.values()].filter(
+          (v) => v.observations === 1,
+        ).length,
+        decreasingVolumeRuns: [...volumeByRun.values()].filter(
+          (v) => v.last < v.first,
+        ).length,
+      },
+      observedVolumeChangeContracts: [...volumeByRun.values()].some(
+        (v) => v.observations >= 2,
+      )
+        ? [...volumeByRun.values()]
+            .filter((v) => v.observations >= 2)
+            .reduce((sum, v) => sum + Number(v.last - v.first) / 100, 0)
+        : null,
       metrics: summarize(quality.samples, options),
       samples: quality.samples,
     };
@@ -121,8 +173,10 @@ export function createAnalysis(options: Options = DEFAULT_OPTIONS) {
 }
 export type Analysis = ReturnType<ReturnType<typeof createAnalysis>["finish"]>;
 export function verdict(analysis: Analysis) {
-  const covered = analysis.perMarket.filter(
-    (m) => m.eligible >= 1000 && m.eligibleSpanMs >= 7200000,
+  const covered = analysis.perMarket.filter((m) =>
+    m.eligibleRunCoverage.some(
+      (r) => r.eligible >= 1000 && r.spanMs >= 7200000,
+    ),
   );
   const qualifying = covered.filter((m) => {
     const spread = m.metrics.spreadCents.thresholds[1]!,
