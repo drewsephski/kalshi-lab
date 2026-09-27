@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
+import { sql } from "drizzle-orm";
 import { migrate } from "drizzle-orm/pglite/migrator";
 import { createRecorderStore } from "@kalshi-lab/db";
 import * as schema from "@kalshi-lab/db";
@@ -114,6 +115,12 @@ test("read-only research queries apply exact source/run/ticker/window filters, p
         tickerReceivedAt: now,
       },
     ]);
+    // PostgreSQL can retain finer precision than JS Date. A page-boundary
+    // timestamp must not be replayed by a rounded cursor.
+    const boundary = new Date(now.getTime() + 1999 * 5000).toISOString();
+    await db.execute(
+      sql`update market_snapshots set observed_at = observed_at + interval '1 microsecond' where worker_run_id = ${publicRun}::uuid and observed_at = ${boundary}::timestamptz`,
+    );
     const a = createAnalysis();
     const provenance = await queryResearch(
       db,
@@ -122,6 +129,7 @@ test("read-only research queries apply exact source/run/ticker/window filters, p
     );
     assert.equal(provenance.selectedRows, 2005);
     assert.equal(provenance.runs.length, 1);
+    assert.equal(a.finish().total, 2005);
     assert.equal(a.finish().eligible, 2004);
     assert.equal(a.finish().exclusions.stale, 1);
     const b = createAnalysis();

@@ -19,7 +19,8 @@ exported environment variables taking precedence. JSON paths are relative to
 existing files. Generated reports/logs in `artifacts/research` are ignored.
 
 Queries use a read-only repeatable-read transaction, existing source/time and
-market/time indexes, and 2,000-row keyset pages. A selected-row count gate rejects
+market/time indexes, and 2,000-row keyset pages. Cursors retain canonical UTC PostgreSQL timestamp
+precision; calculations use the recorder's millisecond UTC observation times. A selected-row count gate rejects
 oversized selections instead of silently truncating them. The data-access layer
 retains one market history at a time. Statistical accumulators retain bounded
 numeric distributions for exact percentiles; memory remains proportional to the

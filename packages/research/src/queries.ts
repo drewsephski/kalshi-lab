@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { and, asc, eq, gte, inArray, lt, or, sql } from "drizzle-orm";
+import { and, asc, eq, gte, inArray, lt, sql } from "drizzle-orm";
 import type { PgDatabase, PgQueryResultHKT } from "drizzle-orm/pg-core";
 import {
   marketSnapshots as s,
@@ -117,13 +117,14 @@ export async function queryResearch<
       for (const market of universe) {
         hash.update(`${market.ticker}\n`);
         const rows: Observation[] = [];
-        let cursor: { observedAt: Date; id: string } | undefined;
+        let cursor: { at: string; id: string } | undefined;
         while (true) {
-          const page: Observation[] = await tx
+          const page: (Observation & { cursorTimestamp: string })[] = await tx
             .select({
               id: s.id,
               workerRunId: s.workerRunId,
               observedAt: s.observedAt,
+              cursorTimestamp: sql<string>`to_char(${s.observedAt} at time zone 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.US"Z"')`,
               stale: s.stale,
               connected: s.connected,
               status: s.status,
@@ -141,13 +142,7 @@ export async function queryResearch<
                 filters,
                 eq(s.marketId, market.id),
                 cursor
-                  ? or(
-                      sql`${s.observedAt} > ${cursor.observedAt.toISOString()}::timestamptz`,
-                      and(
-                        eq(s.observedAt, cursor.observedAt),
-                        sql`${s.id} > ${cursor.id}::uuid`,
-                      ),
-                    )
+                  ? sql`(${s.observedAt}, ${s.id}) > (${cursor.at}::timestamptz, ${cursor.id}::uuid)`
                   : undefined,
               ),
             )
@@ -155,8 +150,13 @@ export async function queryResearch<
             .limit(2000);
           for (const row of page) hash.update(`${JSON.stringify(row)}\n`);
           rows.push(...page);
+          if (rows.length > count.rows)
+            throw new Error(
+              "Pagination exceeded selected row count; no partial report produced.",
+            );
           if (page.length < 2000) break;
-          cursor = page.at(-1)!;
+          const last = page.at(-1)!;
+          cursor = { at: last.cursorTimestamp, id: last.id };
         }
         consume(market.ticker, rows);
       }
