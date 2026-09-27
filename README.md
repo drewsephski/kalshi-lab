@@ -8,6 +8,15 @@ lab makes no profitability claims.
 The initial experiment bankroll remains **$100 mock funds**. No recorder or
 migration resets or changes that record or the live demo balance.
 
+## Research milestone
+
+EXP-001 is complete with **PASS WITH LIMITATIONS**. The corrected recorder met
+the aggregate coverage and freshness criteria; see the dated [formal result](experiments/EXP-001-market-recorder/result-2026-09-27.md)
+and preserved [baseline failure](experiments/EXP-001-market-recorder/baseline-failure-2026-09-27.md).
+The next milestone is production-public microstructure analysis using the
+credential-free read-only client. This is not a profitability claim; authenticated
+trading remains demo-only.
+
 ## Workspace and architecture
 
 - `apps/web`: unchanged Next.js research shell.

@@ -14,6 +14,15 @@ import { SnapshotQueue } from "./persistence.ts";
 import { errorCode, retry } from "./retry.ts";
 
 export const RECORDER_VERSION = "market-recorder-v1";
+export function nextSnapshotDeadline(
+  currentDeadlineMs: number,
+  capturedAtMs: number,
+  intervalMs: number,
+): number {
+  let nextDeadlineMs = currentDeadlineMs + intervalMs;
+  while (nextDeadlineMs <= capturedAtMs) nextDeadlineMs += intervalMs;
+  return nextDeadlineMs;
+}
 export type Log = (event: string, fields: Record<string, unknown>) => void;
 export interface RecorderOptions {
   reader: MarketDataReader;
@@ -151,7 +160,8 @@ export async function recordMarkets(options: RecorderOptions): Promise<void> {
     }
     if (signal.aborted) return;
     connected = true; // initial REST capture is independent of subsequent socket state
-    capture(new Date(), "rest");
+    const initialObservedAt = new Date();
+    capture(initialObservedAt, "rest");
     await retry(() => queue.flush(store, runId, health()));
     log("recorder_started", {
       source: reader.source,
@@ -189,13 +199,18 @@ export async function recordMarkets(options: RecorderOptions): Promise<void> {
       );
       stream.start();
     }
+    let nextSnapshotAt = initialObservedAt.getTime() + config.snapshotIntervalMs;
     let nextRefreshAt = Date.now() + 60_000;
     let nextHealthAt = Date.now() + 60_000;
     let nextWriteAt = 0;
     let failures = 0;
     while (!signal.aborted) {
       try {
-        await setTimeout(config.snapshotIntervalMs, undefined, { signal });
+        await setTimeout(
+          Math.max(0, nextSnapshotAt - Date.now()),
+          undefined,
+          { signal },
+        );
       } catch {
         break;
       }
@@ -225,7 +240,17 @@ export async function recordMarkets(options: RecorderOptions): Promise<void> {
         lastError = "stale_book";
         stream.reconnect();
       }
-      capture(new Date(), stream ? "websocket" : "rest");
+      const observedAt = Date.now();
+      capture(new Date(observedAt), stream ? "websocket" : "rest");
+      // Keep the schedule anchored to the initial observation. Refresh and
+      // persistence latency consume time between deadlines instead of shifting
+      // every later observation. If work overruns, skip missed slots; never
+      // write backfilled observations for times we did not observe.
+      nextSnapshotAt = nextSnapshotDeadline(
+        nextSnapshotAt,
+        observedAt,
+        config.snapshotIntervalMs,
+      );
       if (Date.now() >= nextWriteAt) {
         try {
           await queue.flush(store, runId, health());

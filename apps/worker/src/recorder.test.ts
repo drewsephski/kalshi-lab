@@ -16,7 +16,7 @@ import { discoverMarkets, selectMarkets } from "./universe.ts";
 import { buildSnapshot } from "./snapshot.ts";
 import { SnapshotQueue } from "./persistence.ts";
 import { retry } from "./retry.ts";
-import { recordMarkets } from "./recorder.ts";
+import { nextSnapshotDeadline, recordMarkets } from "./recorder.ts";
 
 const now = new Date("2026-01-01T00:00:00Z");
 const market = (ticker: string, volume = "1.00", status = "active") =>
@@ -260,6 +260,11 @@ test("bounded retry waits between attempts", async () => {
   );
   assert.equal(result, 42);
   assert.deepEqual(waits, [1000, 2000]);
+});
+
+test("snapshot deadlines compensate for work latency and skip missed slots", () => {
+  assert.equal(nextSnapshotDeadline(5_000, 5_400, 5_000), 10_000);
+  assert.equal(nextSnapshotDeadline(5_000, 16_200, 5_000), 20_000);
 });
 
 test("one-shot writes one snapshot per selected market and completes the run", async () => {
