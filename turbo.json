@@ -32,6 +32,9 @@
     },
     "@kalshi-lab/cli#build": {
       "outputs": []
+    },
+    "@kalshi-lab/research#build": {
+      "outputs": []
     }
   },
   "globalPassThroughEnv": [

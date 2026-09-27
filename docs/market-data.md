@@ -241,3 +241,13 @@ milestone. Plan storage/retention before scaling beyond the bounded universe.
 See [EXP-001](../experiments/EXP-001-market-recorder/README.md) for success criteria.
 No data-quality success or profitability is inferred from unit tests or short
 smokes. Authenticated production trading remains impossible through this API.
+
+## Production-public research
+
+`packages/research` consumes stored snapshots with an explicit UTC window and
+optional run/ticker selection. It does not contact Kalshi. See its
+[definitions and query limits](../packages/research/README.md) and the immutable
+[EXP-002 protocol](../experiments/EXP-002-production-microstructure/README.md).
+Stale, disconnected, closed and missing-quote rows remain stored and are counted
+as exclusions. Supplemental `depth.yesTop10` and `depth.noTop10` retain exact
+prices/quantities needed for top-three executable YES-side imbalance.

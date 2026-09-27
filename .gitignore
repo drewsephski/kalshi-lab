@@ -38,3 +38,6 @@ yarn-error.log*
 # Misc
 .DS_Store
 .neon
+
+# Generated research reports/logs; experiment evidence is retained separately.
+artifacts/research/
