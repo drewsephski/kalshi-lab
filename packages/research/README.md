@@ -86,3 +86,7 @@ PGlite with the actual DB migrations. It requires no credentials, network, or
 external services. Tests cover fixed-point thresholds, quantiles, quality counts,
 persistence/gap boundaries, depth, imbalance, forward matching, source isolation,
 pagination and selection caps. No production reads occur in the normal suite.
+
+ESLint explicitly selects this package's TypeScript sources. TypeScript checks
+undefined symbols and unused locals/parameters; Babel's JavaScript scope rules
+are disabled for TS declarations to avoid false type-only warnings.
