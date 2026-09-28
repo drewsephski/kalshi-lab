@@ -216,6 +216,7 @@ async function main() {
       .limit(10001);
     if (fees.length > 10000) throw new Error("Fee selection exceeds cap.");
     const books = new Map<string, EvidenceBook[]>();
+    const bookSnapshotCounts = new Map<string, number>();
     const orders: Ledger[] = [];
     let bookData: Awaited<ReturnType<typeof queryResearch>> | null = null;
     if (bookRuns.length)
@@ -231,6 +232,11 @@ async function main() {
         },
         (ticker, rows) => {
           books.set(ticker, rows as EvidenceBook[]);
+          for (const row of rows)
+            bookSnapshotCounts.set(
+              row.workerRunId,
+              (bookSnapshotCounts.get(row.workerRunId) ?? 0) + 1,
+            );
           orders.push(
             ...simulateMarket(ticker, rows as MakerObservation[], {
               scenario: "pessimistic",
@@ -545,6 +551,9 @@ async function main() {
         tradesPerMinute:
           trades.length / ((to.getTime() - from.getTime()) / 60000),
         stableFieldPct: pct(stableFields, trades.length),
+        maxExchangeToReceiptLagMs: trades.length
+          ? Math.max(...trades.map((trade) => trade.receivedAt.getTime() - trade.executedAt.getTime()))
+          : null,
         collectorRuns: runs.map((r) => ({
           id: r.id,
           startedAt: r.startedAt,
@@ -554,6 +563,16 @@ async function main() {
           gitCommit: r.gitCommit,
           gitDirty: r.gitDirty,
           config: r.config,
+        })),
+        bookRuns: (bookData?.runs ?? []).map((r) => ({
+          id: r.id,
+          startedAt: r.startedAt,
+          stoppedAt: r.stoppedAt,
+          status: r.status,
+          error: r.error,
+          gitCommit: r.gitCommit,
+          gitDirty: r.gitDirty,
+          snapshots: bookSnapshotCounts.get(r.id) ?? 0,
         })),
       },
       direction: {
