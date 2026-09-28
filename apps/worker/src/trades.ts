@@ -39,6 +39,7 @@ export async function fetchTradeWindow(
   const ids = new Set<string>(),
     cursors = new Set<string>();
   let cursor: string | undefined;
+  let oldestSeen = Infinity;
   for (let pageNumber = 0; pageNumber < 20; pageNumber++) {
     const page = await retry(() =>
       reader.listTrades({
@@ -49,6 +50,10 @@ export async function fetchTradeWindow(
         ...(cursor ? { cursor } : {}),
       }),
     );
+    if (page.trades.length && page.trades[0]!.executedAt.getTime() > oldestSeen)
+      throw new Error("Trade cursor page moved forward in time.");
+    if (page.trades.length)
+      oldestSeen = page.trades.at(-1)!.executedAt.getTime();
     for (const trade of page.trades) {
       if (trade.ticker !== ticker || trade.isBlockTrade)
         throw new Error("Trade filter mismatch.");

@@ -101,6 +101,15 @@ test("queue arithmetic excludes wrong side, blocks, duplicates, cancellations an
     expiryTime: at(10_000),
   });
   assert.equal(filled.ourFillReached, true);
+  const empty = queueConsumption({
+    queueAhead: "0.00",
+    orderedTrades: [],
+    limitPrice: "0.4000",
+    side: "yes_buy",
+    activationTime: at(0),
+    expiryTime: at(10_000),
+  });
+  assert.equal(empty.queueFullyConsumed, false);
   assert.throws(
     () =>
       queueConsumption({

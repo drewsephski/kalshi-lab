@@ -144,7 +144,26 @@ async function main() {
     `${PROTOCOL_SHA}:${PROTOCOL_PATH}`,
   ]);
   if (values.formal) {
-    if (gitDirty) throw new Error("Formal analysis requires clean checkout.");
+    const relevantChanges = execFileSync(
+      "git",
+      [
+        "status",
+        "--porcelain",
+        "--",
+        "apps/worker",
+        "packages/db",
+        "packages/kalshi",
+        "packages/research",
+        "docs/market-data.md",
+        PROTOCOL_PATH,
+        "package.json",
+      ],
+      { encoding: "utf8" },
+    ).trim();
+    if (relevantChanges)
+      throw new Error(
+        "Formal analysis requires committed EXP-004 source and protocol.",
+      );
     execFileSync("git", ["merge-base", "--is-ancestor", PROTOCOL_SHA, "HEAD"]);
     if (
       !protocolBytes.equals(
@@ -316,11 +335,20 @@ async function main() {
       (e) => e.classification === "fee_conflicting",
     ).length;
     const completedContexts = orders.filter(
-      (order) => order.status === "completed" && order.entryFillAt && order.exitFillAt && order.eventTicker,
+      (order) =>
+        order.status === "completed" &&
+        order.entryFillAt &&
+        order.exitFillAt &&
+        order.eventTicker,
     );
     const feeKnownCandidateContexts = completedContexts.filter(
-      (order) => classifyFeeWindow(feeEvidence, order.eventTicker!,
-        new Date(order.entryFillAt!), new Date(order.exitFillAt!)) === "fee_known",
+      (order) =>
+        classifyFeeWindow(
+          feeEvidence,
+          order.eventTicker!,
+          new Date(order.entryFillAt!),
+          new Date(order.exitFillAt!),
+        ) === "fee_known",
     ).length;
     const stableFields = trades.filter(
       (t) => t.providerTradeId && t.executedAt && t.yesPrice && t.quantity,
@@ -421,7 +449,10 @@ async function main() {
         eventsUnknown: events.length - feeKnownEvents - feeConflictingEvents,
         eventsConflicting: feeConflictingEvents,
         candidateCompletedContexts: completedContexts.length,
-        candidateContextKnownPct: pct(feeKnownCandidateContexts, completedContexts.length),
+        candidateContextKnownPct: pct(
+          feeKnownCandidateContexts,
+          completedContexts.length,
+        ),
         sourceSnapshots: fees.map((f) => ({
           eventTicker: f.eventTicker,
           seriesTicker: f.seriesTicker,

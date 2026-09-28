@@ -68,6 +68,7 @@ export function alignTrade(
     )
       post = book;
   }
+  if (pre && post && pre.id === post.id) post = null;
   let relation: BookMatch["relation"] = "unmatched";
   if (pre) {
     const price = fixed(trade.yesPrice, 4),

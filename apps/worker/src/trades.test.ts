@@ -44,3 +44,16 @@ test("repeating cursor is a continuity failure", async () => {
     /Repeated trade cursor/,
   );
 });
+
+test("a cursor page moving forward is a continuity failure", async () => {
+  let requests = 0;
+  const client = new KalshiPublicMarketDataClient({
+    fetch: async () =>
+      Response.json(
+        ++requests === 1
+          ? { trades: [row("old", 1)], cursor: "next" }
+          : { trades: [row("new", 2)], cursor: "" },
+      ),
+  });
+  await assert.rejects(() => fetchTradeWindow(client, "T", 0), /moved forward/);
+});
