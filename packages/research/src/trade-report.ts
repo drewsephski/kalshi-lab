@@ -264,8 +264,54 @@ async function main() {
       unmatched = 0;
     const delays: number[] = [],
       relations: Record<string, number> = {};
+    const tradeAlignments = [] as {
+      tradeId: string;
+      ticker: string;
+      executedAt: Date;
+      tradePrice: string;
+      tradeQuantity: string;
+      aggressorSide: EvidenceTrade["aggressorSide"];
+      relation: ReturnType<typeof alignTrade>["relation"];
+      preBookId: string | null;
+      preBookReceivedAt: Date | null;
+      preDelayMs: number | null;
+      preBid: string | null;
+      preAsk: string | null;
+      preBidSize: string | null;
+      preAskSize: string | null;
+      postBookId: string | null;
+      postBookReceivedAt: Date | null;
+      postDelayMs: number | null;
+      postBid: string | null;
+      postAsk: string | null;
+      postBidSize: string | null;
+      postAskSize: string | null;
+    }[];
     for (const trade of evidenceTrades) {
       const match = alignTrade(trade, books.get(trade.ticker) ?? []);
+      tradeAlignments.push({
+        tradeId: trade.tradeId,
+        ticker: trade.ticker,
+        executedAt: trade.executedAt,
+        tradePrice: trade.yesPrice,
+        tradeQuantity: trade.quantity,
+        aggressorSide: trade.aggressorSide,
+        relation: match.relation,
+        preBookId: match.pre?.id ?? null,
+        preBookReceivedAt: match.pre?.bookReceivedAt ?? null,
+        preDelayMs: match.preDelayMs,
+        preBid: match.pre?.yesBid ?? null,
+        preAsk: match.pre?.yesAsk ?? null,
+        preBidSize: match.pre?.yesBidSize ?? null,
+        preAskSize: match.pre?.yesAskSize ?? null,
+        postBookId: match.post?.id ?? null,
+        postBookReceivedAt: match.post?.bookReceivedAt ?? null,
+        postDelayMs: match.postDelayMs,
+        postBid: match.post?.yesBid ?? null,
+        postAsk: match.post?.yesAsk ?? null,
+        postBidSize: match.post?.yesBidSize ?? null,
+        postAskSize: match.post?.yesAskSize ?? null,
+      });
       if (match.pre) {
         pre++;
         delays.push(match.preDelayMs!);
@@ -290,16 +336,43 @@ async function main() {
       queueConsumed = 0,
       fillReached = 0,
       unobservable = 0;
+    const orderQueueEvidence = [] as {
+      simulationId: string;
+      ticker: string;
+      activationTime: string;
+      expiryTime: string;
+      limitPrice: string;
+      queueAhead: string | null;
+      queueConsumed: string;
+      queueFullyConsumed: boolean;
+      queueSupportedHypotheticalFill: boolean;
+      supportingTradeIds: string[];
+      unknownReason: string | null;
+    }[];
     for (const order of posted) {
+      const expiryTime = new Date(
+        Date.parse(order.scheduledActiveAt) + order.expiryMs,
+      );
       const evidence = queueConsumption({
         queueAhead: order.displayedQueueAhead,
         orderedTrades: tradesByTicker.get(order.ticker) ?? [],
         limitPrice: order.entryLimitPrice,
         side: "yes_buy",
         activationTime: new Date(order.orderActiveAt!),
-        expiryTime: new Date(
-          Date.parse(order.scheduledActiveAt) + order.expiryMs,
-        ),
+        expiryTime,
+      });
+      orderQueueEvidence.push({
+        simulationId: order.simulationId,
+        ticker: order.ticker,
+        activationTime: order.orderActiveAt!,
+        expiryTime: expiryTime.toISOString(),
+        limitPrice: order.entryLimitPrice,
+        queueAhead: order.displayedQueueAhead,
+        queueConsumed: evidence.queueConsumed,
+        queueFullyConsumed: evidence.queueFullyConsumed,
+        queueSupportedHypotheticalFill: evidence.ourFillReached,
+        supportingTradeIds: evidence.supportingTradeIds,
+        unknownReason: evidence.unknownReason,
       });
       if (evidence.supportingTradeIds.length) flow++;
       else unobservable++;
@@ -437,6 +510,7 @@ async function main() {
         bothPct: pct(both, trades.length),
         medianDelayMs: median(delays),
       },
+      tradeAlignments,
       queue: {
         candidateOrders: posted.length,
         observableRelevantFlow: flow,
@@ -444,6 +518,7 @@ async function main() {
         queueSupportedHypotheticalFills: fillReached,
         unobservable,
       },
+      orderQueueEvidence,
       fees: {
         eventsKnown: feeKnownEvents,
         eventsUnknown: events.length - feeKnownEvents - feeConflictingEvents,
