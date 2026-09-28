@@ -13,6 +13,7 @@ import {
 } from "@kalshi-lab/db";
 import { queryResearch } from "./queries.ts";
 import { simulateMarket } from "./simulation/execution.ts";
+import { identify } from "./simulation/strategy.ts";
 import type { Ledger, MakerObservation } from "./simulation/types.ts";
 import {
   alignTrade,
@@ -339,6 +340,8 @@ async function main() {
     const orderQueueEvidence = [] as {
       simulationId: string;
       ticker: string;
+      eventTicker: string | null;
+      family: string;
       activationTime: string;
       expiryTime: string;
       limitPrice: string;
@@ -364,6 +367,9 @@ async function main() {
       orderQueueEvidence.push({
         simulationId: order.simulationId,
         ticker: order.ticker,
+        eventTicker: order.eventTicker ?? null,
+        family:
+          identify(order.ticker, order.eventTicker ?? null).family ?? "unknown",
         activationTime: order.orderActiveAt!,
         expiryTime: expiryTime.toISOString(),
         limitPrice: order.entryLimitPrice,
@@ -379,6 +385,63 @@ async function main() {
       if (evidence.queueFullyConsumed) queueConsumed++;
       if (evidence.ourFillReached) fillReached++;
     }
+    const familyCounts = (
+      rows: Array<{ family: string }>,
+    ): Array<{ family: string; count: number; sharePct: number | null }> => {
+      const counts = new Map<string, number>();
+      for (const row of rows)
+        counts.set(row.family, (counts.get(row.family) ?? 0) + 1);
+      return [...counts]
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([family, count]) => ({
+          family,
+          count,
+          sharePct: pct(count, rows.length),
+        }));
+    };
+    const tradeFamilies = trades.map((trade) => ({
+      family: identify(trade.ticker, trade.eventTicker ?? null).family ?? "unknown",
+    }));
+    const candidateFamilies = posted.map((order) => ({
+      family: identify(order.ticker, order.eventTicker ?? null).family ?? "unknown",
+    }));
+    const flowIds = new Set(
+      orderQueueEvidence
+        .filter((evidence) => evidence.supportingTradeIds.length > 0)
+        .map((evidence) => evidence.simulationId),
+    );
+    const flowFamilies = orderQueueEvidence
+      .filter((evidence) => flowIds.has(evidence.simulationId))
+      .map((evidence) => ({ family: evidence.family }));
+    const fillFamilies = orderQueueEvidence
+      .filter((evidence) => evidence.queueSupportedHypotheticalFill)
+      .map((evidence) => ({ family: evidence.family }));
+    const concentration = (rows: Array<{ family: string }>) => {
+      const sorted = familyCounts(rows).sort((a, b) => b.count - a.count);
+      return {
+        byFamily: sorted,
+        largestFamilySharePct: sorted[0]?.sharePct ?? null,
+        largestThreeSharePct:
+          rows.length === 0
+            ? null
+            : pct(sorted.slice(0, 3).reduce((sum, row) => sum + row.count, 0), rows.length),
+      };
+    };
+    const queueFillStatuses = orderQueueEvidence
+      .filter((evidence) => evidence.queueSupportedHypotheticalFill)
+      .map((evidence) => ({
+        simulationId: evidence.simulationId,
+        eventTicker: evidence.eventTicker,
+        family: evidence.family,
+        classification: evidence.eventTicker
+          ? classifyFeeWindow(
+              fees as FeeEvidence[],
+              evidence.eventTicker,
+              new Date(evidence.activationTime),
+              new Date(evidence.expiryTime),
+            )
+          : "fee_unknown" as const,
+      }));
     const families = new Map<string, number>();
     for (const row of trades) {
       const event = fees.find(
@@ -488,6 +551,9 @@ async function main() {
           stoppedAt: r.stoppedAt,
           status: r.status,
           error: r.error,
+          gitCommit: r.gitCommit,
+          gitDirty: r.gitDirty,
+          config: r.config,
         })),
       },
       direction: {
@@ -517,6 +583,11 @@ async function main() {
         queueFullyConsumed: queueConsumed,
         queueSupportedHypotheticalFills: fillReached,
         unobservable,
+        concentration: {
+          candidates: concentration(candidateFamilies),
+          relevantFlow: concentration(flowFamilies),
+          queueSupportedHypotheticalFills: concentration(fillFamilies),
+        },
       },
       orderQueueEvidence,
       fees: {
@@ -529,6 +600,23 @@ async function main() {
           feeKnownCandidateContexts,
           completedContexts.length,
         ),
+        queueSupportedContexts: {
+          total: queueFillStatuses.length,
+          feeKnown: queueFillStatuses.filter((row) => row.classification === "fee_known").length,
+          feeUnknown: queueFillStatuses.filter((row) => row.classification === "fee_unknown").length,
+          feeConflicting: queueFillStatuses.filter((row) => row.classification === "fee_conflicting").length,
+          feeKnownCoveragePct: pct(
+            queueFillStatuses.filter((row) => row.classification === "fee_known").length,
+            queueFillStatuses.length,
+          ),
+          byFamily: queueFillStatuses,
+        },
+        concentration: {
+          publicTrades: concentration(tradeFamilies),
+          candidateOrders: concentration(candidateFamilies),
+          relevantFlowCandidates: concentration(flowFamilies),
+          queueSupportedHypotheticalFills: concentration(fillFamilies),
+        },
         sourceSnapshots: fees.map((f) => ({
           eventTicker: f.eventTicker,
           seriesTicker: f.seriesTicker,

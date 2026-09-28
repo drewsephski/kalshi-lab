@@ -171,6 +171,17 @@ separate read-only collector. Its result preserves provider taker direction,
 nearby book observations, and queue-consumption evidence without changing the
 EXP-003 simulator or claiming actual fills. See the [EXP-004 result](experiments/EXP-004-trade-fee-provenance/result-2026-09-28.md).
 
+EXP-005 repeats that fixed queue-evidence analysis across explicitly selected,
+separated sessions and archives dated fee provenance. Freeze its protocol before
+collection and commit `selection.json` before running the reproducible analysis:
+
+```sh
+pnpm research:replication --manifest ../../experiments/EXP-005-independent-replication/selection.json \
+  --json ../../experiments/EXP-005-independent-replication/result-YYYY-MM-DD.json --formal
+```
+
+See the [EXP-005 protocol](experiments/EXP-005-independent-replication/README.md).
+
 ```sh
 pnpm research:simulate-maker --help
 ```

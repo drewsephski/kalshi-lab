@@ -19,7 +19,8 @@
     "worker:trades": "pnpm --filter @kalshi-lab/worker trades",
     "research:microstructure": "pnpm --filter @kalshi-lab/research microstructure",
     "research:simulate-maker": "pnpm --filter @kalshi-lab/research simulate-maker",
-    "research:trade-report": "pnpm --filter @kalshi-lab/research trade-report"
+    "research:trade-report": "pnpm --filter @kalshi-lab/research trade-report",
+    "research:replication": "pnpm --filter @kalshi-lab/research replication"
   },
   "devDependencies": {
     "prettier": "3.9.6",
