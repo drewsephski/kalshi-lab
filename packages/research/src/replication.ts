@@ -4,6 +4,10 @@ import { tmpdir } from "node:os";
 import { relative, resolve } from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { parseArgs } from "node:util";
+import {
+  combineCohortReports,
+  type CohortReport,
+} from "./replication-aggregation.ts";
 import { assertRunInSessionWindow } from "./replication-validation.ts";
 
 const PROTOCOL_PATH = "experiments/EXP-005-independent-replication/README.md";
@@ -29,26 +33,7 @@ type Selection = {
   }>;
   exp004: Window & { protocolCommit: string; analysisCommit: string };
 };
-type QueueRow = {
-  queueSupportedHypotheticalFill: boolean;
-  family: string;
-  supportingTradeIds: string[];
-};
-type AlignmentRow = { tradeId: string; preBookId: string | null; postBookId: string | null };
-type Report = {
-  provenance: Record<string, unknown>;
-  collection: {
-    trades: number;
-    nonBlockTrades: number;
-    collectorRuns: Array<{ id: string; gitCommit: string; gitDirty: boolean; status: string; error: string | null; startedAt: string; stoppedAt: string | null; config: Record<string, unknown> }>;
-    bookRuns: Array<{ id: string; gitCommit: string; gitDirty: boolean; status: string; error: string | null; startedAt: string; stoppedAt: string | null }>;
-  };
-  alignment: Record<string, unknown>;
-  queue: Record<string, unknown>;
-  fees: { queueSupportedContexts: unknown; concentration: unknown; sourceSnapshots: unknown[] };
-  orderQueueEvidence: QueueRow[];
-  tradeAlignments: AlignmentRow[];
-};
+type Report = CohortReport;
 const sha = (value: unknown) =>
   createHash("sha256").update(JSON.stringify(value)).digest("hex");
 const ids = (values: string[]) => [...new Set(values)].sort();
@@ -74,9 +59,16 @@ function runReport(window: Window, label: string, out: string) {
 const compact = (report: Report) => ({
   provenance: report.provenance,
   collection: report.collection,
+  direction: report.direction,
   alignment: report.alignment,
   queue: report.queue,
   fees: {
+    eventsKnown: report.fees.eventsKnown,
+    eventsUnknown: report.fees.eventsUnknown,
+    eventsConflicting: report.fees.eventsConflicting,
+    eventClassifications: report.fees.eventClassifications,
+    candidateCompletedContexts: report.fees.candidateCompletedContexts,
+    candidateContextKnownPct: report.fees.candidateContextKnownPct,
     queueSupportedContexts: report.fees.queueSupportedContexts,
     concentration: report.fees.concentration,
     sourceSnapshots: report.fees.sourceSnapshots,
@@ -167,15 +159,11 @@ async function main() {
       tradeRunIds: included.flatMap((s) => s.tradeRunIds),
       bookRunIds: included.flatMap((s) => s.bookRunIds),
     };
-    const combined: Window = {
-      from: [selection.exp004.from, newWindow.from].sort()[0]!,
-      toExclusive: [selection.exp004.toExclusive, newWindow.toExclusive].sort().at(-1)!,
-      tradeRunIds: [...selection.exp004.tradeRunIds, ...newWindow.tradeRunIds],
-      bookRunIds: [...selection.exp004.bookRunIds, ...newWindow.bookRunIds],
-    };
     await loadReport("exp004", selection.exp004);
     await loadReport("exp005", newWindow);
-    await loadReport("combined", combined);
+    reports.combined = compact(
+      combineCohortReports(reports.exp004!, reports.exp005!),
+    );
     const exp004 = reports.exp004!;
     const exp005 = reports.exp005!;
     const combinedReport = reports.combined!;
