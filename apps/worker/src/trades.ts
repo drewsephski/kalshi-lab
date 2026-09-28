@@ -156,6 +156,7 @@ export async function collectTrades(
     duplicates = 0,
     paginationPages = 0;
   const watermark = new Map<string, Date>();
+  const seriesFeeHistories = new Set<string>();
   try {
     const events = new Set(
       candidates
@@ -168,6 +169,37 @@ export async function collectTrades(
       const seriesTicker = event.seriesTicker;
       const series = await retry(() => reader.getSeries(seriesTicker));
       const observedAt = now();
+      if (!seriesFeeHistories.has(seriesTicker)) {
+        const seriesChanges = await retry(() =>
+          reader.listSeriesFeeChanges(seriesTicker, true),
+        );
+        const seriesRows: FeeSnapshotInput[] = seriesChanges
+          .slice()
+          .sort((a, b) => a.scheduledAt.getTime() - b.scheduledAt.getTime())
+          .map((change, index, rows) => ({
+            eventTicker: null,
+            seriesTicker,
+            observedAt,
+            effectiveFrom: change.scheduledAt,
+            effectiveTo: rows[index + 1]?.scheduledAt ?? null,
+            feeType: change.feeType,
+            feeMultiplier: change.feeMultiplier,
+            makerMultiplier: null,
+            takerMultiplier: null,
+            sourceUrl: `https://external-api.kalshi.com/trade-api/v2/series/fee_changes?series_ticker=${encodeURIComponent(seriesTicker)}&show_historical=true`,
+            sourceType: "official_series_fee_change_api",
+            rawMetadata: change.rawMetadata,
+            collectionRunId: runId,
+          }));
+        await store.writeFeeSnapshots(seriesRows);
+        seriesFeeHistories.add(seriesTicker);
+        log("series_fee_history_collected", {
+          runId,
+          seriesTicker,
+          records: seriesRows.length,
+          source: "official_series_fee_change_api",
+        });
+      }
       const feeRows: FeeSnapshotInput[] = [
         feeSnapshot(
           runId,

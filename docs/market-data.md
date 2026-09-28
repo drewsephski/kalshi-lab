@@ -10,6 +10,8 @@ The separate `worker:trades` mode uses the recorder's bounded universe, two conc
 
 The event API provides current `fee_type_override` and `fee_multiplier_override`; the series API provides current `fee_type` and `fee_multiplier`. `GET /events/fee_changes` provides event-specific `scheduled_ts` records, with null override fields clearing an override. The PDF states a general taker formula with factor 0.07 and maker factor 0.0175, plus market-specific exceptions and maker applicability. Event/series snapshots and fee-change records are stored separately from trades with source URLs and observed/effective timestamps. Current event/series metadata alone cannot prove past applicability: live event `last_updated_ts` was year 0001 for a sampled event, while its series had a normal timestamp. Unknown historical windows stay unknown. No universal maker-free assumption is backfilled.
 
+The current OpenAPI also documents `GET /series/fee_changes?series_ticker=...&show_historical=true`, returning scheduled series changes (`fee_type`, `fee_multiplier`, `scheduled_ts`). EXP-005 archives this history separately from event overrides. The checked official specification SHA-256 on 2026-09-28 was `0adbb5855cdd4817d61daad7a91b99256d71f083bb10b8232ea52658b4d740a9`. This endpoint has no cursor in the published contract; failures remain visible, and an empty result is not treated as proof beyond an effective window established by other official evidence.
+
 ## Sources and API contract
 
 `kalshi_demo` uses signed demo REST at

@@ -32,6 +32,10 @@ export interface PublicEventFeeChange extends PublicEventFee {
   id: string;
   scheduledAt: Date;
 }
+export interface PublicSeriesFeeChange extends PublicSeriesFee {
+  id: string;
+  scheduledAt: Date;
+}
 export function normalizePublicEventFee(value: unknown): PublicEventFee {
   const raw = record(value);
   return {
@@ -59,4 +63,20 @@ export function normalizePublicEventFeeChange(
   if (!Number.isFinite(scheduledAt.getTime()))
     throw new Error("Invalid fee change time.");
   return { ...normalizePublicEventFee(raw), id: text(raw.id), scheduledAt };
+}
+export function normalizePublicSeriesFeeChange(
+  value: unknown,
+): PublicSeriesFeeChange {
+  const raw = record(value);
+  const scheduledAt = new Date(text(raw.scheduled_ts));
+  if (!Number.isFinite(scheduledAt.getTime()))
+    throw new Error("Invalid series fee change time.");
+  return {
+    ...normalizePublicSeriesFee({
+      ...raw,
+      ticker: raw.series_ticker,
+    }),
+    id: text(raw.id),
+    scheduledAt,
+  };
 }
