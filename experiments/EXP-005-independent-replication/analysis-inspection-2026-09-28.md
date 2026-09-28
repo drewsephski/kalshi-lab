@@ -9,3 +9,5 @@ EXP-005 analysis will restrict queue depletion to trades with both valid pre- an
 ## Formal aggregation input limit
 
 The first formal replication attempt successfully reproduced the archived EXP-004 queue metrics exactly, then failed before the EXP-005 report was written. The report command limited a selected universe to 100 tickers, while the committed five-session EXP-005 selection contains 125 distinct tickers (25 per session). The formal selection and collected evidence remain unchanged. The smallest fix is to raise the research report's bounded ticker cap to accommodate this frozen selection; it does not change market selection or strategy logic. Formal analysis will be rerun from a clean commit.
+
+After raising the report-level cap, the next formal attempt reached the shared query validator, which independently capped ticker selections and distinct snapshot markets at 100. It stopped before writing a report. The same bounded multi-session limit needs to be raised at those two validation points; the selected ticker count remains 125 and the data remains unchanged.
