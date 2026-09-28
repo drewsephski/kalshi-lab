@@ -552,7 +552,14 @@ async function main() {
           trades.length / ((to.getTime() - from.getTime()) / 60000),
         stableFieldPct: pct(stableFields, trades.length),
         maxExchangeToReceiptLagMs: trades.length
-          ? Math.max(...trades.map((trade) => trade.receivedAt.getTime() - trade.executedAt.getTime()))
+          ? trades.reduce(
+              (max, trade) =>
+                Math.max(
+                  max,
+                  trade.receivedAt.getTime() - trade.executedAt.getTime(),
+                ),
+              Number.NEGATIVE_INFINITY,
+            )
           : null,
         collectorRuns: runs.map((r) => ({
           id: r.id,
