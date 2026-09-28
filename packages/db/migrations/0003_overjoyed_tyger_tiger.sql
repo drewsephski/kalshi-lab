@@ -1,0 +1,2 @@
+ALTER TABLE "fee_rule_snapshots" DROP CONSTRAINT "fees_valid_source";--> statement-breakpoint
+ALTER TABLE "fee_rule_snapshots" ADD CONSTRAINT "fees_valid_source" CHECK ("fee_rule_snapshots"."source_type" IN ('official_series_api','official_event_api','official_event_fee_change_api','official_series_fee_change_api','official_fee_schedule','official_regulatory_notice','unknown'));

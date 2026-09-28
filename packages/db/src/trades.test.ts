@@ -31,6 +31,7 @@ test("trade IDs deduplicate idempotently and reject changed immutable records", 
       gitDirty: false,
       config: {},
     });
+    await store.updateCollectionMetrics(runId, { paginationPages: 2 });
     const [market] = await recorder.upsertMarkets([
       {
         source: "kalshi_production_public",
@@ -78,6 +79,7 @@ test("trade IDs deduplicate idempotently and reject changed immutable records", 
     const [run] = await db.select().from(schema.tradeCollectorRuns);
     assert.equal(run?.tradesWritten, 1);
     assert.equal(run?.duplicatesSeen, 1);
+    assert.deepEqual(run?.config, { collectionMetrics: { paginationPages: 2 } });
     assert.equal((await db.select().from(schema.marketTrades)).length, 1);
   } finally {
     await client.close();

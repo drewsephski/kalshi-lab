@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   alignTrade,
   classifyFeeWindow,
+  queueAlignedTrades,
   queueConsumption,
   type EvidenceBook,
   type EvidenceTrade,
@@ -66,6 +67,24 @@ test("nearest valid pre/post books and bounded price relation", () => {
   assert.equal(
     alignTrade(trade("c", 5000), [book(1000, { stale: true })]).relation,
     "unmatched",
+  );
+});
+
+test("queue evidence requires both books within the fixed alignment tolerance", () => {
+  const aligned = trade("aligned", 5000);
+  const noPre = trade("no-pre", 5000);
+  const noPost = trade("no-post", 5000);
+  assert.deepEqual(
+    queueAlignedTrades([aligned], [book(4000), book(6000)]).map(
+      (row) => row.tradeId,
+    ),
+    ["aligned"],
+  );
+  assert.deepEqual(queueAlignedTrades([noPre], [book(6000)]), []);
+  assert.deepEqual(queueAlignedTrades([noPost], [book(4000)]), []);
+  assert.deepEqual(
+    queueAlignedTrades([aligned], [book(0), book(12_501)]),
+    [],
   );
 });
 

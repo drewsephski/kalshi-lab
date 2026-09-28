@@ -260,7 +260,7 @@ export const feeRuleSnapshots = pgTable(
     ),
     check(
       "fees_valid_source",
-      sql`${table.sourceType} IN ('official_series_api','official_event_api','official_event_fee_change_api','official_fee_schedule','official_regulatory_notice','unknown')`,
+      sql`${table.sourceType} IN ('official_series_api','official_event_api','official_event_fee_change_api','official_series_fee_change_api','official_fee_schedule','official_regulatory_notice','unknown')`,
     ),
   ],
 );

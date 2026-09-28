@@ -74,3 +74,27 @@ test("trade pagination keeps unsigned GET, explicit query filters and descending
   await assert.rejects(() => client.getEvent("../portfolio"), /ticker/);
   await assert.rejects(() => client.getSeries("A/B"), /ticker/);
 });
+test("series fee history uses unsigned GET and requests historical changes", async () => {
+  let requested: URL | undefined;
+  const client = new KalshiPublicMarketDataClient({
+    fetch: async (input, init) => {
+      requested = new URL(String(input));
+      assert.equal(init?.method, "GET");
+      assert.equal(init?.headers, undefined);
+      return Response.json({
+        series_fee_change_arr: [{
+          id: "change",
+          series_ticker: "SERIES",
+          fee_type: "quadratic",
+          fee_multiplier: 1,
+          scheduled_ts: "2026-09-28T14:00:00Z",
+        }],
+      });
+    },
+  });
+  const changes = await client.listSeriesFeeChanges("SERIES");
+  assert.equal(changes.length, 1);
+  assert.equal(requested?.pathname, "/trade-api/v2/series/fee_changes");
+  assert.equal(requested?.searchParams.get("series_ticker"), "SERIES");
+  assert.equal(requested?.searchParams.get("show_historical"), "true");
+});

@@ -34,6 +34,7 @@ export async function fetchTradeWindow(
   reader: KalshiPublicMarketDataClient,
   ticker: string,
   minTs: number,
+  onPage?: () => void,
 ): Promise<PublicTrade[]> {
   const trades: PublicTrade[] = [];
   const ids = new Set<string>(),
@@ -50,6 +51,7 @@ export async function fetchTradeWindow(
         ...(cursor ? { cursor } : {}),
       }),
     );
+    onPage?.();
     if (page.trades.length && page.trades[0]!.executedAt.getTime() > oldestSeen)
       throw new Error("Trade cursor page moved forward in time.");
     if (page.trades.length)
@@ -151,8 +153,10 @@ export async function collectTrades(
   let status: "completed" | "stopped" | "failed" = "stopped",
     error: string | null = null;
   let written = 0,
-    duplicates = 0;
+    duplicates = 0,
+    paginationPages = 0;
   const watermark = new Map<string, Date>();
+  const seriesFeeHistories = new Set<string>();
   try {
     const events = new Set(
       candidates
@@ -165,6 +169,37 @@ export async function collectTrades(
       const seriesTicker = event.seriesTicker;
       const series = await retry(() => reader.getSeries(seriesTicker));
       const observedAt = now();
+      if (!seriesFeeHistories.has(seriesTicker)) {
+        const seriesChanges = await retry(() =>
+          reader.listSeriesFeeChanges(seriesTicker, true),
+        );
+        const seriesRows: FeeSnapshotInput[] = seriesChanges
+          .slice()
+          .sort((a, b) => a.scheduledAt.getTime() - b.scheduledAt.getTime())
+          .map((change, index, rows) => ({
+            eventTicker: null,
+            seriesTicker,
+            observedAt,
+            effectiveFrom: change.scheduledAt,
+            effectiveTo: rows[index + 1]?.scheduledAt ?? null,
+            feeType: change.feeType,
+            feeMultiplier: change.feeMultiplier,
+            makerMultiplier: null,
+            takerMultiplier: null,
+            sourceUrl: `https://external-api.kalshi.com/trade-api/v2/series/fee_changes?series_ticker=${encodeURIComponent(seriesTicker)}&show_historical=true`,
+            sourceType: "official_series_fee_change_api",
+            rawMetadata: change.rawMetadata,
+            collectionRunId: runId,
+          }));
+        await store.writeFeeSnapshots(seriesRows);
+        seriesFeeHistories.add(seriesTicker);
+        log("series_fee_history_collected", {
+          runId,
+          seriesTicker,
+          records: seriesRows.length,
+          source: "official_series_fee_change_api",
+        });
+      }
       const feeRows: FeeSnapshotInput[] = [
         feeSnapshot(
           runId,
@@ -274,7 +309,12 @@ export async function collectTrades(
               0,
               Math.floor((prior.getTime() - 1000) / 1000),
             );
-            const trades = await fetchTradeWindow(reader, market.ticker, minTs);
+            const trades = await fetchTradeWindow(
+              reader,
+              market.ticker,
+              minTs,
+              () => paginationPages++,
+            );
             const rows: TradeInput[] = trades.map((trade) => ({
               source: reader.source,
               providerTradeId: trade.tradeId,
@@ -318,6 +358,7 @@ export async function collectTrades(
         runId,
         written,
         duplicates,
+        paginationPages,
         elapsedMs: now().getTime() - selectedAt.getTime(),
       });
       if (
@@ -339,12 +380,19 @@ export async function collectTrades(
     error = errorCode(cause);
     throw cause;
   } finally {
+    try {
+      await store.updateCollectionMetrics(runId, { paginationPages });
+    } catch {
+      status = "failed";
+      error = "collection_metrics_persist_failed";
+    }
     await store.finishRun(runId, status, error);
     log("trade_collector_stopped", {
       runId,
       status,
       written,
       duplicates,
+      paginationPages,
       error,
     });
   }

@@ -8,6 +8,8 @@ export interface EvidenceTrade {
   yesPrice: string;
   quantity: string;
   aggressorSide: "yes_exposure" | "no_exposure" | "unknown";
+  takerOutcomeSide?: "yes" | "no" | null;
+  takerBookSide?: "bid" | "ask" | null;
   sideProvenance: "provider_explicit" | "unknown";
   isBlockTrade: boolean;
 }
@@ -96,6 +98,18 @@ export function alignTrade(
     postDelayMs: post ? post.bookReceivedAt!.getTime() - time : null,
     relation,
   };
+}
+
+/** Keep only trades with valid, non-stale books on both sides of execution. */
+export function queueAlignedTrades(
+  trades: readonly EvidenceTrade[],
+  books: readonly EvidenceBook[],
+  toleranceMs = 7500,
+): EvidenceTrade[] {
+  return trades.filter((trade) => {
+    const match = alignTrade(trade, books, toleranceMs);
+    return match.pre !== null && match.post !== null;
+  });
 }
 
 export interface QueueEvidence {

@@ -13,10 +13,12 @@ import {
 } from "@kalshi-lab/db";
 import { queryResearch } from "./queries.ts";
 import { simulateMarket } from "./simulation/execution.ts";
+import { identify } from "./simulation/strategy.ts";
 import type { Ledger, MakerObservation } from "./simulation/types.ts";
 import {
   alignTrade,
   classifyFeeWindow,
+  queueAlignedTrades,
   queueConsumption,
   type EvidenceBook,
   type EvidenceTrade,
@@ -191,7 +193,7 @@ async function main() {
         ),
       ),
     ].sort();
-    if (!tickers.length || tickers.length > 100)
+    if (!tickers.length || tickers.length > 250)
       throw new Error("Invalid collector universe.");
     const trades = await database.db
       .select()
@@ -215,6 +217,7 @@ async function main() {
       .limit(10001);
     if (fees.length > 10000) throw new Error("Fee selection exceeds cap.");
     const books = new Map<string, EvidenceBook[]>();
+    const bookSnapshotCounts = new Map<string, number>();
     const orders: Ledger[] = [];
     let bookData: Awaited<ReturnType<typeof queryResearch>> | null = null;
     if (bookRuns.length)
@@ -230,6 +233,11 @@ async function main() {
         },
         (ticker, rows) => {
           books.set(ticker, rows as EvidenceBook[]);
+          for (const row of rows)
+            bookSnapshotCounts.set(
+              row.workerRunId,
+              (bookSnapshotCounts.get(row.workerRunId) ?? 0) + 1,
+            );
           orders.push(
             ...simulateMarket(ticker, rows as MakerObservation[], {
               scenario: "pessimistic",
@@ -247,6 +255,8 @@ async function main() {
       yesPrice: row.yesPrice,
       quantity: row.quantity,
       aggressorSide: row.aggressorSide as EvidenceTrade["aggressorSide"],
+      takerOutcomeSide: row.takerOutcomeSide as EvidenceTrade["takerOutcomeSide"],
+      takerBookSide: row.takerBookSide as EvidenceTrade["takerBookSide"],
       sideProvenance: row.sideProvenance as EvidenceTrade["sideProvenance"],
       isBlockTrade: row.isBlockTrade,
     }));
@@ -256,6 +266,15 @@ async function main() {
         ...(tradesByTicker.get(trade.ticker) ?? []),
         trade,
       ]);
+    const queueTradesByTicker = new Map<string, EvidenceTrade[]>();
+    for (const [ticker, tickerTrades] of tradesByTicker)
+      queueTradesByTicker.set(
+        ticker,
+        queueAlignedTrades(tickerTrades, books.get(ticker) ?? []),
+      );
+    const evidenceTradesById = new Map(
+      evidenceTrades.map((trade) => [trade.tradeId, trade]),
+    );
     let pre = 0,
       post = 0,
       both = 0,
@@ -337,8 +356,11 @@ async function main() {
       fillReached = 0,
       unobservable = 0;
     const orderQueueEvidence = [] as {
+      candidateId: string;
       simulationId: string;
       ticker: string;
+      eventTicker: string | null;
+      family: string;
       activationTime: string;
       expiryTime: string;
       limitPrice: string;
@@ -347,23 +369,43 @@ async function main() {
       queueFullyConsumed: boolean;
       queueSupportedHypotheticalFill: boolean;
       supportingTradeIds: string[];
+      relevantExecutedQuantity: string;
+      ourOneContractThresholdReached: boolean;
+      relevantDirectedTrades: {
+        tradeId: string;
+        executedAt: string;
+        yesPrice: string;
+        quantity: string;
+        takerOutcomeSide: EvidenceTrade["takerOutcomeSide"];
+        takerBookSide: EvidenceTrade["takerBookSide"];
+        aggressorSide: EvidenceTrade["aggressorSide"];
+        preBookId: string;
+        postBookId: string;
+      }[];
       unknownReason: string | null;
     }[];
+    const alignmentsById = new Map(
+      tradeAlignments.map((alignment) => [alignment.tradeId, alignment]),
+    );
     for (const order of posted) {
       const expiryTime = new Date(
         Date.parse(order.scheduledActiveAt) + order.expiryMs,
       );
       const evidence = queueConsumption({
         queueAhead: order.displayedQueueAhead,
-        orderedTrades: tradesByTicker.get(order.ticker) ?? [],
+        orderedTrades: queueTradesByTicker.get(order.ticker) ?? [],
         limitPrice: order.entryLimitPrice,
         side: "yes_buy",
         activationTime: new Date(order.orderActiveAt!),
         expiryTime,
       });
       orderQueueEvidence.push({
+        candidateId: order.simulationId,
         simulationId: order.simulationId,
         ticker: order.ticker,
+        eventTicker: order.eventTicker ?? null,
+        family:
+          identify(order.ticker, order.eventTicker ?? null).family ?? "unknown",
         activationTime: order.orderActiveAt!,
         expiryTime: expiryTime.toISOString(),
         limitPrice: order.entryLimitPrice,
@@ -372,6 +414,23 @@ async function main() {
         queueFullyConsumed: evidence.queueFullyConsumed,
         queueSupportedHypotheticalFill: evidence.ourFillReached,
         supportingTradeIds: evidence.supportingTradeIds,
+        relevantExecutedQuantity: evidence.queueConsumed,
+        ourOneContractThresholdReached: evidence.ourFillReached,
+        relevantDirectedTrades: evidence.supportingTradeIds.map((tradeId) => {
+          const trade = evidenceTradesById.get(tradeId)!;
+          const alignment = alignmentsById.get(tradeId)!;
+          return {
+            tradeId,
+            executedAt: trade.executedAt.toISOString(),
+            yesPrice: trade.yesPrice,
+            quantity: trade.quantity,
+            takerOutcomeSide: trade.takerOutcomeSide ?? null,
+            takerBookSide: trade.takerBookSide ?? null,
+            aggressorSide: trade.aggressorSide,
+            preBookId: alignment.preBookId!,
+            postBookId: alignment.postBookId!,
+          };
+        }),
         unknownReason: evidence.unknownReason,
       });
       if (evidence.supportingTradeIds.length) flow++;
@@ -379,6 +438,63 @@ async function main() {
       if (evidence.queueFullyConsumed) queueConsumed++;
       if (evidence.ourFillReached) fillReached++;
     }
+    const familyCounts = (
+      rows: Array<{ family: string }>,
+    ): Array<{ family: string; count: number; sharePct: number | null }> => {
+      const counts = new Map<string, number>();
+      for (const row of rows)
+        counts.set(row.family, (counts.get(row.family) ?? 0) + 1);
+      return [...counts]
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([family, count]) => ({
+          family,
+          count,
+          sharePct: pct(count, rows.length),
+        }));
+    };
+    const tradeFamilies = trades.map((trade) => ({
+      family: identify(trade.ticker, trade.eventTicker ?? null).family ?? "unknown",
+    }));
+    const candidateFamilies = posted.map((order) => ({
+      family: identify(order.ticker, order.eventTicker ?? null).family ?? "unknown",
+    }));
+    const flowIds = new Set(
+      orderQueueEvidence
+        .filter((evidence) => evidence.supportingTradeIds.length > 0)
+        .map((evidence) => evidence.simulationId),
+    );
+    const flowFamilies = orderQueueEvidence
+      .filter((evidence) => flowIds.has(evidence.simulationId))
+      .map((evidence) => ({ family: evidence.family }));
+    const fillFamilies = orderQueueEvidence
+      .filter((evidence) => evidence.queueSupportedHypotheticalFill)
+      .map((evidence) => ({ family: evidence.family }));
+    const concentration = (rows: Array<{ family: string }>) => {
+      const sorted = familyCounts(rows).sort((a, b) => b.count - a.count);
+      return {
+        byFamily: sorted,
+        largestFamilySharePct: sorted[0]?.sharePct ?? null,
+        largestThreeSharePct:
+          rows.length === 0
+            ? null
+            : pct(sorted.slice(0, 3).reduce((sum, row) => sum + row.count, 0), rows.length),
+      };
+    };
+    const queueFillStatuses = orderQueueEvidence
+      .filter((evidence) => evidence.queueSupportedHypotheticalFill)
+      .map((evidence) => ({
+        simulationId: evidence.simulationId,
+        eventTicker: evidence.eventTicker,
+        family: evidence.family,
+        classification: evidence.eventTicker
+          ? classifyFeeWindow(
+              fees as FeeEvidence[],
+              evidence.eventTicker,
+              new Date(evidence.activationTime),
+              new Date(evidence.expiryTime),
+            )
+          : "fee_unknown" as const,
+      }));
     const families = new Map<string, number>();
     for (const row of trades) {
       const event = fees.find(
@@ -451,7 +567,7 @@ async function main() {
           ? "PROCEED TO MAKER-SIMULATOR-V2"
           : "COLLECT MORE EVIDENCE";
     const legacy = values["exp003-ledger"]
-      ? await readExp003(values["exp003-ledger"], tradesByTicker)
+      ? await readExp003(values["exp003-ledger"], queueTradesByTicker)
       : { compared: 0, changed: 0, changes: [] };
     const report = {
       provenance: {
@@ -474,6 +590,7 @@ async function main() {
         events: events.length,
         seriesFamilies: [...families],
         trades: trades.length,
+        nonBlockTrades: trades.filter((trade) => !trade.isBlockTrade).length,
         uniqueTradeIds: new Set(trades.map((t) => t.providerTradeId)).size,
         duplicatesSuppressed: runs.reduce(
           (n, run) => n + run.duplicatesSeen,
@@ -482,12 +599,51 @@ async function main() {
         tradesPerMinute:
           trades.length / ((to.getTime() - from.getTime()) / 60000),
         stableFieldPct: pct(stableFields, trades.length),
-        collectorRuns: runs.map((r) => ({
+        maxExchangeToReceiptLagMs: trades.length
+          ? trades.reduce(
+              (max, trade) =>
+                Math.max(
+                  max,
+                  trade.receivedAt.getTime() - trade.executedAt.getTime(),
+                ),
+              Number.NEGATIVE_INFINITY,
+            )
+          : null,
+        collectorRuns: runs.map((r) => {
+          const runTrades = trades.filter(
+            (trade) => trade.collectionRunId === r.id,
+          );
+          return {
+            id: r.id,
+            startedAt: r.startedAt,
+            stoppedAt: r.stoppedAt,
+            status: r.status,
+            error: r.error,
+            gitCommit: r.gitCommit,
+            gitDirty: r.gitDirty,
+            tradesWritten: r.tradesWritten,
+            duplicatesSeen: r.duplicatesSeen,
+            selectedTrades: runTrades.length,
+            selectedNonBlockTrades: runTrades.filter(
+              (trade) => !trade.isBlockTrade,
+            ).length,
+            paginationPages: Number(
+              (r.config.collectionMetrics as
+                | { paginationPages?: number }
+                | undefined)?.paginationPages ?? 0,
+            ),
+            config: r.config,
+          };
+        }),
+        bookRuns: (bookData?.runs ?? []).map((r) => ({
           id: r.id,
           startedAt: r.startedAt,
           stoppedAt: r.stoppedAt,
           status: r.status,
           error: r.error,
+          gitCommit: r.gitCommit,
+          gitDirty: r.gitDirty,
+          snapshots: bookSnapshotCounts.get(r.id) ?? 0,
         })),
       },
       direction: {
@@ -517,6 +673,11 @@ async function main() {
         queueFullyConsumed: queueConsumed,
         queueSupportedHypotheticalFills: fillReached,
         unobservable,
+        concentration: {
+          candidates: concentration(candidateFamilies),
+          relevantFlow: concentration(flowFamilies),
+          queueSupportedHypotheticalFills: concentration(fillFamilies),
+        },
       },
       orderQueueEvidence,
       fees: {
@@ -529,19 +690,54 @@ async function main() {
           feeKnownCandidateContexts,
           completedContexts.length,
         ),
+        queueSupportedContexts: {
+          total: queueFillStatuses.length,
+          feeKnown: queueFillStatuses.filter((row) => row.classification === "fee_known").length,
+          feeUnknown: queueFillStatuses.filter((row) => row.classification === "fee_unknown").length,
+          feeConflicting: queueFillStatuses.filter((row) => row.classification === "fee_conflicting").length,
+          feeKnownCoveragePct: pct(
+            queueFillStatuses.filter((row) => row.classification === "fee_known").length,
+            queueFillStatuses.length,
+          ),
+          byFamily: queueFillStatuses,
+        },
+        concentration: {
+          publicTrades: concentration(tradeFamilies),
+          candidateOrders: concentration(candidateFamilies),
+          relevantFlowCandidates: concentration(flowFamilies),
+          queueSupportedHypotheticalFills: concentration(fillFamilies),
+        },
         sourceSnapshots: fees.map((f) => ({
           eventTicker: f.eventTicker,
           seriesTicker: f.seriesTicker,
           sourceType: f.sourceType,
           sourceUrl: f.sourceUrl,
           observedAt: f.observedAt,
+          retrievedAt: f.observedAt,
           effectiveFrom: f.effectiveFrom,
           effectiveTo: f.effectiveTo,
           feeType: f.feeType,
           feeMultiplier: f.feeMultiplier,
+          makerFeeApplicable:
+            f.makerMultiplier === null
+              ? null
+              : Number(f.makerMultiplier) !== 0,
           makerMultiplier: f.makerMultiplier,
           takerMultiplier: f.takerMultiplier,
+          evidenceLayer:
+            f.sourceType === "official_fee_schedule"
+              ? "formula_known_applicability_unproven"
+              : "official_applicability_evidence",
+          rawResponseHash: hash(f.rawMetadata),
           rawMetadataSha256: hash(f.rawMetadata),
+          rationale:
+            f.sourceType === "official_series_fee_change_api"
+              ? "Official scheduled historical series fee change; maker/taker multipliers remain unknown unless corroborated by an effective fee schedule."
+              : f.sourceType === "official_event_fee_change_api"
+                ? "Official scheduled event override change; applies over the series rule only within its dated interval."
+                : f.sourceType === "official_fee_schedule"
+                  ? "Dated general schedule formula retained separately from product applicability."
+                  : "Official current metadata snapshot; current state alone does not establish historical applicability.",
           rawMetadata: f.rawMetadata,
         })),
       },

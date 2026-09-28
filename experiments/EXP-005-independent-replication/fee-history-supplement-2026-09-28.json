@@ -1,0 +1,189 @@
+{
+  "experiment": "EXP-005",
+  "source": "official_unsigned_production_public_get",
+  "retrievedAt": "2026-09-28T19:17:34.049Z",
+  "contexts": {
+    "events": [
+      "KXTEMPLAXHS-26SEP2814",
+      "KXTEMPMIAH-26SEP2811",
+      "KXTEMPMIAH-26SEP2813",
+      "KXTEMPMIAH-26SEP2815"
+    ],
+    "series": [
+      "KXTEMPLAXHS",
+      "KXTEMPMIAH"
+    ]
+  },
+  "records": [
+    {
+      "kind": "event_current",
+      "ticker": "KXTEMPLAXHS-26SEP2814",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPLAXHS-26SEP2814",
+      "retrievedAt": "2026-09-28T19:17:32.953Z",
+      "httpStatus": 200,
+      "rawResponseHash": "2fd94f8be371a3d08800ed09ce082fe680106fe98be20d92c6e1fc504dd7b2f2",
+      "metadata": {
+        "eventTicker": "KXTEMPLAXHS-26SEP2814",
+        "seriesTicker": "KXTEMPLAXHS",
+        "feeTypeOverride": null,
+        "feeMultiplierOverride": null
+      },
+      "error": null
+    },
+    {
+      "kind": "event_fee_changes",
+      "ticker": "KXTEMPLAXHS-26SEP2814",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/fee_changes?event_ticker=KXTEMPLAXHS-26SEP2814&limit=1000",
+      "retrievedAt": "2026-09-28T19:17:33.325Z",
+      "httpStatus": 200,
+      "rawResponseHash": "4d755a11d76cd85bec7a4758a2d226815fd2a935a5563dbafae35ee9d373da45",
+      "metadata": {
+        "count": 0,
+        "cursorPresent": false,
+        "changes": []
+      },
+      "error": null
+    },
+    {
+      "kind": "event_current",
+      "ticker": "KXTEMPMIAH-26SEP2811",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPMIAH-26SEP2811",
+      "retrievedAt": "2026-09-28T19:17:33.389Z",
+      "httpStatus": 200,
+      "rawResponseHash": "269ed0fd374f06315270e624040e0a9ddce19ed194e71cc2f4a004aa839c4157",
+      "metadata": {
+        "eventTicker": "KXTEMPMIAH-26SEP2811",
+        "seriesTicker": "KXTEMPMIAH",
+        "feeTypeOverride": null,
+        "feeMultiplierOverride": null
+      },
+      "error": null
+    },
+    {
+      "kind": "event_fee_changes",
+      "ticker": "KXTEMPMIAH-26SEP2811",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/fee_changes?event_ticker=KXTEMPMIAH-26SEP2811&limit=1000",
+      "retrievedAt": "2026-09-28T19:17:33.459Z",
+      "httpStatus": 200,
+      "rawResponseHash": "4d755a11d76cd85bec7a4758a2d226815fd2a935a5563dbafae35ee9d373da45",
+      "metadata": {
+        "count": 0,
+        "cursorPresent": false,
+        "changes": []
+      },
+      "error": null
+    },
+    {
+      "kind": "event_current",
+      "ticker": "KXTEMPMIAH-26SEP2813",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPMIAH-26SEP2813",
+      "retrievedAt": "2026-09-28T19:17:33.523Z",
+      "httpStatus": 200,
+      "rawResponseHash": "e781feb45a691afe9a385aaeff4cec3a5020719eb08a092e306a438756de4aab",
+      "metadata": {
+        "eventTicker": "KXTEMPMIAH-26SEP2813",
+        "seriesTicker": "KXTEMPMIAH",
+        "feeTypeOverride": null,
+        "feeMultiplierOverride": null
+      },
+      "error": null
+    },
+    {
+      "kind": "event_fee_changes",
+      "ticker": "KXTEMPMIAH-26SEP2813",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/fee_changes?event_ticker=KXTEMPMIAH-26SEP2813&limit=1000",
+      "retrievedAt": "2026-09-28T19:17:33.584Z",
+      "httpStatus": 200,
+      "rawResponseHash": "4d755a11d76cd85bec7a4758a2d226815fd2a935a5563dbafae35ee9d373da45",
+      "metadata": {
+        "count": 0,
+        "cursorPresent": false,
+        "changes": []
+      },
+      "error": null
+    },
+    {
+      "kind": "event_current",
+      "ticker": "KXTEMPMIAH-26SEP2815",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPMIAH-26SEP2815",
+      "retrievedAt": "2026-09-28T19:17:33.667Z",
+      "httpStatus": 200,
+      "rawResponseHash": "b398f19634b642f5d57fd1c3cec2ca00dd9268491cbb73d673d64363e4bc4e15",
+      "metadata": {
+        "eventTicker": "KXTEMPMIAH-26SEP2815",
+        "seriesTicker": "KXTEMPMIAH",
+        "feeTypeOverride": null,
+        "feeMultiplierOverride": null
+      },
+      "error": null
+    },
+    {
+      "kind": "event_fee_changes",
+      "ticker": "KXTEMPMIAH-26SEP2815",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/fee_changes?event_ticker=KXTEMPMIAH-26SEP2815&limit=1000",
+      "retrievedAt": "2026-09-28T19:17:33.736Z",
+      "httpStatus": 200,
+      "rawResponseHash": "4d755a11d76cd85bec7a4758a2d226815fd2a935a5563dbafae35ee9d373da45",
+      "metadata": {
+        "count": 0,
+        "cursorPresent": false,
+        "changes": []
+      },
+      "error": null
+    },
+    {
+      "kind": "series_current",
+      "ticker": "KXTEMPLAXHS",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPLAXHS",
+      "retrievedAt": "2026-09-28T19:17:33.818Z",
+      "httpStatus": 200,
+      "rawResponseHash": "0f489068fe65ecf248365d71f56b0f14d2a26a76d4c8794b8d13a7509d00e30e",
+      "metadata": {
+        "seriesTicker": "KXTEMPLAXHS",
+        "feeType": "quadratic",
+        "feeMultiplier": 1
+      },
+      "error": null
+    },
+    {
+      "kind": "series_fee_changes",
+      "ticker": "KXTEMPLAXHS",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/fee_changes?series_ticker=KXTEMPLAXHS&show_historical=true",
+      "retrievedAt": "2026-09-28T19:17:33.879Z",
+      "httpStatus": 200,
+      "rawResponseHash": "6780c8eb7edbb5e1ca3b15166f17cef054befacb2cc8f4bc479c54074a9a2c18",
+      "metadata": {
+        "count": 0,
+        "changes": []
+      },
+      "error": null
+    },
+    {
+      "kind": "series_current",
+      "ticker": "KXTEMPMIAH",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPMIAH",
+      "retrievedAt": "2026-09-28T19:17:33.934Z",
+      "httpStatus": 200,
+      "rawResponseHash": "d3d58b8ef78c828a258964e5d22f3eda5b6ff8b03b644401179bf3c31670b5e5",
+      "metadata": {
+        "seriesTicker": "KXTEMPMIAH",
+        "feeType": "quadratic",
+        "feeMultiplier": 1
+      },
+      "error": null
+    },
+    {
+      "kind": "series_fee_changes",
+      "ticker": "KXTEMPMIAH",
+      "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/fee_changes?series_ticker=KXTEMPMIAH&show_historical=true",
+      "retrievedAt": "2026-09-28T19:17:33.994Z",
+      "httpStatus": 200,
+      "rawResponseHash": "6780c8eb7edbb5e1ca3b15166f17cef054befacb2cc8f4bc479c54074a9a2c18",
+      "metadata": {
+        "count": 0,
+        "changes": []
+      },
+      "error": null
+    }
+  ]
+}

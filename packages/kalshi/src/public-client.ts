@@ -10,6 +10,7 @@ import { normalizeTradePage } from "./public-trades.ts";
 import {
   normalizePublicEventFee,
   normalizePublicEventFeeChange,
+  normalizePublicSeriesFeeChange,
   normalizePublicSeriesFee,
 } from "./public-fees.ts";
 
@@ -115,11 +116,29 @@ export class KalshiPublicMarketDataClient implements MarketDataReader {
       cursor: typeof raw.cursor === "string" && raw.cursor ? raw.cursor : null,
     };
   }
+  async listSeriesFeeChanges(
+    seriesTicker: string,
+    showHistorical = true,
+  ) {
+    const query = new URLSearchParams({
+      series_ticker: ticker(seriesTicker),
+      show_historical: String(showHistorical),
+    });
+    const raw = record(
+      await this.request(`/trade-api/v2/series/fee_changes?${query}`),
+    );
+    if (
+      !Array.isArray(raw.series_fee_change_arr) ||
+      raw.series_fee_change_arr.length > 10000
+    )
+      throw new Error("Invalid series fee changes.");
+    return raw.series_fee_change_arr.map(normalizePublicSeriesFeeChange);
+  }
   private async request(path: string): Promise<unknown> {
     const url = new URL(path, "https://external-api.kalshi.com");
     if (
       url.origin !== "https://external-api.kalshi.com" ||
-      !/^\/trade-api\/v2\/(?:markets(?:\/(?:trades|[A-Za-z0-9%._-]+(?:\/orderbook)?))?|events\/(?:fee_changes|[A-Za-z0-9%._-]+)|series\/[A-Za-z0-9%._-]+)$/.test(
+      !/^\/trade-api\/v2\/(?:markets(?:\/(?:trades|[A-Za-z0-9%._-]+(?:\/orderbook)?))?|events\/(?:fee_changes|[A-Za-z0-9%._-]+)|series\/(?:fee_changes|[A-Za-z0-9%._-]+))$/.test(
         url.pathname,
       )
     ) {

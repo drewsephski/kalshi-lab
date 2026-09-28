@@ -1,0 +1,489 @@
+{
+  "experiment": "EXP-005",
+  "source": "kalshi_production_public",
+  "protocolCommit": "6985257e03f42faa88c35b602cad2198ee56ceb7",
+  "sessions": [
+    {
+      "sessionId": "EXP005-S1",
+      "from": "2026-09-28T15:17:20.591Z",
+      "toExclusive": "2026-09-28T15:29:59.016Z",
+      "tradeRunIds": [
+        "a4a2d154-66ca-4df4-a9c4-db1c8b209ae2"
+      ],
+      "bookRunIds": [
+        "43faff08-0b80-43c2-b39e-33cdf909eab3"
+      ],
+      "collectCommit": "d521678451b2f7e335508bbb676f11ca836bd4fc",
+      "gitDirty": false,
+      "markets": [
+        "KXAAAGASW-26OCT05-4.4600",
+        "KXAAAGASW-26OCT05-4.5600",
+        "KXAAAGASW-26OCT05-4.6000",
+        "KXAAAGASW-26OCT05-4.6200",
+        "KXAAAGASW-26OCT05-4.6600",
+        "KXAAAGASW-26OCT05-4.6800",
+        "KXAAAGASW-26OCT05-4.7000",
+        "KXAAAGASWNJ-26OCT05-4.2800",
+        "KXGOLDH-26SEP2812-T4115.99",
+        "KXINTLFRIENDLYSPREAD-26SEP28KGZMDV-KGZ4",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV-10",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV-7",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV-8",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV-9",
+        "KXTEMPCHIHS-26SEP2812-T66.99",
+        "KXTEMPLAXHS-26SEP2812-T71.99",
+        "KXTEMPLAXHS-26SEP2812-T72.99",
+        "KXTEMPLAXHS-26SEP2812-T73.99",
+        "KXTEMPMIAH-26SEP2812-T78.99",
+        "KXTEMPMIAH-26SEP2812-T79.99",
+        "KXTEMPMIAH-26SEP2812-T81.99",
+        "KXTEMPMIAH-26SEP2812-T83.99",
+        "KXTEMPMIAH-26SEP2812-T84.99",
+        "KXTEMPMIAH-26SEP2812-T85.99",
+        "KXTEMPMIAH-26SEP2812-T86.99"
+      ],
+      "eventTickers": [
+        "KXAAAGASW-26OCT05",
+        "KXAAAGASWNJ-26OCT05",
+        "KXGOLDH-26SEP2812",
+        "KXINTLFRIENDLYSPREAD-26SEP28KGZMDV",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+        "KXTEMPCHIHS-26SEP2812",
+        "KXTEMPLAXHS-26SEP2812",
+        "KXTEMPMIAH-26SEP2812"
+      ],
+      "seriesFamilies": [
+        "temperature:CHI:26SEP28",
+        "temperature:LAX:26SEP28",
+        "temperature:MIA:26SEP28",
+        "unknown"
+      ],
+      "seriesTickers": [
+        "KXAAAGASW",
+        "KXAAAGASWNJ",
+        "KXGOLDH",
+        "KXINTLFRIENDLYSPREAD",
+        "KXINTLFRIENDLYTOTAL",
+        "KXTEMPCHIHS",
+        "KXTEMPLAXHS",
+        "KXTEMPMIAH"
+      ],
+      "exclusion": "Excluded: trade collector failed with EADDRNOTAVAIL at 15:24:50Z and paired book recorder stopped with market_read_HTTP_429 at 15:29:59Z; incomplete book continuity."
+    },
+    {
+      "sessionId": "EXP005-S2",
+      "from": "2026-09-28T15:31:04.521Z",
+      "toExclusive": "2026-09-28T15:53:42.488Z",
+      "tradeRunIds": [
+        "84048052-27bf-4810-ab0a-6ed57c3da4d5"
+      ],
+      "bookRunIds": [
+        "afe93a08-773e-40e4-b493-d3d09f6f9b8e"
+      ],
+      "collectCommit": "bf2443245eefcc6ff148c580cf8101646a8e2cd0",
+      "gitDirty": false,
+      "markets": [
+        "KXAAAGASW-26OCT05-4.4000",
+        "KXAAAGASW-26OCT05-4.4200",
+        "KXAAAGASW-26OCT05-4.4400",
+        "KXAAAGASW-26OCT05-4.4600",
+        "KXAAAGASW-26OCT05-4.4800",
+        "KXAAAGASW-26OCT05-4.5600",
+        "KXAAAGASW-26OCT05-4.6600",
+        "KXAAAGASW-26OCT05-4.6800",
+        "KXAAAGASW-26OCT05-4.7000",
+        "KXGOLDH-26SEP2812-T4115.99",
+        "KXINTLFRIENDLYSPREAD-26SEP28KGZMDV-KGZ4",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV-10",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV-8",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV-9",
+        "KXTEMPCHIHS-26SEP2812-T65.99",
+        "KXTEMPCHIHS-26SEP2812-T66.99",
+        "KXTEMPLAXHS-26SEP2812-T72.99",
+        "KXTEMPLAXHS-26SEP2812-T73.99",
+        "KXTEMPMIAH-26SEP2812-T78.99",
+        "KXTEMPMIAH-26SEP2812-T81.99",
+        "KXTEMPMIAH-26SEP2812-T83.99",
+        "KXTEMPMIAH-26SEP2812-T84.99",
+        "KXTEMPMIAH-26SEP2812-T85.99",
+        "KXTEMPMIAH-26SEP2812-T86.99",
+        "KXTEMPNYCHS-26SEP2812-T59.99"
+      ],
+      "eventTickers": [
+        "KXAAAGASW-26OCT05",
+        "KXGOLDH-26SEP2812",
+        "KXINTLFRIENDLYSPREAD-26SEP28KGZMDV",
+        "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+        "KXTEMPCHIHS-26SEP2812",
+        "KXTEMPLAXHS-26SEP2812",
+        "KXTEMPMIAH-26SEP2812",
+        "KXTEMPNYCHS-26SEP2812"
+      ],
+      "seriesFamilies": [
+        "temperature:CHI:26SEP28",
+        "temperature:LAX:26SEP28",
+        "temperature:MIA:26SEP28",
+        "temperature:NYC:26SEP28",
+        "unknown"
+      ],
+      "seriesTickers": [
+        "KXAAAGASW",
+        "KXGOLDH",
+        "KXINTLFRIENDLYSPREAD",
+        "KXINTLFRIENDLYTOTAL",
+        "KXTEMPCHIHS",
+        "KXTEMPLAXHS",
+        "KXTEMPMIAH",
+        "KXTEMPNYCHS"
+      ],
+      "exclusion": "Excluded as a pair: trade collector completed, but the paired book recorder ended with market_read_EADDRNOTAVAIL and the precise affected book interval is unavailable; conservative exclusion avoids uncertain alignment."
+    },
+    {
+      "sessionId": "EXP005-S3",
+      "from": "2026-09-28T16:02:11.329Z",
+      "toExclusive": "2026-09-28T16:22:37.607Z",
+      "tradeRunIds": [
+        "04680210-ea54-461c-aa1f-6868683b02bf"
+      ],
+      "bookRunIds": [
+        "3b4e0ce3-4da7-401a-bd4e-6c18b616aa87"
+      ],
+      "collectCommit": "57c6b88885a07e8b94e1b2c0ff068a7e95275613",
+      "gitDirty": false,
+      "markets": [
+        "KXALBUMEQUIV-IMS26OCT01-25K",
+        "KXALBUMEQUIV-POP26OCT01-30K",
+        "KXALBUMSTREAMS-IMS26OCT01-12.0M",
+        "KXALBUMSTREAMS-IMS26OCT01-14.0M",
+        "KXATPCHALLENGERMATCH-26SEP28JASMOR-JAS",
+        "KXATPCHALLENGERMATCH-26SEP28JASMOR-MOR",
+        "KXATPGSPREAD-26SEP29VANCUI-VAN6",
+        "KXATPGTOTAL-26SEP28MANCAR-23",
+        "KXATPGTOTAL-26SEP29HURDAV-24",
+        "KXTEMPCHIHS-26SEP2813-T66.99",
+        "KXTEMPCHIHS-26SEP2813-T67.99",
+        "KXTEMPCHIHS-26SEP2813-T68.99",
+        "KXTEMPCHIHS-26SEP2813-T69.99",
+        "KXTEMPLAXHS-26SEP2813-T72.99",
+        "KXTEMPLAXHS-26SEP2813-T73.99",
+        "KXTEMPLAXHS-26SEP2813-T74.99",
+        "KXTEMPLAXHS-26SEP2813-T75.99",
+        "KXTEMPMIAH-26SEP2813-T82.99",
+        "KXTEMPMIAH-26SEP2813-T84.99",
+        "KXTEMPMIAH-26SEP2813-T85.99",
+        "KXTEMPMIAH-26SEP2813-T86.99",
+        "KXTEMPMIAH-26SEP2813-T87.99",
+        "KXTEMPMIAH-26SEP2813-T88.99",
+        "KXTEMPNYCHS-26SEP2813-T60.99",
+        "KXTEMPNYCHS-26SEP2813-T61.99"
+      ],
+      "eventTickers": [
+        "KXALBUMEQUIV-IMS26OCT01",
+        "KXALBUMEQUIV-POP26OCT01",
+        "KXALBUMSTREAMS-IMS26OCT01",
+        "KXATPCHALLENGERMATCH-26SEP28JASMOR",
+        "KXATPGSPREAD-26SEP29VANCUI",
+        "KXATPGTOTAL-26SEP28MANCAR",
+        "KXATPGTOTAL-26SEP29HURDAV",
+        "KXTEMPCHIHS-26SEP2813",
+        "KXTEMPLAXHS-26SEP2813",
+        "KXTEMPMIAH-26SEP2813",
+        "KXTEMPNYCHS-26SEP2813"
+      ],
+      "seriesFamilies": [
+        "temperature:CHI:26SEP28",
+        "temperature:LAX:26SEP28",
+        "temperature:MIA:26SEP28",
+        "temperature:NYC:26SEP28",
+        "unknown"
+      ],
+      "seriesTickers": [
+        "KXALBUMEQUIV",
+        "KXALBUMSTREAMS",
+        "KXATPCHALLENGERMATCH",
+        "KXATPGSPREAD",
+        "KXATPGTOTAL",
+        "KXTEMPCHIHS",
+        "KXTEMPLAXHS",
+        "KXTEMPMIAH",
+        "KXTEMPNYCHS"
+      ]
+    },
+    {
+      "sessionId": "EXP005-S4",
+      "from": "2026-09-28T16:32:41.887Z",
+      "toExclusive": "2026-09-28T17:02:57.839Z",
+      "tradeRunIds": [
+        "afd663a8-d123-4532-8e15-8b3ae44ad3ad"
+      ],
+      "bookRunIds": [
+        "09c77bbf-c79d-4883-bb1a-c1d9bb435f7a"
+      ],
+      "collectCommit": "a6b0b9dbd90c6d814e2523199ebcff82f7a50575",
+      "gitDirty": false,
+      "markets": [
+        "KXINXHUD-26SEP281300-T7678.14",
+        "KXNFLPASSYDS-26SEP28PHICHI-CHICKEENUM11-325",
+        "KXNFLPASSYDS-26SEP28PHICHI-CHICKEENUM11-350",
+        "KXTEMPCHIHS-26SEP2813-T66.99",
+        "KXTEMPCHIHS-26SEP2813-T67.99",
+        "KXTEMPCHIHS-26SEP2813-T68.99",
+        "KXTEMPCHIHS-26SEP2813-T69.99",
+        "KXTEMPLAXHS-26SEP2813-T72.99",
+        "KXTEMPLAXHS-26SEP2813-T73.99",
+        "KXTEMPLAXHS-26SEP2813-T74.99",
+        "KXTEMPLAXHS-26SEP2813-T75.99",
+        "KXTEMPLAXHS-26SEP2813-T76.99",
+        "KXTEMPMIAH-26SEP2813-T80.99",
+        "KXTEMPMIAH-26SEP2813-T81.99",
+        "KXTEMPMIAH-26SEP2813-T82.99",
+        "KXTEMPMIAH-26SEP2813-T83.99",
+        "KXTEMPMIAH-26SEP2813-T84.99",
+        "KXTEMPMIAH-26SEP2813-T85.99",
+        "KXTEMPMIAH-26SEP2813-T86.99",
+        "KXTEMPMIAH-26SEP2813-T87.99",
+        "KXTEMPMIAH-26SEP2813-T88.99",
+        "KXTEMPMIAH-26SEP2813-T89.99",
+        "KXTEMPNYCHS-26SEP2813-T59.99",
+        "KXTEMPNYCHS-26SEP2813-T60.99",
+        "KXTEMPNYCHS-26SEP2813-T61.99"
+      ],
+      "eventTickers": [
+        "KXINXHUD-26SEP281300",
+        "KXNFLPASSYDS-26SEP28PHICHI",
+        "KXTEMPCHIHS-26SEP2813",
+        "KXTEMPLAXHS-26SEP2813",
+        "KXTEMPMIAH-26SEP2813",
+        "KXTEMPNYCHS-26SEP2813"
+      ],
+      "seriesFamilies": [
+        "NFL:26SEP28PHICHI",
+        "temperature:CHI:26SEP28",
+        "temperature:LAX:26SEP28",
+        "temperature:MIA:26SEP28",
+        "temperature:NYC:26SEP28",
+        "unknown"
+      ],
+      "seriesTickers": [
+        "KXINXHUD",
+        "KXNFLPASSYDS",
+        "KXTEMPCHIHS",
+        "KXTEMPLAXHS",
+        "KXTEMPMIAH",
+        "KXTEMPNYCHS"
+      ]
+    },
+    {
+      "sessionId": "EXP005-S5",
+      "from": "2026-09-28T17:13:07.380Z",
+      "toExclusive": "2026-09-28T17:43:40.835Z",
+      "tradeRunIds": [
+        "337ca01c-b9a6-453b-8f68-838d947adf20"
+      ],
+      "bookRunIds": [
+        "bfd0aaaa-79ee-4581-9a89-66cd4eac81b3"
+      ],
+      "collectCommit": "a6b0b9dbd90c6d814e2523199ebcff82f7a50575",
+      "gitDirty": false,
+      "markets": [
+        "KXBOXING-26OCT02JONESA-A",
+        "KXBOXING-26OCT02JONESA-JONES",
+        "KXISRNLTOTAL-26SEP28HKSBYE-8",
+        "KXNFLDROTY-27-HMASSES35",
+        "KXNFLOROTY-27-JDANIELS10",
+        "KXTEMPCHIHS-26SEP2814-T64.99",
+        "KXTEMPCHIHS-26SEP2814-T66.99",
+        "KXTEMPCHIHS-26SEP2814-T70.99",
+        "KXTEMPCHIHS-26SEP2814-T71.99",
+        "KXTEMPLAXHS-26SEP2814-T75.99",
+        "KXTEMPLAXHS-26SEP2814-T76.99",
+        "KXTEMPLAXHS-26SEP2814-T77.99",
+        "KXTEMPMIAH-26SEP2814-T81.99",
+        "KXTEMPMIAH-26SEP2814-T82.99",
+        "KXTEMPMIAH-26SEP2814-T84.99",
+        "KXTEMPMIAH-26SEP2814-T85.99",
+        "KXTEMPMIAH-26SEP2814-T86.99",
+        "KXTEMPMIAH-26SEP2814-T87.99",
+        "KXTEMPMIAH-26SEP2814-T88.99",
+        "KXTEMPMIAH-26SEP2814-T90.99",
+        "KXTEMPNYCHS-26SEP2814-T61.99",
+        "KXTEMPNYCHS-26SEP2814-T62.99",
+        "KXTRUMPMENTION-26OCT02-TRAN",
+        "KXUEFANLTOTAL-26SEP28ARMMNE-7",
+        "KXUEFANLTOTAL-26SEP28ARMMNE-8"
+      ],
+      "eventTickers": [
+        "KXBOXING-26OCT02JONESA",
+        "KXISRNLTOTAL-26SEP28HKSBYE",
+        "KXNFLDROTY-27",
+        "KXNFLOROTY-27",
+        "KXTEMPCHIHS-26SEP2814",
+        "KXTEMPLAXHS-26SEP2814",
+        "KXTEMPMIAH-26SEP2814",
+        "KXTEMPNYCHS-26SEP2814",
+        "KXTRUMPMENTION-26OCT02",
+        "KXUEFANLTOTAL-26SEP28ARMMNE"
+      ],
+      "seriesFamilies": [
+        "UEFANL:26SEP28ARMMNE",
+        "mentions:TRUMP",
+        "temperature:CHI:26SEP28",
+        "temperature:LAX:26SEP28",
+        "temperature:MIA:26SEP28",
+        "temperature:NYC:26SEP28",
+        "unknown"
+      ],
+      "seriesTickers": [
+        "KXBOXING",
+        "KXISRNLTOTAL",
+        "KXNFLDROTY",
+        "KXNFLOROTY",
+        "KXTEMPCHIHS",
+        "KXTEMPLAXHS",
+        "KXTEMPMIAH",
+        "KXTEMPNYCHS",
+        "KXTRUMPMENTION",
+        "KXUEFANLTOTAL"
+      ]
+    },
+    {
+      "sessionId": "EXP005-S6",
+      "from": "2026-09-28T17:53:45.939Z",
+      "toExclusive": "2026-09-28T18:24:14.041Z",
+      "tradeRunIds": [
+        "502d5359-5c3c-4523-80b4-19569fcfb974"
+      ],
+      "bookRunIds": [
+        "04a7cd1f-9bc7-44b7-a80b-68dd6c72db47"
+      ],
+      "collectCommit": "a6b0b9dbd90c6d814e2523199ebcff82f7a50575",
+      "gitDirty": false,
+      "markets": [
+        "KXAFCONTOTAL-26SEP28ZIMCOD-7",
+        "KXMLBKS-26SEP292000BOSNYY-BOSPTOLLE70-5",
+        "KXMLBKS-26SEP292000BOSNYY-BOSPTOLLE70-6",
+        "KXMLBKS-26SEP292000BOSNYY-BOSPTOLLE70-7",
+        "KXMLBKS-26SEP292000BOSNYY-BOSPTOLLE70-8",
+        "KXPGATOUR-BAOUC26-JKOI",
+        "KXPGATOUR-BAOUC26-MBRE",
+        "KXPGATOUR-BAOUC26-MGRE",
+        "KXPGATOUR-BAOUC26-MHOM",
+        "KXPGATOUR-BAOUC26-MMCN",
+        "KXTRUMPMENTION-26SEP28-BLOC",
+        "KXTRUMPMENTION-26SEP28-DARI",
+        "KXTRUMPMENTION-26SEP28-HORM",
+        "KXTRUMPMENTION-26SEP28-MIDT",
+        "KXUEFANLGOAL-26SEP28BELFRA-BELCDEKE17-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-FRABBARCO29-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-FRADDOUE14-1",
+        "KXUEFANLGOAL-26SEP28TURITA-TURAGULER15-1",
+        "KXUEFANLGOAL-26SEP28TURITA-TURMDEMIR28-1",
+        "KXUEFANLGOAL-26SEP28TURITA-TUROKABAK5-1",
+        "KXUEFANLGOAL-26SEP28TURITA-TURSOZCAN6-1",
+        "KXWTIH-26SEP2814-T92.09",
+        "KXWTIH-26SEP2814-T92.19",
+        "KXWTIH-26SEP2814-T92.29",
+        "KXWTIH-26SEP2814-T92.39"
+      ],
+      "eventTickers": [
+        "KXAFCONTOTAL-26SEP28ZIMCOD",
+        "KXMLBKS-26SEP292000BOSNYY",
+        "KXPGATOUR-BAOUC26",
+        "KXTRUMPMENTION-26SEP28",
+        "KXUEFANLGOAL-26SEP28BELFRA",
+        "KXUEFANLGOAL-26SEP28TURITA",
+        "KXWTIH-26SEP2814"
+      ],
+      "seriesFamilies": [
+        "MLB:26SEP292000BOSNYY",
+        "UEFANL:26SEP28BELFRA",
+        "UEFANL:26SEP28TURITA",
+        "mentions:TRUMP",
+        "unknown"
+      ],
+      "seriesTickers": [
+        "KXAFCONTOTAL",
+        "KXMLBKS",
+        "KXPGATOUR",
+        "KXTRUMPMENTION",
+        "KXUEFANLGOAL",
+        "KXWTIH"
+      ]
+    },
+    {
+      "sessionId": "EXP005-S7",
+      "from": "2026-09-28T18:34:25.451Z",
+      "toExclusive": "2026-09-28T19:05:01.216Z",
+      "tradeRunIds": [
+        "045b4c32-9b9b-4097-b96b-524938dcd35e"
+      ],
+      "bookRunIds": [
+        "6dc651c9-a541-4173-b929-af395ba737cb"
+      ],
+      "collectCommit": "a6b0b9dbd90c6d814e2523199ebcff82f7a50575",
+      "gitDirty": false,
+      "markets": [
+        "KXTEMPLAXHS-26SEP2815-T76.99",
+        "KXTEMPLAXHS-26SEP2815-T77.99",
+        "KXTEMPMIAH-26SEP2815-T83.99",
+        "KXTEMPMIAH-26SEP2815-T84.99",
+        "KXTEMPMIAH-26SEP2815-T85.99",
+        "KXTEMPMIAH-26SEP2815-T86.99",
+        "KXTEMPMIAH-26SEP2815-T87.99",
+        "KXTEMPMIAH-26SEP2815-T88.99",
+        "KXUEFANLFIRSTGOAL-26SEP28BELFRA-BELCDEKE17",
+        "KXUEFANLFIRSTGOAL-26SEP28BELFRA-BELDMOREI7",
+        "KXUEFANLFIRSTGOAL-26SEP28BELFRA-BELKDEBR11",
+        "KXUEFANLFIRSTGOAL-26SEP28BELFRA-BELMGODTS11",
+        "KXUEFANLFIRSTGOAL-26SEP28BELFRA-FRABBARCO29",
+        "KXUEFANLFIRSTGOAL-26SEP28BELFRA-FRADDOUE14",
+        "KXUEFANLFIRSTGOAL-26SEP28TURITA-ITAFESPOS94",
+        "KXUEFANLFIRSTGOAL-26SEP28TURITA-TURAGULER15",
+        "KXUEFANLGOAL-26SEP28BELFRA-BELCDEKE17-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-BELKDEBR11-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-BELMGODTS11-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-FRABBARCO29-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-FRADDOUE14-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-FRAELEPAU9-1",
+        "KXUEFANLGOAL-26SEP28BELFRA-FRAMLACRO5-1",
+        "KXUEFANLGOAL-26SEP28TURITA-TURAGULER15-1",
+        "KXUEFANLGOAL-26SEP28TURITA-TURAGULER15-2"
+      ],
+      "eventTickers": [
+        "KXTEMPLAXHS-26SEP2815",
+        "KXTEMPMIAH-26SEP2815",
+        "KXUEFANLFIRSTGOAL-26SEP28BELFRA",
+        "KXUEFANLFIRSTGOAL-26SEP28TURITA",
+        "KXUEFANLGOAL-26SEP28BELFRA",
+        "KXUEFANLGOAL-26SEP28TURITA"
+      ],
+      "seriesFamilies": [
+        "UEFANL:26SEP28BELFRA",
+        "UEFANL:26SEP28TURITA",
+        "temperature:LAX:26SEP28",
+        "temperature:MIA:26SEP28"
+      ],
+      "seriesTickers": [
+        "KXTEMPLAXHS",
+        "KXTEMPMIAH",
+        "KXUEFANLFIRSTGOAL",
+        "KXUEFANLGOAL"
+      ]
+    }
+  ],
+  "exp004": {
+    "from": "2026-09-28T14:18:02.091Z",
+    "toExclusive": "2026-09-28T14:39:10.000Z",
+    "tradeRunIds": [
+      "79c9f70a-6c15-4448-8438-84b9b083338d",
+      "c248aff4-f530-43f7-b29f-6e09612c2ef3"
+    ],
+    "bookRunIds": [
+      "c9efc1da-c5de-47d6-9581-4294d06eeb02",
+      "e5d2eddf-6fbe-4bd1-a122-9dd64207f670",
+      "f3d5e5b6-201d-45fb-9033-c95433c4e721"
+    ],
+    "protocolCommit": "1783627743117647529390843560ef871ae1ac80",
+    "analysisCommit": "70803305d51cab1e3e7a683528c3c48120cc548c"
+  }
+}

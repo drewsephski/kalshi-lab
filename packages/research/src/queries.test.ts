@@ -30,6 +30,13 @@ test("query selection rejects source mixing, unbounded windows and invalid filte
   );
   assert.throws(() => validateSelection({ ...selection, runIds: ["oops"] }));
   assert.throws(() => validateSelection({ ...selection, maxRows: NaN }));
+  const boundedTickers = Array.from({ length: 250 }, (_, i) => `T${i}`);
+  assert.doesNotThrow(() =>
+    validateSelection({ ...selection, tickers: boundedTickers }),
+  );
+  assert.throws(() =>
+    validateSelection({ ...selection, tickers: [...boundedTickers, "T250"] }),
+  );
 });
 test("read-only research queries apply exact source/run/ticker/window filters, paginate, and reconcile exclusions", async () => {
   const client = new PGlite(),

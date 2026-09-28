@@ -4,6 +4,7 @@ import {
   normalizePublicEventFee,
   normalizePublicEventFeeChange,
   normalizePublicSeriesFee,
+  normalizePublicSeriesFeeChange,
 } from "./public-fees.ts";
 
 test("public event, series and dated fee changes retain exact source metadata", () => {
@@ -21,6 +22,16 @@ test("public event, series and dated fee changes retain exact source metadata", 
     fee_multiplier: 1,
   });
   assert.equal(series.feeMultiplier, "1.0000");
+  const seriesChange = normalizePublicSeriesFeeChange({
+    id: "series-change",
+    series_ticker: "S",
+    fee_type: "quadratic_with_maker_fees",
+    fee_multiplier: 0.5,
+    scheduled_ts: "2026-09-28T14:00:00Z",
+  });
+  assert.equal(seriesChange.feeType, "quadratic_with_maker_fees");
+  assert.equal(seriesChange.feeMultiplier, "0.5000");
+  assert.equal(seriesChange.scheduledAt.toISOString(), "2026-09-28T14:00:00.000Z");
   const change = normalizePublicEventFeeChange({
     id: "id",
     event_ticker: "E",

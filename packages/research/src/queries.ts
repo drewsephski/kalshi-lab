@@ -7,6 +7,7 @@ import {
   workerRuns as r,
 } from "@kalshi-lab/db";
 import type { Observation } from "./microstructure.ts";
+const MAX_SELECTED_TICKERS = 250;
 export interface Selection {
   source: "kalshi_production_public";
   from: Date;
@@ -38,7 +39,7 @@ export function validateSelection(selection: Selection): void {
   )
     throw new Error("Invalid/broad run selection.");
   if (
-    selection.tickers.length > 100 ||
+    selection.tickers.length > MAX_SELECTED_TICKERS ||
     selection.tickers.some((t) => !/^[A-Za-z0-9._-]+$/.test(t))
   )
     throw new Error("Invalid/broad ticker selection.");
@@ -88,9 +89,9 @@ export async function queryResearch<
         .innerJoin(m, eq(s.marketId, m.id))
         .where(filters)
         .orderBy(asc(m.ticker));
-      if (universe.length > 100)
+      if (universe.length > MAX_SELECTED_TICKERS)
         throw new Error(
-          "Selected markets exceed 100; narrow the window/tickers.",
+          `Selected markets exceed ${MAX_SELECTED_TICKERS}; narrow the window/tickers.`,
         );
       const runIds = await tx
         .selectDistinct({ id: s.workerRunId })
