@@ -7,6 +7,7 @@ import {
   text,
   type MarketDataReader,
 } from "./market-data.ts";
+import { normalizeTradePage } from "./public-trades.ts";
 
 /** Credential-free GET-only transport; never shares the authenticated client. */
 export class KalshiPublicMarketDataClient implements MarketDataReader {
@@ -39,15 +40,81 @@ export class KalshiPublicMarketDataClient implements MarketDataReader {
       ),
     );
   }
+  async listTrades(options: {
+    ticker: string;
+    limit?: number;
+    cursor?: string;
+    minTs?: number;
+    maxTs?: number;
+    isBlockTrade?: boolean;
+  }) {
+    const limit = options.limit ?? 1000;
+    if (!Number.isInteger(limit) || limit < 1 || limit > 1000)
+      throw new Error("Invalid trade page size.");
+    const query = new URLSearchParams({
+      ticker: text(options.ticker),
+      limit: String(limit),
+    });
+    if (options.cursor) query.set("cursor", options.cursor);
+    for (const [name, value] of [
+      ["min_ts", options.minTs],
+      ["max_ts", options.maxTs],
+    ] as const)
+      if (value !== undefined) {
+        if (!Number.isSafeInteger(value) || value < 0)
+          throw new Error("Invalid trade timestamp filter.");
+        query.set(name, String(value));
+      }
+    if (options.isBlockTrade !== undefined)
+      query.set("is_block_trade", String(options.isBlockTrade));
+    return normalizeTradePage(
+      await this.request(`/trade-api/v2/markets/trades?${query}`),
+    );
+  }
+  async getEvent(eventTicker: string) {
+    const raw = record(
+      await this.request(
+        `/trade-api/v2/events/${encodeURIComponent(text(eventTicker))}`,
+      ),
+    );
+    return record(raw.event);
+  }
+  async getSeries(seriesTicker: string) {
+    const raw = record(
+      await this.request(
+        `/trade-api/v2/series/${encodeURIComponent(text(seriesTicker))}`,
+      ),
+    );
+    return record(raw.series);
+  }
+  async listEventFeeChanges(eventTicker: string, cursor?: string) {
+    const query = new URLSearchParams({
+      event_ticker: text(eventTicker),
+      limit: "1000",
+    });
+    if (cursor) query.set("cursor", cursor);
+    const raw = record(
+      await this.request(`/trade-api/v2/events/fee_changes?${query}`),
+    );
+    if (
+      !Array.isArray(raw.event_fee_changes) ||
+      raw.event_fee_changes.length > 1000
+    )
+      throw new Error("Invalid event fee changes.");
+    return {
+      changes: raw.event_fee_changes.map(record),
+      cursor: typeof raw.cursor === "string" && raw.cursor ? raw.cursor : null,
+    };
+  }
   private async request(path: string): Promise<unknown> {
     const url = new URL(path, "https://external-api.kalshi.com");
     if (
       url.origin !== "https://external-api.kalshi.com" ||
-      !/^\/trade-api\/v2\/markets(?:\/[A-Za-z0-9%._-]+(?:\/orderbook)?)?$/.test(
+      !/^\/trade-api\/v2\/(?:markets(?:\/(?:trades|[A-Za-z0-9%._-]+(?:\/orderbook)?))?|events\/(?:fee_changes|[A-Za-z0-9%._-]+)|series\/[A-Za-z0-9%._-]+)$/.test(
         url.pathname,
       )
     ) {
-      throw new Error("Blocked non-market public request.");
+      throw new Error("Blocked non-public market data request.");
     }
     const response = await this.fetchImplementation(url, {
       method: "GET",

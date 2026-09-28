@@ -9,7 +9,8 @@
     "build": "tsc --noEmit",
     "test": "node --test src/*.test.ts",
     "record": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts",
-    "once": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts --once"
+    "once": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/index.ts --once",
+    "trades": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/trades-cli.ts"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

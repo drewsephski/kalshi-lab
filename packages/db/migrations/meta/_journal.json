@@ -8,6 +8,13 @@
       "when": 1790532321809,
       "tag": "0000_lowly_mordo",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790604127048,
+      "tag": "0001_nasty_sugar_man",
+      "breakpoints": true
     }
   ]
 }

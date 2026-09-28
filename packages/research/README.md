@@ -1,5 +1,18 @@
 # Production-public microstructure research
 
+## Directed trade evidence (EXP-004)
+
+Run `pnpm worker:trades --duration-minutes 10` alongside the existing `KALSHI_RECORDER_SOURCE=production_public pnpm worker:record` to capture public trade IDs, explicit taker direction, current fee metadata and nearby REST books. Trade collection always uses unsigned production-public GETs and takes no credentials. The frozen [EXP-004 protocol](../../experiments/EXP-004-trade-fee-provenance/README.md) defines sampling, alignment and verdict thresholds. The analysis command accepts explicit UTC windows and run IDs:
+
+```sh
+pnpm research:trade-report --from 2026-09-28T14:00:00.000Z \
+  --to 2026-09-28T14:20:00.000Z --trade-runs UUID,UUID \
+  --book-runs UUID,UUID --json ../../experiments/EXP-004-trade-fee-provenance/result-2026-09-28.json \
+  --exp003-ledger ../../artifacts/research/EXP-003-2026-09-28.jsonl --formal
+```
+
+Paths resolve from `packages/research`; output uses exclusive creation. The report hashes selected trade, book and fee data. Queue counts are **hypothetical evidence**, not actual fills. Historical fee coverage requires effective windows, so current metadata by itself remains unknown.
+
 Read-only analysis of persisted `kalshi_production_public` snapshots. No Kalshi
 transport, credentials, or order operations. The microstructure command does not model fills or P&L. Uses the
 existing database schema without moving research calculations into the DB package.

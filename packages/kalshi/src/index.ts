@@ -16,6 +16,8 @@ export type {
   KalshiOrder,
 } from "./types.ts";
 export { KalshiPublicMarketDataClient } from "./public-client.ts";
+export { normalizePublicTrade, normalizeTradePage } from "./public-trades.ts";
+export type { PublicTrade } from "./public-trades.ts";
 export * from "./market-data.ts";
 export { units, decimal, complement } from "./decimal.ts";
 export { MarketState } from "./market-state.ts";
