@@ -13,8 +13,8 @@ migration resets or changes that record or the live demo balance.
 EXP-001 is complete with **PASS WITH LIMITATIONS**. The corrected recorder met
 the aggregate coverage and freshness criteria; see the dated [formal result](experiments/EXP-001-market-recorder/result-2026-09-27.md)
 and preserved [baseline failure](experiments/EXP-001-market-recorder/baseline-failure-2026-09-27.md).
-The next milestone is production-public microstructure analysis using the
-credential-free read-only client. This is not a profitability claim; authenticated
+EXP-002 is complete with PROCEED TO FILL SIMULATOR; EXP-003 adds a conservative
+read-only maker simulation in the research layer. This is not a profitability claim; authenticated
 trading remains demo-only.
 
 ## Workspace and architecture
@@ -165,9 +165,18 @@ constraints, exact numerics, upserts, transactions, and retry idempotency.
 
 ## Research boundaries
 
-This milestone has no strategies, automated orders, backtesting engine, P&L
-optimization, WeatherNext, Grok/xAI, external sports/economic feeds, user auth,
+The research layer includes a hypothetical fixed maker strategy and scenario
+simulator. There are no automated orders, strategy execution, P&L optimization, WeatherNext, Grok/xAI, external sports/economic feeds, user auth,
 billing, or dashboard redesign. Preserve prior results and the starting bankroll.
 Future strategy changes must record a hypothesis, evaluation metrics, strategy
 version, and Git commit SHA before interpreting results. Never weaken the
 hard-coded demo boundary to enable authenticated production access.
+
+## Conservative maker research
+
+EXP-003 separates attractive quotes, uncertain hypothetical fills, exits, fees,
+and simulated P&L. See the immutable [protocol](experiments/EXP-003-maker-fill-simulator/README.md)
+and [simulation usage](packages/research/README.md#conservative-maker-simulation-exp-003).
+`pnpm research:simulate-maker` reads persisted public data only. No production or
+demo order is submitted. Unknown queue evidence yields no pessimistic fill;
+unknown fee applicability excludes a trade from primary net-P&L conclusions.

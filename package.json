@@ -16,7 +16,8 @@
     "db:check": "pnpm --filter @kalshi-lab/db migration:check",
     "worker:record": "pnpm --filter @kalshi-lab/worker record",
     "worker:once": "pnpm --filter @kalshi-lab/worker once",
-    "research:microstructure": "pnpm --filter @kalshi-lab/research microstructure"
+    "research:microstructure": "pnpm --filter @kalshi-lab/research microstructure",
+    "research:simulate-maker": "pnpm --filter @kalshi-lab/research simulate-maker"
   },
   "devDependencies": {
     "prettier": "3.9.6",

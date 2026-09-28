@@ -84,6 +84,7 @@ test("read-only research queries apply exact source/run/ticker/window filters, p
       workerRunId: publicRun,
       marketId: publicMarket.id,
       status: "active",
+      bookReceivedAt: now,
       transport: "rest",
       connected: true,
       stale: false,
@@ -127,6 +128,20 @@ test("read-only research queries apply exact source/run/ticker/window filters, p
       { ...selection, runIds: [publicRun], tickers: ["A"] },
       a.consume,
     );
+    let enrichedRows = 0;
+    await queryResearch(
+      db,
+      { ...selection, runIds: [publicRun] },
+      (_ticker, rows) => {
+        enrichedRows += rows.length;
+        const row = rows[0] as import("./simulation/types.ts").MakerObservation;
+        assert.equal(row.bookReceivedAt?.toISOString(), now.toISOString());
+        assert.equal(row.tickerReceivedAt?.toISOString(), now.toISOString());
+        assert.equal(row.eventTicker, null);
+      },
+      true,
+    );
+    assert.equal(enrichedRows, 2005);
     assert.equal(provenance.selectedRows, 2005);
     assert.equal(provenance.runs.length, 1);
     assert.equal(a.finish().total, 2005);

@@ -1,0 +1,625 @@
+{
+  "checkedAt": "2026-09-28T13:16:02.865Z",
+  "schedule": {
+    "url": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+    "effective": "2026-07-07",
+    "rounding": "centicent per page 1; whole-cent example tables reported as sensitivity"
+  },
+  "events": [
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPCHIHS-26SEP2810",
+      "observedAt": "2026-09-28T13:15:15.003Z",
+      "status": 200,
+      "event": {
+        "category": "Climate and Weather",
+        "collateral_return_type": "DIRECNET",
+        "event_ticker": "KXTEMPCHIHS-26SEP2810",
+        "exchange_index": 0,
+        "last_updated_ts": "0001-01-01T00:00:00Z",
+        "mutually_exclusive": false,
+        "product_metadata": {
+          "cadence": "hourly"
+        },
+        "series_ticker": "KXTEMPCHIHS",
+        "settlement_sources": [
+          {
+            "name": "Kalshi",
+            "url": "https://kalshi.com"
+          }
+        ],
+        "strike_date": "2026-09-28T14:00:00Z",
+        "strike_period": "",
+        "sub_title": "On Sep 28, 2026 at 10am EDT",
+        "title": "Temperature in Chicago Metro Area on Sep 28, 2026 at 10am EDT?"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPLAXHS-26SEP2810",
+      "observedAt": "2026-09-28T13:15:15.063Z",
+      "status": 200,
+      "event": {
+        "category": "Climate and Weather",
+        "collateral_return_type": "DIRECNET",
+        "event_ticker": "KXTEMPLAXHS-26SEP2810",
+        "exchange_index": 0,
+        "last_updated_ts": "0001-01-01T00:00:00Z",
+        "mutually_exclusive": false,
+        "product_metadata": {
+          "cadence": "hourly"
+        },
+        "series_ticker": "KXTEMPLAXHS",
+        "settlement_sources": [
+          {
+            "name": "Synoptic Data",
+            "url": "https://synopticdata.com/"
+          }
+        ],
+        "strike_date": "2026-09-28T14:00:00Z",
+        "strike_period": "",
+        "sub_title": "On Sep 28, 2026 at 10am EDT",
+        "title": "Temperature in Coastal Los Angeles on Sep 28, 2026 at 10am EDT?"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPMIAH-26SEP2810",
+      "observedAt": "2026-09-28T13:15:15.123Z",
+      "status": 200,
+      "event": {
+        "category": "Climate and Weather",
+        "collateral_return_type": "DIRECNET",
+        "event_ticker": "KXTEMPMIAH-26SEP2810",
+        "exchange_index": 0,
+        "last_updated_ts": "0001-01-01T00:00:00Z",
+        "mutually_exclusive": false,
+        "product_metadata": {
+          "cadence": "hourly"
+        },
+        "series_ticker": "KXTEMPMIAH",
+        "settlement_sources": [
+          {
+            "name": "Synoptic Data",
+            "url": "https://synopticdata.com/"
+          }
+        ],
+        "strike_date": "2026-09-28T14:00:00Z",
+        "strike_period": "",
+        "sub_title": "On Sep 28, 2026 at 10am EDT",
+        "title": "Temperature in Miami on Sep 28, 2026 at 10am EDT?"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPNYCHS-26SEP2810",
+      "observedAt": "2026-09-28T13:15:15.177Z",
+      "status": 200,
+      "event": {
+        "category": "Climate and Weather",
+        "collateral_return_type": "DIRECNET",
+        "event_ticker": "KXTEMPNYCHS-26SEP2810",
+        "exchange_index": 0,
+        "last_updated_ts": "0001-01-01T00:00:00Z",
+        "mutually_exclusive": false,
+        "product_metadata": {
+          "cadence": "hourly"
+        },
+        "series_ticker": "KXTEMPNYCHS",
+        "settlement_sources": [
+          {
+            "name": "Synoptic Data",
+            "url": "https://synopticdata.com/"
+          }
+        ],
+        "strike_date": "2026-09-28T14:00:00Z",
+        "strike_period": "",
+        "sub_title": "On Sep 28, 2026 at 10am EDT",
+        "title": "Temperature in New York City on Sep 28, 2026 at 10am EDT?"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/events/KXTRUMPMENTION-26SEP28",
+      "observedAt": "2026-09-28T13:15:15.238Z",
+      "status": 200,
+      "event": {
+        "category": "Mentions",
+        "collateral_return_type": "",
+        "event_ticker": "KXTRUMPMENTION-26SEP28",
+        "exchange_index": 0,
+        "last_updated_ts": "0001-01-01T00:00:00Z",
+        "mutually_exclusive": false,
+        "series_ticker": "KXTRUMPMENTION",
+        "settlement_sources": [
+          {
+            "name": "ABC",
+            "url": "https://abcnews.go.com/"
+          },
+          {
+            "name": "Fox News",
+            "url": "https://www.foxnews.com/"
+          },
+          {
+            "name": "MSNBC",
+            "url": "https://www.msnbc.com/"
+          },
+          {
+            "name": "The Wall Street Journal",
+            "url": "https://www.wsj.com/"
+          },
+          {
+            "name": "Semafor",
+            "url": "https://www.semafor.com/"
+          },
+          {
+            "name": "The Information",
+            "url": "https://www.theinformation.com/"
+          },
+          {
+            "name": "CBS",
+            "url": "https://www.cbsnews.com/"
+          },
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/"
+          },
+          {
+            "name": "CNN",
+            "url": "https://www.cnn.com/"
+          },
+          {
+            "name": "Reuters",
+            "url": "https://www.reuters.com/"
+          },
+          {
+            "name": "The New York Times",
+            "url": "https://www.nytimes.com/"
+          },
+          {
+            "name": "The Washington Post",
+            "url": "https://www.washingtonpost.com/"
+          },
+          {
+            "name": "the Associated Press",
+            "url": "https://apnews.com/"
+          },
+          {
+            "name": "Politico",
+            "url": "https://www.politico.com/"
+          }
+        ],
+        "strike_period": "",
+        "sub_title": "Donald Trump - Oval Office announcement originally scheduled for September 28, 2026",
+        "title": "What will Trump say during his announcement?"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/events/KXTRUMPSAY-26OCT05",
+      "observedAt": "2026-09-28T13:15:15.356Z",
+      "status": 200,
+      "event": {
+        "category": "Mentions",
+        "collateral_return_type": "",
+        "event_ticker": "KXTRUMPSAY-26OCT05",
+        "exchange_index": 0,
+        "last_updated_ts": "0001-01-01T00:00:00Z",
+        "mutually_exclusive": false,
+        "series_ticker": "KXTRUMPSAY",
+        "settlement_sources": [
+          {
+            "name": "ABC",
+            "url": "https://abcnews.go.com/"
+          },
+          {
+            "name": "Fox News",
+            "url": "https://www.foxnews.com/"
+          },
+          {
+            "name": "MSNBC",
+            "url": "https://www.msnbc.com/"
+          },
+          {
+            "name": "The Wall Street Journal",
+            "url": "https://www.wsj.com/"
+          },
+          {
+            "name": "Semafor",
+            "url": "https://www.semafor.com/"
+          },
+          {
+            "name": "The Information",
+            "url": "https://www.theinformation.com/"
+          },
+          {
+            "name": "PBS",
+            "url": "https://www.pbs.org"
+          },
+          {
+            "name": "the President of the United States",
+            "url": "https://www.whitehouse.gov/"
+          },
+          {
+            "name": "CBS",
+            "url": "https://www.cbsnews.com/"
+          },
+          {
+            "name": "NBC",
+            "url": "https://www.nbcnews.com/"
+          },
+          {
+            "name": "Bloomberg",
+            "url": "https://www.bloomberg.com"
+          },
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/"
+          },
+          {
+            "name": "CNN",
+            "url": "https://www.cnn.com/"
+          },
+          {
+            "name": "Reuters",
+            "url": "https://www.reuters.com/"
+          },
+          {
+            "name": "The Washington Post",
+            "url": "https://www.washingtonpost.com/"
+          },
+          {
+            "name": "the Associated Press",
+            "url": "https://apnews.com/"
+          },
+          {
+            "name": "Politico",
+            "url": "https://www.politico.com/"
+          },
+          {
+            "name": "The New York Times",
+            "url": "https://www.nytimes.com/"
+          }
+        ],
+        "strike_period": "",
+        "sub_title": "Before Oct 5, 2026",
+        "title": "What will Trump say this week?"
+      }
+    }
+  ],
+  "series": [
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPCHIHS",
+      "observedAt": "2026-09-28T13:16:02.571Z",
+      "status": 200,
+      "sha256": "0e6ee2648e8e8543e5e151384ecc40da1ffc8ed4abf4aadf7125892917073e9a",
+      "response": {
+        "additional_prohibitions": [
+          "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+          "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+        ],
+        "categories": [
+          "Climate and Weather"
+        ],
+        "category": "Climate and Weather",
+        "contract_terms_url": "https://assets.kalshi.com/contract_terms/CHIMETROWINDEX.pdf",
+        "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/CHIMETROWINDEX.pdf",
+        "exchange_index": 0,
+        "fee_multiplier": 1,
+        "fee_type": "quadratic",
+        "frequency": "hourly",
+        "last_updated_ts": "2026-09-25T15:15:55.869038Z",
+        "settlement_sources": [
+          {
+            "name": "Kalshi",
+            "url": "https://kalshi.com"
+          }
+        ],
+        "tags": [
+          "Hourly temperature"
+        ],
+        "ticker": "KXTEMPCHIHS",
+        "title": "Hourly Directional Chicago Metro Temperature"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPLAXHS",
+      "observedAt": "2026-09-28T13:16:02.636Z",
+      "status": 200,
+      "sha256": "0f489068fe65ecf248365d71f56b0f14d2a26a76d4c8794b8d13a7509d00e30e",
+      "response": {
+        "additional_prohibitions": [
+          "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+          "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+        ],
+        "categories": [
+          "Climate and Weather"
+        ],
+        "category": "Climate and Weather",
+        "contract_terms_url": "https://assets.kalshi.com/contract_terms/LAWINDEX.pdf",
+        "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/LAWINDEX.pdf",
+        "exchange_index": 0,
+        "fee_multiplier": 1,
+        "fee_type": "quadratic",
+        "frequency": "hourly",
+        "last_updated_ts": "2026-09-25T15:19:08.647855Z",
+        "settlement_sources": [
+          {
+            "name": "Synoptic Data",
+            "url": "https://synopticdata.com/"
+          }
+        ],
+        "tags": [
+          "Hourly temperature"
+        ],
+        "ticker": "KXTEMPLAXHS",
+        "title": "Hourly Directional Coastal LA Temperature"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPMIAH",
+      "observedAt": "2026-09-28T13:16:02.701Z",
+      "status": 200,
+      "sha256": "d3d58b8ef78c828a258964e5d22f3eda5b6ff8b03b644401179bf3c31670b5e5",
+      "response": {
+        "additional_prohibitions": [
+          "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+          "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+        ],
+        "categories": [
+          "Climate and Weather"
+        ],
+        "category": "Climate and Weather",
+        "contract_terms_url": "https://assets.kalshi.com/contract_terms/MIAWINDEX.pdf",
+        "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/MIAWINDEX.pdf",
+        "exchange_index": 0,
+        "fee_multiplier": 1,
+        "fee_type": "quadratic",
+        "frequency": "hourly",
+        "last_updated_ts": "2026-09-08T19:38:39.578288Z",
+        "product_metadata": {
+          "important_info": {
+            "id": "NHIGHD-bulk-2026-06-12",
+            "markdown": "**Important information:** The data shown is 5 minutes delayed. Resolution for KXTEMPMIAH is based on Synoptic Data and calculated via Kalshi Weather Index Methodology. Please see additional details for more information.",
+            "message": "",
+            "title": ""
+          }
+        },
+        "settlement_sources": [
+          {
+            "name": "Synoptic Data",
+            "url": "https://synopticdata.com/"
+          }
+        ],
+        "tags": [
+          "Hourly temperature"
+        ],
+        "ticker": "KXTEMPMIAH",
+        "title": "Hourly Directional Miami Temperature"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPNYCHS",
+      "observedAt": "2026-09-28T13:16:02.753Z",
+      "status": 200,
+      "sha256": "50bee63e91bff111fe7d64d0859a69ec32d829f0275dbc34e605963ab83cf871",
+      "response": {
+        "additional_prohibitions": [
+          "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+          "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+        ],
+        "categories": [
+          "Climate and Weather"
+        ],
+        "category": "Climate and Weather",
+        "contract_terms_url": "https://assets.kalshi.com/contract_terms/NYCWINDEX.pdf",
+        "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/NYCWINDEX.pdf",
+        "exchange_index": 0,
+        "fee_multiplier": 1,
+        "fee_type": "quadratic",
+        "frequency": "hourly",
+        "last_updated_ts": "2026-09-25T15:14:26.051338Z",
+        "settlement_sources": [
+          {
+            "name": "Synoptic Data",
+            "url": "https://synopticdata.com/"
+          }
+        ],
+        "tags": [
+          "Hourly temperature"
+        ],
+        "ticker": "KXTEMPNYCHS",
+        "title": "Hourly Directional NYC Temperature"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/series/KXTRUMPMENTION",
+      "observedAt": "2026-09-28T13:16:02.808Z",
+      "status": 200,
+      "sha256": "5ae479a14b1c7f30af5cfe3bcd1a27cfa7cbf7e6ebedc0728990aea2cb4f0350",
+      "response": {
+        "additional_prohibitions": [
+          "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+          "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+        ],
+        "categories": [
+          "Mentions"
+        ],
+        "category": "Mentions",
+        "contract_terms_url": "https://assets.kalshi.com/contract_terms/MENTION.pdf",
+        "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/MENTION.pdf",
+        "exchange_index": 0,
+        "fee_multiplier": 1,
+        "fee_type": "quadratic",
+        "frequency": "one_off",
+        "last_updated_ts": "2026-09-22T16:56:59.703626Z",
+        "product_metadata": {
+          "scope": "Mention"
+        },
+        "settlement_sources": [
+          {
+            "name": "ABC",
+            "url": "https://abcnews.go.com/"
+          },
+          {
+            "name": "Fox News",
+            "url": "https://www.foxnews.com/"
+          },
+          {
+            "name": "MSNBC",
+            "url": "https://www.msnbc.com/"
+          },
+          {
+            "name": "The Wall Street Journal",
+            "url": "https://www.wsj.com/"
+          },
+          {
+            "name": "Semafor",
+            "url": "https://www.semafor.com/"
+          },
+          {
+            "name": "The Information",
+            "url": "https://www.theinformation.com/"
+          },
+          {
+            "name": "CBS",
+            "url": "https://www.cbsnews.com/"
+          },
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/"
+          },
+          {
+            "name": "CNN",
+            "url": "https://www.cnn.com/"
+          },
+          {
+            "name": "Reuters",
+            "url": "https://www.reuters.com/"
+          },
+          {
+            "name": "The New York Times",
+            "url": "https://www.nytimes.com/"
+          },
+          {
+            "name": "The Washington Post",
+            "url": "https://www.washingtonpost.com/"
+          },
+          {
+            "name": "the Associated Press",
+            "url": "https://apnews.com/"
+          },
+          {
+            "name": "Politico",
+            "url": "https://www.politico.com/"
+          }
+        ],
+        "tags": [
+          "Trump",
+          "Politicians"
+        ],
+        "ticker": "KXTRUMPMENTION",
+        "title": "What will Trump say?"
+      }
+    },
+    {
+      "url": "https://external-api.kalshi.com/trade-api/v2/series/KXTRUMPSAY",
+      "observedAt": "2026-09-28T13:16:02.865Z",
+      "status": 200,
+      "sha256": "b24816d43f559ca0fb3549a41aa752d949cc65dbcce1db9181912a71e08391cf",
+      "response": {
+        "additional_prohibitions": [
+          "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+          "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+        ],
+        "categories": [
+          "Mentions"
+        ],
+        "category": "Mentions",
+        "contract_terms_url": "https://assets.kalshi.com/contract_terms/TRUMPSAY.pdf",
+        "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/TRUMPSAY.pdf",
+        "exchange_index": 0,
+        "fee_multiplier": 1,
+        "fee_type": "quadratic",
+        "frequency": "one_off",
+        "last_updated_ts": "2026-09-21T18:41:00.126811Z",
+        "settlement_sources": [
+          {
+            "name": "ABC",
+            "url": "https://abcnews.go.com/"
+          },
+          {
+            "name": "Fox News",
+            "url": "https://www.foxnews.com/"
+          },
+          {
+            "name": "MSNBC",
+            "url": "https://www.msnbc.com/"
+          },
+          {
+            "name": "The Wall Street Journal",
+            "url": "https://www.wsj.com/"
+          },
+          {
+            "name": "Semafor",
+            "url": "https://www.semafor.com/"
+          },
+          {
+            "name": "The Information",
+            "url": "https://www.theinformation.com/"
+          },
+          {
+            "name": "PBS",
+            "url": "https://www.pbs.org"
+          },
+          {
+            "name": "the President of the United States",
+            "url": "https://www.whitehouse.gov/"
+          },
+          {
+            "name": "CBS",
+            "url": "https://www.cbsnews.com/"
+          },
+          {
+            "name": "NBC",
+            "url": "https://www.nbcnews.com/"
+          },
+          {
+            "name": "Bloomberg",
+            "url": "https://www.bloomberg.com"
+          },
+          {
+            "name": "Axios",
+            "url": "https://www.axios.com/"
+          },
+          {
+            "name": "CNN",
+            "url": "https://www.cnn.com/"
+          },
+          {
+            "name": "Reuters",
+            "url": "https://www.reuters.com/"
+          },
+          {
+            "name": "The Washington Post",
+            "url": "https://www.washingtonpost.com/"
+          },
+          {
+            "name": "the Associated Press",
+            "url": "https://apnews.com/"
+          },
+          {
+            "name": "Politico",
+            "url": "https://www.politico.com/"
+          },
+          {
+            "name": "The New York Times",
+            "url": "https://www.nytimes.com/"
+          }
+        ],
+        "tags": [
+          "Trump",
+          "Politicians"
+        ],
+        "ticker": "KXTRUMPSAY",
+        "title": "What will trump say"
+      }
+    }
+  ],
+  "applicability": "UNVERIFIED_HISTORICAL_WINDOW",
+  "reason": "Current metadata does not establish historical event fee overrides or effective validity windows. Event last_updated_ts is year 0001. No fee manifest entries are approved for primary net P&L; retain gross results."
+}

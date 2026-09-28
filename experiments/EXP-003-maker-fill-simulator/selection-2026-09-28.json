@@ -1,0 +1,13 @@
+{
+  "protocolCommit": "5366073931168afa2d6bfca02fa41ba02a14b63d",
+  "from": "2026-09-27T20:09:16.942Z",
+  "toExclusive": "2026-09-28T13:30:00.000Z",
+  "developmentRuns": [
+    "e6a6d78b-7708-4155-8f6b-77e90a3fff53"
+  ],
+  "evaluationRuns": [
+    "1a75ce6d-2e6b-4f6e-8baf-a50daf6633aa",
+    "8ace6edc-950a-475f-9f61-99eb42f0144b"
+  ],
+  "fees": []
+}
