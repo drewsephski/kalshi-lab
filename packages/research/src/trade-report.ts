@@ -193,7 +193,7 @@ async function main() {
         ),
       ),
     ].sort();
-    if (!tickers.length || tickers.length > 100)
+    if (!tickers.length || tickers.length > 250)
       throw new Error("Invalid collector universe.");
     const trades = await database.db
       .select()
