@@ -1,7 +1,7 @@
 # Production-public microstructure research
 
 Read-only analysis of persisted `kalshi_production_public` snapshots. No Kalshi
-transport, credentials, order operations, fill model, or fee-based P&L. Uses the
+transport, credentials, or order operations. The microstructure command does not model fills or P&L. Uses the
 existing database schema without moving research calculations into the DB package.
 
 ```sh
@@ -90,3 +90,55 @@ pagination and selection caps. No production reads occur in the normal suite.
 ESLint explicitly selects this package's TypeScript sources. TypeScript checks
 undefined symbols and unused locals/parameters; Babel's JavaScript scope rules
 are disabled for TS declarations to avoid false type-only warnings.
+
+## Conservative maker simulation (EXP-003)
+
+The separate `src/simulation` layer implements hypothetical passive YES orders.
+It never imports a Kalshi transport or writes database rows. The immutable
+[EXP-003 protocol](../../experiments/EXP-003-maker-fill-simulator/README.md)
+predefines the rules and decision gates. The historical microstructure command
+above is unchanged. The simulation command runs the fixed 24 scenario/settings
+combinations; it does not rank or optimize them.
+
+```sh
+pnpm research:simulate-maker \
+  --manifest ../../experiments/EXP-003-maker-fill-simulator/selection-2026-09-28.json \
+  --json ../../artifacts/research/EXP-003-reproduction.json \
+  --ledger ../../artifacts/research/EXP-003-reproduction.jsonl --formal
+```
+
+Run from a clean committed checkout. The committed selection manifest names the
+protocol commit, full UTC window, development/evaluation IDs and any verified fee
+rules. No overlapping sessions or moving evaluation into development. Unknown
+fee validity means gross-only trades, null net values, and explicit exclusions.
+The simulator does not fetch fees implicitly. Official metadata evidence is
+retained separately from approved fee rules.
+
+The existing read-only repeatable-read query adds receipt timestamps and event
+identity only when simulation requests them; EXP-002's selected fields and hash
+semantics remain unchanged. All rows, including quality failures, contribute to
+the selected input hash. There is a 250,000-row input and per-scenario ledger cap.
+Both output paths are create-only. Large JSONL ledgers belong in ignored
+`artifacts/research`, with hashes in compact experiment evidence.
+
+Currency fields are exact decimal dollars backed by bigint. Rational means and
+medians retain dollar numerators and integer denominators. Movement is in half
+$0.0001 units. Rates and concentration percentages are descriptive floating-point
+ratios; classifications, fees and all P&L sums remain exact. Metrics report realized
+completed trades; unresolved positions are separate and block continuation.
+`exitFilled` means passive exit; `forcedExit` identifies liquidation. Net statistics
+use only completed fee-known trades. Unfilled/rejected/suppressed orders do not
+enter win/loss statistics. Empty expectancy is null, never a winning observation.
+
+Queue sizes are measured in displayed contracts, not estimated execution volume.
+Pessimistic v1 deliberately produces no fills because the current production REST
+adapter has no complete queue/trade tape. The base model's two consecutive
+through-price observations plus increasing volume remain a proxy, not proof of
+actual execution. Receipt freshness is stricter than the recorder stale flag.
+
+Family normalization merges sports player/line variants on the same dated game,
+weather hourly/strike variants within each recognized city-day, and overlapping
+Trump mention windows into one speaker exposure. The weather and mention identity
+mapping was checked against unsigned public event metadata before evaluation.
+Unsupported identities remain unknown and cannot satisfy independence thresholds.
+Even recognized exposure groups are not proof of statistical independence.

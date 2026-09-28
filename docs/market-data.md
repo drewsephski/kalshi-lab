@@ -251,3 +251,14 @@ optional run/ticker selection. It does not contact Kalshi. See its
 Stale, disconnected, closed and missing-quote rows remain stored and are counted
 as exclusions. Supplemental `depth.yesTop10` and `depth.noTop10` retain exact
 prices/quantities needed for top-three executable YES-side imbalance.
+
+## EXP-003 interpretation boundary
+
+The maker simulator consumes the unchanged recorder through read-only research
+queries, including historical book/ticker receipt timestamps. Its 7.5s receipt
+freshness gate is stricter than the recorder stale flag. Repeated snapshots of
+one received book cannot manufacture new execution evidence. Public REST has no
+complete directed trade tape, so pessimistic queue depletion is unobservable.
+Current market metadata does not retain historical fee overrides; fee applicability
+must be documented in a separate evidence manifest or net P&L stays unavailable.
+See the [frozen protocol](../experiments/EXP-003-maker-fill-simulator/README.md).

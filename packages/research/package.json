@@ -10,8 +10,9 @@
     "lint": "eslint --max-warnings 0 .",
     "check-types": "tsc --noEmit",
     "build": "tsc --noEmit",
-    "test": "node --test src/*.test.ts",
-    "microstructure": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/cli.ts"
+    "test": "node --test src/*.test.ts src/simulation/*.test.ts",
+    "microstructure": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/cli.ts",
+    "simulate-maker": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/simulation/cli.ts"
   },
   "dependencies": {
     "@kalshi-lab/db": "workspace:*",

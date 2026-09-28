@@ -53,6 +53,7 @@ export async function queryResearch<
   db: PgDatabase<T, TSchema>,
   selection: Selection,
   consume: (ticker: string, rows: Observation[]) => void,
+  makerFields = false,
 ) {
   validateSelection(selection);
   return db.transaction(
@@ -121,6 +122,13 @@ export async function queryResearch<
         while (true) {
           const page: (Observation & { cursorTimestamp: string })[] = await tx
             .select({
+              ...(makerFields
+                ? {
+                    eventTicker: m.eventTicker,
+                    bookReceivedAt: s.bookReceivedAt,
+                    tickerReceivedAt: s.tickerReceivedAt,
+                  }
+                : {}),
               id: s.id,
               workerRunId: s.workerRunId,
               observedAt: s.observedAt,
