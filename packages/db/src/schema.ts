@@ -221,7 +221,7 @@ export const marketTrades = pgTable(
     ),
     check(
       "trades_valid_direction",
-      sql`${table.aggressorSide} IN ('yes_buy','no_buy','unknown') AND ${table.sideProvenance} IN ('provider_explicit','unknown')`,
+      sql`${table.aggressorSide} IN ('yes_exposure','no_exposure','unknown') AND ${table.sideProvenance} IN ('provider_explicit','unknown')`,
     ),
   ],
 );

@@ -14,7 +14,7 @@ const trade = (
   id: string,
   ms: number,
   quantity = "1.00",
-  aggressorSide: EvidenceTrade["aggressorSide"] = "no_buy",
+  aggressorSide: EvidenceTrade["aggressorSide"] = "no_exposure",
   yesPrice = "0.4000",
 ): EvidenceTrade => ({
   tradeId: id,
@@ -77,7 +77,7 @@ test("queue arithmetic excludes wrong side, blocks, duplicates, cancellations an
     orderedTrades: [
       cancelled,
       blocked,
-      trade("wrong", 3000, "10.00", "yes_buy"),
+      trade("wrong", 3000, "10.00", "yes_exposure"),
       trade("a", 4000),
       trade("a", 4000),
       trade("b", 5000),

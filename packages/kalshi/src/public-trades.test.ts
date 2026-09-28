@@ -18,7 +18,7 @@ test("trade normalization preserves fixed point, ID and explicit provider direct
   const trade = normalizePublicTrade(raw);
   assert.equal(trade.tradeId, "id-1");
   assert.equal(trade.quantity, "2.50");
-  assert.equal(trade.aggressorSide, "no_buy");
+  assert.equal(trade.aggressorSide, "no_exposure");
   assert.equal(trade.aggressorProvenance, "provider_explicit");
   assert.equal(
     normalizePublicTrade({ ...raw, taker_book_side: "bid" }).aggressorSide,
@@ -71,4 +71,6 @@ test("trade pagination keeps unsigned GET, explicit query filters and descending
     () => client.listTrades({ ticker: "TEST", limit: 1001 }),
     /page size/,
   );
+  await assert.rejects(() => client.getEvent("../portfolio"), /ticker/);
+  await assert.rejects(() => client.getSeries("A/B"), /ticker/);
 });

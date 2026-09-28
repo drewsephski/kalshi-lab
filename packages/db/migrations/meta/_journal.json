@@ -15,6 +15,13 @@
       "when": 1790604127048,
       "tag": "0001_nasty_sugar_man",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790605305663,
+      "tag": "0002_redundant_alex_wilder",
+      "breakpoints": true
     }
   ]
 }

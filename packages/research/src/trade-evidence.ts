@@ -7,7 +7,7 @@ export interface EvidenceTrade {
   executedAt: Date;
   yesPrice: string;
   quantity: string;
-  aggressorSide: "yes_buy" | "no_buy" | "unknown";
+  aggressorSide: "yes_exposure" | "no_exposure" | "unknown";
   sideProvenance: "provider_explicit" | "unknown";
   isBlockTrade: boolean;
 }
@@ -144,8 +144,8 @@ export function queueConsumption(input: {
       continue;
     const price = fixed(trade.yesPrice, 4);
     if (
-      (side === "yes_buy" && trade.aggressorSide !== "no_buy") ||
-      (side === "yes_sell" && trade.aggressorSide !== "yes_buy") ||
+      (side === "yes_buy" && trade.aggressorSide !== "no_exposure") ||
+      (side === "yes_sell" && trade.aggressorSide !== "yes_exposure") ||
       (side === "yes_buy" && price > limit) ||
       (side === "yes_sell" && price < limit)
     )

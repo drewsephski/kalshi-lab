@@ -18,6 +18,16 @@ export type {
 export { KalshiPublicMarketDataClient } from "./public-client.ts";
 export { normalizePublicTrade, normalizeTradePage } from "./public-trades.ts";
 export type { PublicTrade } from "./public-trades.ts";
+export {
+  normalizePublicEventFee,
+  normalizePublicSeriesFee,
+  normalizePublicEventFeeChange,
+} from "./public-fees.ts";
+export type {
+  PublicEventFee,
+  PublicSeriesFee,
+  PublicEventFeeChange,
+} from "./public-fees.ts";
 export * from "./market-data.ts";
 export { units, decimal, complement } from "./decimal.ts";
 export { MarketState } from "./market-state.ts";

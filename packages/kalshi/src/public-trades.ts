@@ -10,7 +10,7 @@ export interface PublicTrade {
   quantity: string;
   takerOutcomeSide: "yes" | "no" | null;
   takerBookSide: "bid" | "ask" | null;
-  aggressorSide: "yes_buy" | "no_buy" | "unknown";
+  aggressorSide: "yes_exposure" | "no_exposure" | "unknown";
   aggressorProvenance: "provider_explicit" | "unknown";
   isBlockTrade: boolean;
   rawMetadata: Record<string, unknown>;
@@ -58,8 +58,8 @@ export function normalizePublicTrade(value: unknown): PublicTrade {
     takerBookSide: book,
     aggressorSide: explicit
       ? outcome === "yes"
-        ? "yes_buy"
-        : "no_buy"
+        ? "yes_exposure"
+        : "no_exposure"
       : "unknown",
     aggressorProvenance: explicit ? "provider_explicit" : "unknown",
     isBlockTrade: raw.is_block_trade,
@@ -82,10 +82,4 @@ export function normalizeTradePage(value: unknown): {
     trades,
     cursor: typeof raw.cursor === "string" && raw.cursor ? raw.cursor : null,
   };
-}
-
-export interface PublicFeeMetadata {
-  raw: Record<string, unknown>;
-  observedAt: Date;
-  sourceUrl: string;
 }

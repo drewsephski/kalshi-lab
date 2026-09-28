@@ -89,7 +89,7 @@ async function readExp003(
       : evidence.supportingTradeIds.length
         ? "partial_directed_flow"
         : "unobservable";
-    if (next === "queue_supported_hypothetical_fill") {
+    if (next !== "unobservable") {
       result.changed++;
       result.changes.push({
         simulationId: row.simulationId,

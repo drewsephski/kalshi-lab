@@ -11,7 +11,7 @@ import {
   type TradeInput,
   type TradeStore,
 } from "@kalshi-lab/db";
-import type { ReturnTypeDatabase } from "./trades-db.ts";
+import type { createDatabase } from "@kalshi-lab/db";
 import { readRecorderConfig } from "./config.ts";
 import { marketInput } from "./snapshot.ts";
 import { discoverMarkets } from "./universe.ts";
@@ -20,7 +20,7 @@ import { retry, errorCode } from "./retry.ts";
 export const TRADE_COLLECTOR_VERSION = "trade-collector-v1";
 export interface TradeCollectorOptions {
   reader: KalshiPublicMarketDataClient;
-  db: ReturnTypeDatabase;
+  db: ReturnType<typeof createDatabase>["db"];
   signal: AbortSignal;
   once: boolean;
   durationMs: number | null;
@@ -81,31 +81,26 @@ function feeSnapshot(
   sourceUrl: string,
   eventTicker: string | null,
   seriesTicker: string,
-  raw: Record<string, unknown>,
+  fee: {
+    feeType: string | null;
+    feeMultiplier: string | null;
+    rawMetadata: Record<string, unknown>;
+  },
   effectiveFrom: Date | null = null,
 ): FeeSnapshotInput {
-  const type =
-    sourceType === "official_series_api" ? raw.fee_type : raw.fee_type_override;
-  const multiplier =
-    sourceType === "official_series_api"
-      ? raw.fee_multiplier
-      : raw.fee_multiplier_override;
   return {
     eventTicker,
     seriesTicker,
     observedAt,
     effectiveFrom,
     effectiveTo: null,
-    feeType: typeof type === "string" ? type : null,
-    feeMultiplier:
-      typeof multiplier === "number" && Number.isFinite(multiplier)
-        ? multiplier.toFixed(4)
-        : null,
+    feeType: fee.feeType,
+    feeMultiplier: fee.feeMultiplier,
     makerMultiplier: null,
     takerMultiplier: null,
     sourceUrl,
     sourceType,
-    rawMetadata: raw,
+    rawMetadata: fee.rawMetadata,
     collectionRunId: runId,
   };
 }
@@ -167,9 +162,7 @@ export async function collectTrades(
     for (const eventTicker of events) {
       if (signal.aborted) break;
       const event = await retry(() => reader.getEvent(eventTicker));
-      const seriesTicker = event.series_ticker;
-      if (typeof seriesTicker !== "string" || !seriesTicker)
-        throw new Error("Missing event series ticker.");
+      const seriesTicker = event.seriesTicker;
       const series = await retry(() => reader.getSeries(seriesTicker));
       const observedAt = now();
       const feeRows: FeeSnapshotInput[] = [
@@ -221,12 +214,11 @@ export async function collectTrades(
           reader.listEventFeeChanges(eventTicker, feeCursor),
         );
         for (const change of changes.changes) {
-          const effective =
-            typeof change.scheduled_ts === "string"
-              ? new Date(change.scheduled_ts)
-              : null;
-          if (effective && !Number.isFinite(effective.getTime()))
-            throw new Error("Invalid fee change time.");
+          if (
+            change.eventTicker !== eventTicker ||
+            change.seriesTicker !== seriesTicker
+          )
+            throw new Error("Event fee change ticker mismatch.");
           feeRows.push(
             feeSnapshot(
               runId,
@@ -236,7 +228,7 @@ export async function collectTrades(
               eventTicker,
               seriesTicker,
               change,
-              effective,
+              change.scheduledAt,
             ),
           );
         }
@@ -245,6 +237,21 @@ export async function collectTrades(
           throw new Error("Fee-change pagination incomplete.");
         feeCursors.add(changes.cursor);
         feeCursor = changes.cursor;
+      }
+      const datedChanges = feeRows
+        .filter(
+          (row) =>
+            row.sourceType === "official_event_fee_change_api" &&
+            row.effectiveFrom,
+        )
+        .sort(
+          (a, b) => a.effectiveFrom!.getTime() - b.effectiveFrom!.getTime(),
+        );
+      for (let i = 0; i < datedChanges.length; i++) {
+        const next = datedChanges
+          .slice(i + 1)
+          .find((row) => row.effectiveFrom! > datedChanges[i]!.effectiveFrom!);
+        if (next) datedChanges[i]!.effectiveTo = next.effectiveFrom;
       }
       await store.writeFeeSnapshots(feeRows);
     }
