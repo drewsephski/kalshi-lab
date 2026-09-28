@@ -649,13 +649,23 @@ async function main() {
           sourceType: f.sourceType,
           sourceUrl: f.sourceUrl,
           observedAt: f.observedAt,
+          retrievedAt: f.observedAt,
           effectiveFrom: f.effectiveFrom,
           effectiveTo: f.effectiveTo,
           feeType: f.feeType,
           feeMultiplier: f.feeMultiplier,
           makerMultiplier: f.makerMultiplier,
           takerMultiplier: f.takerMultiplier,
+          rawResponseHash: hash(f.rawMetadata),
           rawMetadataSha256: hash(f.rawMetadata),
+          rationale:
+            f.sourceType === "official_series_fee_change_api"
+              ? "Official scheduled historical series fee change; maker/taker multipliers remain unknown unless corroborated by an effective fee schedule."
+              : f.sourceType === "official_event_fee_change_api"
+                ? "Official scheduled event override change; applies over the series rule only within its dated interval."
+                : f.sourceType === "official_fee_schedule"
+                  ? "Dated general schedule formula retained separately from product applicability."
+                  : "Official current metadata snapshot; current state alone does not establish historical applicability.",
           rawMetadata: f.rawMetadata,
         })),
       },
