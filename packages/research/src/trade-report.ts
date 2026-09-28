@@ -448,6 +448,7 @@ async function main() {
         eventsKnown: feeKnownEvents,
         eventsUnknown: events.length - feeKnownEvents - feeConflictingEvents,
         eventsConflicting: feeConflictingEvents,
+        eventClassifications: feeEvents,
         candidateCompletedContexts: completedContexts.length,
         candidateContextKnownPct: pct(
           feeKnownCandidateContexts,
@@ -463,6 +464,10 @@ async function main() {
           effectiveTo: f.effectiveTo,
           feeType: f.feeType,
           feeMultiplier: f.feeMultiplier,
+          makerMultiplier: f.makerMultiplier,
+          takerMultiplier: f.takerMultiplier,
+          rawMetadataSha256: hash(f.rawMetadata),
+          rawMetadata: f.rawMetadata,
         })),
       },
       exp003Retrospective: legacy,
