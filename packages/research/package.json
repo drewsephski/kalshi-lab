@@ -12,7 +12,8 @@
     "build": "tsc --noEmit",
     "test": "node --test src/*.test.ts src/simulation/*.test.ts",
     "microstructure": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/cli.ts",
-    "simulate-maker": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/simulation/cli.ts"
+    "simulate-maker": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/simulation/cli.ts",
+    "trade-report": "node --env-file-if-exists=../../.env --env-file-if-exists=../../.env.local src/trade-report.ts"
   },
   "dependencies": {
     "@kalshi-lab/db": "workspace:*",

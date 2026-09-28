@@ -156,6 +156,115 @@ export const marketSnapshots = pgTable(
   ],
 );
 
+export const tradeCollectorRuns = pgTable("trade_collector_runs", {
+  id: uuid("id").primaryKey(),
+  startedAt: time("started_at").notNull(),
+  stoppedAt: time("stopped_at"),
+  heartbeatAt: time("heartbeat_at").notNull(),
+  status: runStatus("status").notNull(),
+  gitCommit: text("git_commit").notNull(),
+  gitDirty: boolean("git_dirty").notNull(),
+  config: jsonb("config").$type<Record<string, unknown>>().notNull(),
+  tradesWritten: bigint("trades_written", { mode: "number" })
+    .notNull()
+    .default(0),
+  duplicatesSeen: bigint("duplicates_seen", { mode: "number" })
+    .notNull()
+    .default(0),
+  error: text("error"),
+});
+
+export const marketTrades = pgTable(
+  "market_trades",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    source: marketSource("source").notNull(),
+    providerTradeId: text("provider_trade_id").notNull(),
+    marketId: uuid("market_id").notNull(),
+    ticker: text("ticker").notNull(),
+    eventTicker: text("event_ticker"),
+    executedAt: time("executed_at").notNull(),
+    receivedAt: time("received_at").notNull(),
+    yesPrice: price("yes_price").notNull(),
+    noPrice: price("no_price").notNull(),
+    quantity: quantity("quantity").notNull(),
+    takerOutcomeSide: text("taker_outcome_side"),
+    takerBookSide: text("taker_book_side"),
+    aggressorSide: text("aggressor_side").notNull(),
+    sideProvenance: text("side_provenance").notNull(),
+    isBlockTrade: boolean("is_block_trade").notNull(),
+    rawMetadata: jsonb("raw_metadata")
+      .$type<Record<string, unknown>>()
+      .notNull(),
+    collectionRunId: uuid("collection_run_id").notNull(),
+  },
+  (table) => [
+    foreignKey({
+      name: "trades_market_source_fk",
+      columns: [table.marketId, table.source],
+      foreignColumns: [markets.id, markets.source],
+    }),
+    foreignKey({
+      name: "trades_collection_run_fk",
+      columns: [table.collectionRunId],
+      foreignColumns: [tradeCollectorRuns.id],
+    }),
+    uniqueIndex("trades_source_provider_id_uq").on(
+      table.source,
+      table.providerTradeId,
+    ),
+    index("trades_market_executed_idx").on(table.marketId, table.executedAt),
+    index("trades_source_executed_idx").on(table.source, table.executedAt),
+    check(
+      "trades_valid_numbers",
+      sql`${table.yesPrice} >= 0 AND ${table.yesPrice} <= 1 AND ${table.noPrice} >= 0 AND ${table.noPrice} <= 1 AND ${table.yesPrice} + ${table.noPrice} = 1 AND ${table.quantity} > 0`,
+    ),
+    check(
+      "trades_valid_direction",
+      sql`${table.aggressorSide} IN ('yes_exposure','no_exposure','unknown') AND ${table.sideProvenance} IN ('provider_explicit','unknown')`,
+    ),
+  ],
+);
+
+export const feeRuleSnapshots = pgTable(
+  "fee_rule_snapshots",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    eventTicker: text("event_ticker"),
+    seriesTicker: text("series_ticker").notNull(),
+    observedAt: time("observed_at").notNull(),
+    effectiveFrom: time("effective_from"),
+    effectiveTo: time("effective_to"),
+    feeType: text("fee_type"),
+    feeMultiplier: numeric("fee_multiplier", { precision: 12, scale: 4 }),
+    makerMultiplier: numeric("maker_multiplier", { precision: 12, scale: 4 }),
+    takerMultiplier: numeric("taker_multiplier", { precision: 12, scale: 4 }),
+    sourceUrl: text("source_url").notNull(),
+    sourceType: text("source_type").notNull(),
+    rawMetadata: jsonb("raw_metadata")
+      .$type<Record<string, unknown>>()
+      .notNull(),
+    collectionRunId: uuid("collection_run_id").notNull(),
+  },
+  (table) => [
+    foreignKey({
+      name: "fees_collection_run_fk",
+      columns: [table.collectionRunId],
+      foreignColumns: [tradeCollectorRuns.id],
+    }),
+    index("fees_event_window_idx").on(table.eventTicker, table.effectiveFrom),
+    index("fees_series_observed_idx").on(table.seriesTicker, table.observedAt),
+    check(
+      "fees_valid_window",
+      sql`${table.effectiveTo} IS NULL OR ${table.effectiveFrom} IS NOT NULL AND ${table.effectiveTo} > ${table.effectiveFrom}`,
+    ),
+    check(
+      "fees_valid_source",
+      sql`${table.sourceType} IN ('official_series_api','official_event_api','official_event_fee_change_api','official_fee_schedule','official_regulatory_notice','unknown')`,
+    ),
+  ],
+);
+
 export type MarketRow = typeof markets.$inferSelect;
 export type MarketInput = Omit<typeof markets.$inferInsert, "id">;
 export type SnapshotInput = typeof marketSnapshots.$inferInsert;
@@ -164,3 +273,5 @@ export type RunHealth = Pick<
   typeof workerRuns.$inferInsert,
   "error" | "reconnectCount" | "malformedMessages" | "droppedSnapshots"
 >;
+export type TradeInput = typeof marketTrades.$inferInsert;
+export type FeeSnapshotInput = typeof feeRuleSnapshots.$inferInsert;

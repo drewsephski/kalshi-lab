@@ -1,0 +1,2791 @@
+{
+  "provenance": {
+    "gitCommit": "bc3f6799acef423280adc3d0a062e74d82356773",
+    "gitDirty": true,
+    "protocolCommit": "1783627743117647529390843560ef871ae1ac80",
+    "protocolSha256": "4155471768c94d4637f41a979f432b75c3c634951cc6e72cc3677d25dfa4ba94",
+    "tradeRunIds": [
+      "79c9f70a-6c15-4448-8438-84b9b083338d",
+      "c248aff4-f530-43f7-b29f-6e09612c2ef3"
+    ],
+    "bookRunIds": [
+      "c9efc1da-c5de-47d6-9581-4294d06eeb02",
+      "e5d2eddf-6fbe-4bd1-a122-9dd64207f670",
+      "f3d5e5b6-201d-45fb-9033-c95433c4e721"
+    ],
+    "from": "2026-09-28T14:18:02.091Z",
+    "toExclusive": "2026-09-28T14:39:10.000Z",
+    "tradeDataSha256": "7135eea26b92cad5b8f48c6ca275ca1f802885d1a4931694317ffe9914ae1765",
+    "bookDataSha256": "64beb1674d2064143f81b9553ac30d1b0d9886f6518c2c5701a710224711c7ae",
+    "feeDataSha256": "e5e0da56bdb74b049bd3b582831e986b008678276971ae51e5ed4ece54698c07"
+  },
+  "collection": {
+    "markets": 30,
+    "events": 10,
+    "seriesFamilies": [
+      [
+        "KXTEMPMIAH",
+        402
+      ],
+      [
+        "KXTEMPCHIHS",
+        52
+      ],
+      [
+        "KXTEMPLAXHS",
+        62
+      ],
+      [
+        "KXCS2GAME",
+        527
+      ],
+      [
+        "KXTEMPNYCHS",
+        33
+      ],
+      [
+        "KXCS2MAP",
+        50
+      ],
+      [
+        "KXATPMATCH",
+        2
+      ],
+      [
+        "KXINTLFRIENDLYTOTAL",
+        102
+      ],
+      [
+        "KXCS2TOTALMAPS",
+        4
+      ]
+    ],
+    "trades": 1234,
+    "uniqueTradeIds": 1234,
+    "duplicatesSuppressed": 3529,
+    "tradesPerMinute": 58.395358026482974,
+    "stableFieldPct": 100,
+    "collectorRuns": [
+      {
+        "id": "79c9f70a-6c15-4448-8438-84b9b083338d",
+        "startedAt": "2026-09-28T14:18:02.091Z",
+        "stoppedAt": "2026-09-28T14:28:07.327Z",
+        "status": "completed",
+        "error": null
+      },
+      {
+        "id": "c248aff4-f530-43f7-b29f-6e09612c2ef3",
+        "startedAt": "2026-09-28T14:29:02.464Z",
+        "stoppedAt": "2026-09-28T14:39:09.724Z",
+        "status": "completed",
+        "error": null
+      }
+    ]
+  },
+  "direction": {
+    "providerExplicit": 1234,
+    "providerExplicitPct": 100,
+    "reconstructed": 0,
+    "reconstructedPct": 0,
+    "ambiguous": 0,
+    "ambiguousPct": 0,
+    "unmatched": 0,
+    "unmatchedPct": 0,
+    "priceRelations": {
+      "trade_at_pre_bid": 209,
+      "trade_at_pre_ask": 512,
+      "trade_above_pre_ask": 252,
+      "inside_spread": 84,
+      "unmatched": 102,
+      "trade_below_pre_bid": 75
+    }
+  },
+  "alignment": {
+    "pre": 1132,
+    "prePct": 91.73,
+    "post": 1102,
+    "postPct": 89.3,
+    "both": 1081,
+    "bothPct": 87.6,
+    "medianDelayMs": 2562.5
+  },
+  "queue": {
+    "candidateOrders": 95,
+    "observableRelevantFlow": 16,
+    "queueFullyConsumed": 6,
+    "queueSupportedHypotheticalFills": 4,
+    "unobservable": 79
+  },
+  "fees": {
+    "eventsKnown": 0,
+    "eventsUnknown": 10,
+    "eventsConflicting": 0,
+    "eventClassifications": [
+      {
+        "eventTicker": "KXTEMPMIAH-26SEP2811",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXTEMPCHIHS-26SEP2811",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXTEMPLAXHS-26SEP2811",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXCS2GAME-26SEP281000GLNIP",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXTEMPNYCHS-26SEP2811",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXCS2MAP-26SEP281000GLNIP-1",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXCS2MAP-26SEP281000GLNIP-3",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXATPMATCH-26SEP29MEDRUB",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+        "classification": "fee_unknown"
+      },
+      {
+        "eventTicker": "KXCS2TOTALMAPS-26SEP281000GLNIP",
+        "classification": "fee_unknown"
+      }
+    ],
+    "candidateCompletedContexts": 0,
+    "candidateContextKnownPct": null,
+    "sourceSnapshots": [
+      {
+        "eventTicker": "KXCS2GAME-26SEP281000GLNIP",
+        "seriesTicker": "KXCS2GAME",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXCS2GAME-26SEP281000GLNIP",
+        "observedAt": "2026-09-28T14:18:04.217Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "cd9cbd240438ed40c8af5ac0769890d25f388bfd46b82f64fe5688d00607f51d",
+        "rawMetadata": {
+          "title": "GamerLegion vs. NIP",
+          "category": "Sports",
+          "sub_title": "GamerLegion vs. NIP (Sep 28)",
+          "event_ticker": "KXCS2GAME-26SEP281000GLNIP",
+          "series_ticker": "KXCS2GAME",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "CS2",
+            "competition_scope": "Game"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2GAME",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:04.217Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "df76c451439e0372018e75908351ef052a53c1a897389d854f347738a1f797f9",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:04.217Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2GAME",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXCS2GAME",
+        "observedAt": "2026-09-28T14:18:04.217Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "35afef61d79ede46b6eb88431c14d64bcd6733117bf5d38da4ea019cbc32b235",
+        "rawMetadata": {
+          "tags": [
+            "Esports"
+          ],
+          "title": "Counter-Strike 2 Game",
+          "ticker": "KXCS2GAME",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ESPORTSWIN.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-16T00:29:24.467894Z",
+          "product_metadata": {
+            "scope": "Game",
+            "important_info": {
+              "id": "KXCS2GAME-2026-07-13",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** If a match is forfeited, cancelled, or otherwise not played before gameplay begins, the market will resolve to Fair Market Price. If gameplay has begun and the match is later awarded by forfeit, disqualification, or a similar ruling, the market will resolve based on the official result declared by the tournament organizer."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ESPORTSWIN.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPMIAH",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPMIAH",
+        "observedAt": "2026-09-28T14:18:04.726Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "e43237c5bbdabc827c61304179840f86f8206797a478329f52906d63b1c8a826",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional Miami Temperature",
+          "ticker": "KXTEMPMIAH",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/MIAWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-08T19:38:39.578288Z",
+          "product_metadata": {
+            "important_info": {
+              "id": "NHIGHD-bulk-2026-06-12",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** The data shown is 5 minutes delayed. Resolution for KXTEMPMIAH is based on Synoptic Data and calculated via Kalshi Weather Index Methodology. Please see additional details for more information."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/MIAWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXTEMPMIAH-26SEP2811",
+        "seriesTicker": "KXTEMPMIAH",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPMIAH-26SEP2811",
+        "observedAt": "2026-09-28T14:18:04.726Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "028e1f5db60596f9131835961f075d601368bce7a4ce0f625f26628fa51ecd55",
+        "rawMetadata": {
+          "title": "Temperature in Miami on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPMIAH-26SEP2811",
+          "series_ticker": "KXTEMPMIAH",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPMIAH",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:04.726Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "1e99580298849b30b86a23f4b1fc2c63153a6ce84c6827117eae97b81d979f1f",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:04.726Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXCS2MAP",
+        "observedAt": "2026-09-28T14:18:05.307Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "2441abaa41bbf0d01345f045fa9e0d5448a4eb803b8face5c6e0a0d20ed7e6f4",
+        "rawMetadata": {
+          "tags": [
+            "Esports"
+          ],
+          "title": "Counter-Strike 2 Map Winner ",
+          "ticker": "KXCS2MAP",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "daily",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ESPORTSWIN.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-16T00:29:24.467894Z",
+          "product_metadata": {
+            "scope": "Map Winner",
+            "important_info": {
+              "id": "ESPORTSWIN-bulk-2026-07-13",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** If a map is forfeited, cancelled, or otherwise not played before gameplay begins, the market will resolve to Fair Market Price. If gameplay has begun in the map and the map is later awarded by forfeit, disqualification, or a similar ruling, the market will resolve based on the official result declared by the tournament organizer."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ESPORTSWIN.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXCS2MAP-26SEP281000GLNIP-1",
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXCS2MAP-26SEP281000GLNIP-1",
+        "observedAt": "2026-09-28T14:18:05.307Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "4522408050dcc330756d1acff5692bdcac2c437fbaa2c08c30b4205e0da0fdac",
+        "rawMetadata": {
+          "title": "GamerLegion vs. NIP: Map 1",
+          "category": "Sports",
+          "sub_title": "Map 1: GL vs. NIP (Sep 28)",
+          "event_ticker": "KXCS2MAP-26SEP281000GLNIP-1",
+          "series_ticker": "KXCS2MAP",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "CS2",
+            "competition_scope": "Map 1 Winner"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:05.307Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "9753546e6e8a8d343215f0f87d10ae852b581d46b3d754868aec7dda6fc4bd8c",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:05.307Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXCS2MAP",
+        "observedAt": "2026-09-28T14:18:05.777Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "2441abaa41bbf0d01345f045fa9e0d5448a4eb803b8face5c6e0a0d20ed7e6f4",
+        "rawMetadata": {
+          "tags": [
+            "Esports"
+          ],
+          "title": "Counter-Strike 2 Map Winner ",
+          "ticker": "KXCS2MAP",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "daily",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ESPORTSWIN.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-16T00:29:24.467894Z",
+          "product_metadata": {
+            "scope": "Map Winner",
+            "important_info": {
+              "id": "ESPORTSWIN-bulk-2026-07-13",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** If a map is forfeited, cancelled, or otherwise not played before gameplay begins, the market will resolve to Fair Market Price. If gameplay has begun in the map and the map is later awarded by forfeit, disqualification, or a similar ruling, the market will resolve based on the official result declared by the tournament organizer."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ESPORTSWIN.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:05.777Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "12b4729fb1af556ebefe68b679e59af2996934a60969e82b6570a78bd58e5653",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:05.777Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXCS2MAP-26SEP281000GLNIP-3",
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXCS2MAP-26SEP281000GLNIP-3",
+        "observedAt": "2026-09-28T14:18:05.777Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "5b4a7f31f03d7954fce06bc6d9c8409785beae752eab6b647be1accef4b9e536",
+        "rawMetadata": {
+          "title": "GamerLegion vs. NIP: Map 3",
+          "category": "Sports",
+          "sub_title": "Map 3: GL vs. NIP (Sep 28)",
+          "event_ticker": "KXCS2MAP-26SEP281000GLNIP-3",
+          "series_ticker": "KXCS2MAP",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "CS2",
+            "competition_scope": "Map 3 Winner"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPNYCHS",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:06.292Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "e0229535a840faa71279743a7cab87ee5d8c3849462454469880e8431f22fa50",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:06.292Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXTEMPNYCHS-26SEP2811",
+        "seriesTicker": "KXTEMPNYCHS",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPNYCHS-26SEP2811",
+        "observedAt": "2026-09-28T14:18:06.292Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "4f6beeadd7cf7d30e67789e5f75785f109085ead2a41b145b4d00c548bb2033c",
+        "rawMetadata": {
+          "title": "Temperature in New York City on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPNYCHS-26SEP2811",
+          "series_ticker": "KXTEMPNYCHS",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPNYCHS",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPNYCHS",
+        "observedAt": "2026-09-28T14:18:06.292Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "2df7cdf0f95375a2d9f4ecc2d25ad3c28ed0404326c1e551b05e34b7c97ab281",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional NYC Temperature",
+          "ticker": "KXTEMPNYCHS",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/NYCWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-25T15:14:26.051338Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/NYCWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXINTLFRIENDLYTOTAL",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:06.752Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "fc8189d51d82e10e9d8c8ff747d31bba04bac8eb26c18a7e0a0b1d0e4a1a5c11",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:06.752Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXINTLFRIENDLYTOTAL",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXINTLFRIENDLYTOTAL",
+        "observedAt": "2026-09-28T14:18:06.752Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "b5156319b797d72ee74e03366382f18ac3dc9b1a4a201ce24067df6fc176bcad",
+        "rawMetadata": {
+          "tags": [
+            "Soccer"
+          ],
+          "title": "International Friendly Total",
+          "ticker": "KXINTLFRIENDLYTOTAL",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/SOCCERTOTALS.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-22T15:04:39.281951Z",
+          "product_metadata": {
+            "scope": "Point Total",
+            "important_info": {
+              "id": "SOCCERTOTAL-bulk-2026-04-23",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** The following market is based on the outcome after 90 minutes plus stoppage time. This does not include extra time or penalties."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/SOCCERTOTALS.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://www.foxsports.com",
+              "name": "Fox Sports"
+            },
+            {
+              "url": "https://espn.com",
+              "name": "ESPN"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+        "seriesTicker": "KXINTLFRIENDLYTOTAL",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+        "observedAt": "2026-09-28T14:18:06.752Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "6536baac07bfd8aa050f91273d2dd982916fcb00e3b7a98b83769d8bf97581fd",
+        "rawMetadata": {
+          "title": "Kyrgyzstan vs Maldives: Total Goals",
+          "category": "Sports",
+          "sub_title": "KGZ vs MDV (Sep 28)",
+          "event_ticker": "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+          "series_ticker": "KXINTLFRIENDLYTOTAL",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "Intl Friendlies",
+            "competition_scope": "Point Total"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://www.foxsports.com",
+              "name": "Fox Sports"
+            },
+            {
+              "url": "https://espn.com",
+              "name": "ESPN"
+            }
+          ],
+          "collateral_return_type": ""
+        }
+      },
+      {
+        "eventTicker": "KXTEMPLAXHS-26SEP2811",
+        "seriesTicker": "KXTEMPLAXHS",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPLAXHS-26SEP2811",
+        "observedAt": "2026-09-28T14:18:07.187Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "c9690d07b990b1311a63b1ed23d26acc4c5b9056c0f2dadf60f176e0b43e44da",
+        "rawMetadata": {
+          "title": "Temperature in Coastal Los Angeles on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPLAXHS-26SEP2811",
+          "series_ticker": "KXTEMPLAXHS",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPLAXHS",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:07.187Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "a8aad1ea142bd2f08b64b2cdd5cd318a77e35420170687d355205443d1fcf7db",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:07.187Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPLAXHS",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPLAXHS",
+        "observedAt": "2026-09-28T14:18:07.187Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "a57d44d68d93742077262cade428a687c1ae23ce6b0a50b5d6529df843a68782",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional Coastal LA Temperature",
+          "ticker": "KXTEMPLAXHS",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/LAWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-25T15:19:08.647855Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/LAWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPCHIHS",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:07.654Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "bdc172c1549c76190ed44da5fa2fa8958ee34fe0416965fb19c13ec5bc8bf3a7",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:07.654Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPCHIHS",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPCHIHS",
+        "observedAt": "2026-09-28T14:18:07.654Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "e52157b736fed4bdfa10831dd26737733a031233e4d25d9f11ae929ec4df5eee",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional Chicago Metro Temperature",
+          "ticker": "KXTEMPCHIHS",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/CHIMETROWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-25T15:15:55.869038Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/CHIMETROWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://kalshi.com",
+              "name": "Kalshi"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXTEMPCHIHS-26SEP2811",
+        "seriesTicker": "KXTEMPCHIHS",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPCHIHS-26SEP2811",
+        "observedAt": "2026-09-28T14:18:07.654Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "104070576df93e53396b31dd0dbeeeb0dc5ab73eff466d058b83be2d049a5e89",
+        "rawMetadata": {
+          "title": "Temperature in Chicago Metro Area on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPCHIHS-26SEP2811",
+          "series_ticker": "KXTEMPCHIHS",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://kalshi.com",
+              "name": "Kalshi"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": "KXATPMATCH-26SEP29MEDRUB",
+        "seriesTicker": "KXATPMATCH",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXATPMATCH-26SEP29MEDRUB",
+        "observedAt": "2026-09-28T14:18:08.015Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "353cffc2e10bb4ca67418cb889af7f94f6a0360954d33766c660eff174950687",
+        "rawMetadata": {
+          "title": "Medvedev vs Rublev",
+          "category": "Sports",
+          "sub_title": "Medvedev vs Rublev (Sep 29)",
+          "event_ticker": "KXATPMATCH-26SEP29MEDRUB",
+          "series_ticker": "KXATPMATCH",
+          "strike_period": "",
+          "exchange_index": 3,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "ATP Hangzhou",
+            "competition_scope": "Game"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://www.atptour.com/",
+              "name": "ATP"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXATPMATCH",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:08.015Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "2bb02d1bd1aa289e2097a35073b168dc786c492e05f38d9b54ccd9bd3eec68b1",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:08.015Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXATPMATCH",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXATPMATCH",
+        "observedAt": "2026-09-28T14:18:08.015Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic_with_maker_fees",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "61cc201437386611deb2d58027f1f03f5302fa11307529719669405e6cd5d72f",
+        "rawMetadata": {
+          "tags": [
+            "Tennis"
+          ],
+          "title": "ATP Tennis Match",
+          "ticker": "KXATPMATCH",
+          "category": "Sports",
+          "fee_type": "quadratic_with_maker_fees",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ACHIEVEMENTS.pdf",
+          "exchange_index": 3,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-24T19:09:06.028275Z",
+          "product_metadata": {
+            "scope": "Game",
+            "important_info": {
+              "id": "KXATPMATCH-2026-04-09",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information**: If the match does not begin (signaled by a ball being played), all markets, including set winner markets, will resolve to a **fair price** for each player in accordance with the rules. If a player withdraws or forfeits after the match has begun, that player will resolve to **No** for the main match market. Any markets that can be definitively determined at that point will be settled accordingly, while any additional prop markets will resolve to a **fair price**."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ACHIEVEMENTS.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://www.atptour.com/",
+              "name": "ATP"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXAUDUSDAW-26OCT02",
+        "seriesTicker": "KXAUDUSDAW",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXAUDUSDAW-26OCT02",
+        "observedAt": "2026-09-28T14:18:08.409Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "7c6efdd551433940c40a35ca1a1a26fbd115b543e19a01e30b3a0d991375f9f6",
+        "rawMetadata": {
+          "title": "AUDUSD price on Oct 02 at 5:00 PM EDT",
+          "category": "Financials",
+          "sub_title": "Oct 02, 2026 at 5pm ET",
+          "event_ticker": "KXAUDUSDAW-26OCT02",
+          "series_ticker": "KXAUDUSDAW",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "weekly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://app.pyth.com/explore/FX.AUD%2FUSD?returnUrl=%2Fexplore%3Fsearch%3Daudusd%26state%3Dstable",
+              "name": "Pyth - AUDUSD"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXAUDUSDAW",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXAUDUSDAW",
+        "observedAt": "2026-09-28T14:18:08.409Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "58dc8c0f154c1b910a8b5adfc26712cd140adf192c0c877e2cb175827077a47a",
+        "rawMetadata": {
+          "tags": [
+            "Foreign Exchange"
+          ],
+          "title": "AUDUSD Weekly",
+          "ticker": "KXAUDUSDAW",
+          "category": "Financials",
+          "fee_type": "quadratic",
+          "frequency": "weekly",
+          "categories": [
+            "Financials"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/FXAUDUSD.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-23T14:19:46.704902Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/FXAUDUSD.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://app.pyth.com/explore/FX.AUD%2FUSD?returnUrl=%2Fexplore%3Fsearch%3Daudusd%26state%3Dstable",
+              "name": "Pyth - AUDUSD"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXAUDUSDAW",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:08.409Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "3af7ee6cc53ab72ec1520b83eb973bd30983f849fd668fa36232b8d0eeeed419",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:08.409Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTRUMPAPPROVE",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:18:08.756Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "9145547f247cfcb4740449bbd8aa3227623bbab0f62599c6c3612b0fa25972e1",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:18:08.756Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXTRUMPAPPROVE-26SEP29",
+        "seriesTicker": "KXTRUMPAPPROVE",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTRUMPAPPROVE-26SEP29",
+        "observedAt": "2026-09-28T14:18:08.756Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "083e79aee28769e7eba22ad4314e02613cd75014ac343e69086c9060cc82d700",
+        "rawMetadata": {
+          "title": "Trump's RCP approval average on Sep 29, 2026?",
+          "category": "Politics",
+          "sub_title": "On Sep 29, 2026",
+          "strike_date": "2026-09-29T17:00:00Z",
+          "event_ticker": "KXTRUMPAPPROVE-26SEP29",
+          "series_ticker": "KXTRUMPAPPROVE",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://www.realclearpolling.com/polls/approval/donald-trump/approval-rating",
+              "name": "RealClearPolitics"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTRUMPAPPROVE",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTRUMPAPPROVE",
+        "observedAt": "2026-09-28T14:18:08.756Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "267bcad3866e663d67d5204a9c01be2ffda39ac95de36542590934440f0bc158",
+        "rawMetadata": {
+          "tags": [
+            "Recurring"
+          ],
+          "title": "Trump approval rating",
+          "ticker": "KXTRUMPAPPROVE",
+          "category": "Politics",
+          "fee_type": "quadratic",
+          "frequency": "one_off",
+          "categories": [
+            "Elections",
+            "Politics"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/POLITICALSTAT.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-25T15:44:42.014516Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/POLITICALSTAT.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://www.realclearpolling.com/polls/approval/donald-trump/approval-rating",
+              "name": "RealClearPolitics"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract.",
+            "Any candidate currently listed as a market within this event."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2GAME",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXCS2GAME",
+        "observedAt": "2026-09-28T14:29:03.719Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "35afef61d79ede46b6eb88431c14d64bcd6733117bf5d38da4ea019cbc32b235",
+        "rawMetadata": {
+          "tags": [
+            "Esports"
+          ],
+          "title": "Counter-Strike 2 Game",
+          "ticker": "KXCS2GAME",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ESPORTSWIN.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-16T00:29:24.467894Z",
+          "product_metadata": {
+            "scope": "Game",
+            "important_info": {
+              "id": "KXCS2GAME-2026-07-13",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** If a match is forfeited, cancelled, or otherwise not played before gameplay begins, the market will resolve to Fair Market Price. If gameplay has begun and the match is later awarded by forfeit, disqualification, or a similar ruling, the market will resolve based on the official result declared by the tournament organizer."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ESPORTSWIN.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXCS2GAME-26SEP281000GLNIP",
+        "seriesTicker": "KXCS2GAME",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXCS2GAME-26SEP281000GLNIP",
+        "observedAt": "2026-09-28T14:29:03.719Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "cd9cbd240438ed40c8af5ac0769890d25f388bfd46b82f64fe5688d00607f51d",
+        "rawMetadata": {
+          "title": "GamerLegion vs. NIP",
+          "category": "Sports",
+          "sub_title": "GamerLegion vs. NIP (Sep 28)",
+          "event_ticker": "KXCS2GAME-26SEP281000GLNIP",
+          "series_ticker": "KXCS2GAME",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "CS2",
+            "competition_scope": "Game"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2GAME",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:03.719Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "5b4d4fd5e21d2203f6c06136128e4198c55e3eaf433c4bba173c1075ca411a58",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:03.719Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPMIAH",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPMIAH",
+        "observedAt": "2026-09-28T14:29:04.048Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "e43237c5bbdabc827c61304179840f86f8206797a478329f52906d63b1c8a826",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional Miami Temperature",
+          "ticker": "KXTEMPMIAH",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/MIAWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-08T19:38:39.578288Z",
+          "product_metadata": {
+            "important_info": {
+              "id": "NHIGHD-bulk-2026-06-12",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** The data shown is 5 minutes delayed. Resolution for KXTEMPMIAH is based on Synoptic Data and calculated via Kalshi Weather Index Methodology. Please see additional details for more information."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/MIAWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPMIAH",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:04.048Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "96daedd022af4d51458bca49e79da236abef47d0bf94075ea2c1fa26e4717742",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:04.048Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXTEMPMIAH-26SEP2811",
+        "seriesTicker": "KXTEMPMIAH",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPMIAH-26SEP2811",
+        "observedAt": "2026-09-28T14:29:04.048Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "028e1f5db60596f9131835961f075d601368bce7a4ce0f625f26628fa51ecd55",
+        "rawMetadata": {
+          "title": "Temperature in Miami on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPMIAH-26SEP2811",
+          "series_ticker": "KXTEMPMIAH",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXCS2MAP",
+        "observedAt": "2026-09-28T14:29:04.358Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "2441abaa41bbf0d01345f045fa9e0d5448a4eb803b8face5c6e0a0d20ed7e6f4",
+        "rawMetadata": {
+          "tags": [
+            "Esports"
+          ],
+          "title": "Counter-Strike 2 Map Winner ",
+          "ticker": "KXCS2MAP",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "daily",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ESPORTSWIN.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-16T00:29:24.467894Z",
+          "product_metadata": {
+            "scope": "Map Winner",
+            "important_info": {
+              "id": "ESPORTSWIN-bulk-2026-07-13",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** If a map is forfeited, cancelled, or otherwise not played before gameplay begins, the market will resolve to Fair Market Price. If gameplay has begun in the map and the map is later awarded by forfeit, disqualification, or a similar ruling, the market will resolve based on the official result declared by the tournament organizer."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ESPORTSWIN.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXCS2MAP-26SEP281000GLNIP-1",
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXCS2MAP-26SEP281000GLNIP-1",
+        "observedAt": "2026-09-28T14:29:04.358Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "4522408050dcc330756d1acff5692bdcac2c437fbaa2c08c30b4205e0da0fdac",
+        "rawMetadata": {
+          "title": "GamerLegion vs. NIP: Map 1",
+          "category": "Sports",
+          "sub_title": "Map 1: GL vs. NIP (Sep 28)",
+          "event_ticker": "KXCS2MAP-26SEP281000GLNIP-1",
+          "series_ticker": "KXCS2MAP",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "CS2",
+            "competition_scope": "Map 1 Winner"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:04.358Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "c8a858fcc7324349cd8b0e1a8fba3ca707ac3e8a6ef0f94a8e788c4a85c31ead",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:04.358Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXTEMPLAXHS-26SEP2811",
+        "seriesTicker": "KXTEMPLAXHS",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPLAXHS-26SEP2811",
+        "observedAt": "2026-09-28T14:29:04.678Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "c9690d07b990b1311a63b1ed23d26acc4c5b9056c0f2dadf60f176e0b43e44da",
+        "rawMetadata": {
+          "title": "Temperature in Coastal Los Angeles on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPLAXHS-26SEP2811",
+          "series_ticker": "KXTEMPLAXHS",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPLAXHS",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPLAXHS",
+        "observedAt": "2026-09-28T14:29:04.678Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "a57d44d68d93742077262cade428a687c1ae23ce6b0a50b5d6529df843a68782",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional Coastal LA Temperature",
+          "ticker": "KXTEMPLAXHS",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/LAWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-25T15:19:08.647855Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/LAWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPLAXHS",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:04.678Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "9e6b4a61be6403bb98fe5b1e97506b1dbcd112269b234755055db987ef2b8a3f",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:04.678Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXCS2MAP",
+        "observedAt": "2026-09-28T14:29:05.067Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "2441abaa41bbf0d01345f045fa9e0d5448a4eb803b8face5c6e0a0d20ed7e6f4",
+        "rawMetadata": {
+          "tags": [
+            "Esports"
+          ],
+          "title": "Counter-Strike 2 Map Winner ",
+          "ticker": "KXCS2MAP",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "daily",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ESPORTSWIN.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-16T00:29:24.467894Z",
+          "product_metadata": {
+            "scope": "Map Winner",
+            "important_info": {
+              "id": "ESPORTSWIN-bulk-2026-07-13",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** If a map is forfeited, cancelled, or otherwise not played before gameplay begins, the market will resolve to Fair Market Price. If gameplay has begun in the map and the map is later awarded by forfeit, disqualification, or a similar ruling, the market will resolve based on the official result declared by the tournament organizer."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ESPORTSWIN.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXCS2MAP-26SEP281000GLNIP-3",
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXCS2MAP-26SEP281000GLNIP-3",
+        "observedAt": "2026-09-28T14:29:05.067Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "5b4a7f31f03d7954fce06bc6d9c8409785beae752eab6b647be1accef4b9e536",
+        "rawMetadata": {
+          "title": "GamerLegion vs. NIP: Map 3",
+          "category": "Sports",
+          "sub_title": "Map 3: GL vs. NIP (Sep 28)",
+          "event_ticker": "KXCS2MAP-26SEP281000GLNIP-3",
+          "series_ticker": "KXCS2MAP",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "CS2",
+            "competition_scope": "Map 3 Winner"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://bo3.gg/matches/finished",
+              "name": "B03"
+            },
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2MAP",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:05.067Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "06331b897cd5f099cd82c2165a365cacfdaf294d4b5dac04341490ae36e1d819",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:05.067Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPCHIHS",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPCHIHS",
+        "observedAt": "2026-09-28T14:29:05.554Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "e52157b736fed4bdfa10831dd26737733a031233e4d25d9f11ae929ec4df5eee",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional Chicago Metro Temperature",
+          "ticker": "KXTEMPCHIHS",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/CHIMETROWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-25T15:15:55.869038Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/CHIMETROWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://kalshi.com",
+              "name": "Kalshi"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPCHIHS",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:05.554Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "146d5772b6b2ebe9841cc897d3abe807cdcb41b126e5bba0f4ecbdb133889a2c",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:05.554Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXTEMPCHIHS-26SEP2811",
+        "seriesTicker": "KXTEMPCHIHS",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPCHIHS-26SEP2811",
+        "observedAt": "2026-09-28T14:29:05.554Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "104070576df93e53396b31dd0dbeeeb0dc5ab73eff466d058b83be2d049a5e89",
+        "rawMetadata": {
+          "title": "Temperature in Chicago Metro Area on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPCHIHS-26SEP2811",
+          "series_ticker": "KXTEMPCHIHS",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://kalshi.com",
+              "name": "Kalshi"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+        "seriesTicker": "KXINTLFRIENDLYTOTAL",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+        "observedAt": "2026-09-28T14:29:05.859Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "6536baac07bfd8aa050f91273d2dd982916fcb00e3b7a98b83769d8bf97581fd",
+        "rawMetadata": {
+          "title": "Kyrgyzstan vs Maldives: Total Goals",
+          "category": "Sports",
+          "sub_title": "KGZ vs MDV (Sep 28)",
+          "event_ticker": "KXINTLFRIENDLYTOTAL-26SEP28KGZMDV",
+          "series_ticker": "KXINTLFRIENDLYTOTAL",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "Intl Friendlies",
+            "competition_scope": "Point Total"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://www.foxsports.com",
+              "name": "Fox Sports"
+            },
+            {
+              "url": "https://espn.com",
+              "name": "ESPN"
+            }
+          ],
+          "collateral_return_type": ""
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXINTLFRIENDLYTOTAL",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:05.859Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "e2709289283b40bf0b90fecb77e4f37689060c31e3a48d699a238721e7bfef42",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:05.859Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXINTLFRIENDLYTOTAL",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXINTLFRIENDLYTOTAL",
+        "observedAt": "2026-09-28T14:29:05.859Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "b5156319b797d72ee74e03366382f18ac3dc9b1a4a201ce24067df6fc176bcad",
+        "rawMetadata": {
+          "tags": [
+            "Soccer"
+          ],
+          "title": "International Friendly Total",
+          "ticker": "KXINTLFRIENDLYTOTAL",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/SOCCERTOTALS.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-22T15:04:39.281951Z",
+          "product_metadata": {
+            "scope": "Point Total",
+            "important_info": {
+              "id": "SOCCERTOTAL-bulk-2026-04-23",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** The following market is based on the outcome after 90 minutes plus stoppage time. This does not include extra time or penalties."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/SOCCERTOTALS.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://www.foxsports.com",
+              "name": "Fox Sports"
+            },
+            {
+              "url": "https://espn.com",
+              "name": "ESPN"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPNYCHS",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXTEMPNYCHS",
+        "observedAt": "2026-09-28T14:29:06.177Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "2df7cdf0f95375a2d9f4ecc2d25ad3c28ed0404326c1e551b05e34b7c97ab281",
+        "rawMetadata": {
+          "tags": [
+            "Hourly temperature"
+          ],
+          "title": "Hourly Directional NYC Temperature",
+          "ticker": "KXTEMPNYCHS",
+          "category": "Climate and Weather",
+          "fee_type": "quadratic",
+          "frequency": "hourly",
+          "categories": [
+            "Climate and Weather"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/NYCWINDEX.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-25T15:14:26.051338Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/NYCWINDEX.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXTEMPNYCHS-26SEP2811",
+        "seriesTicker": "KXTEMPNYCHS",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXTEMPNYCHS-26SEP2811",
+        "observedAt": "2026-09-28T14:29:06.177Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "4f6beeadd7cf7d30e67789e5f75785f109085ead2a41b145b4d00c548bb2033c",
+        "rawMetadata": {
+          "title": "Temperature in New York City on Sep 28, 2026 at 11am EDT?",
+          "category": "Climate and Weather",
+          "sub_title": "On Sep 28, 2026 at 11am EDT",
+          "strike_date": "2026-09-28T15:00:00Z",
+          "event_ticker": "KXTEMPNYCHS-26SEP2811",
+          "series_ticker": "KXTEMPNYCHS",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "hourly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://synopticdata.com/",
+              "name": "Synoptic Data"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXTEMPNYCHS",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:06.177Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "f8093abde60f586342aed355403e35689dd2f6c0a737230d773d2c097f5ddccd",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:06.177Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2TOTALMAPS",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXCS2TOTALMAPS",
+        "observedAt": "2026-09-28T14:29:06.487Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "a9a0746a8a50bbf35cecdba09bd6ebe167b982de70875e88769e02fcf05780ab",
+        "rawMetadata": {
+          "tags": [
+            "Esports"
+          ],
+          "title": "CS2 Total Maps",
+          "ticker": "KXCS2TOTALMAPS",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ESPORTSMAPS.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-17T19:20:31.513077Z",
+          "product_metadata": {
+            "scope": "Total Maps"
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ESPORTSMAPS.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXCS2TOTALMAPS",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:06.487Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "897bde8659ab439f2c3df5dce20bfe4c515d746f3425ab81b72b764cb26b1d2d",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:06.487Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXCS2TOTALMAPS-26SEP281000GLNIP",
+        "seriesTicker": "KXCS2TOTALMAPS",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXCS2TOTALMAPS-26SEP281000GLNIP",
+        "observedAt": "2026-09-28T14:29:06.487Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "68e810d01e03492a7109d06da1da538b8d167e54b722fcc50bb661fd406a24cb",
+        "rawMetadata": {
+          "title": "GamerLegion vs. NIP: Total Maps",
+          "category": "Sports",
+          "sub_title": "Total Maps: GL vs. NIP (Sep 28)",
+          "event_ticker": "KXCS2TOTALMAPS-26SEP281000GLNIP",
+          "series_ticker": "KXCS2TOTALMAPS",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "CS2",
+            "competition_scope": "Total Maps"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://www.hltv.org/results",
+              "name": "HLTV"
+            },
+            {
+              "url": "https://egamersworld.com/",
+              "name": "Gamers World"
+            }
+          ],
+          "collateral_return_type": ""
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXITFMATCH",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXITFMATCH",
+        "observedAt": "2026-09-28T14:29:06.807Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "cb16b2240413b23a233b8a1a023be5601712f7d3aff65491969d7cf53d457513",
+        "rawMetadata": {
+          "tags": [
+            "Tennis"
+          ],
+          "title": "ITF Men's Match",
+          "ticker": "KXITFMATCH",
+          "category": "Sports",
+          "fee_type": "quadratic",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ACHIEVEMENTS.pdf",
+          "exchange_index": 3,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-24T19:09:05.922488Z",
+          "product_metadata": {
+            "scope": "Game",
+            "important_info": {
+              "id": "KXITFMATCH-2026-04-09",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information:** If the match does not start (signaled by a ball being played), all markets will resolve to **$0.50**. If a player withdraws or forfeits after a match has started, that player will resolve to **No**."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ACHIEVEMENTS.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://www.itftennis.com/en/",
+              "name": "ITF"
+            },
+            {
+              "url": "https://www.flashscoreusa.com/tennis/itf-men-singles/",
+              "name": "Flashscore"
+            },
+            {
+              "url": "https://www.foxsports.com",
+              "name": "Fox Sports"
+            },
+            {
+              "url": "https://www.espn.com",
+              "name": "ESPN"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXITFMATCH",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:06.807Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "8bc14006497abe3a0819958a289d351e9017fe57438316db2f89b707ed794bc1",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:06.807Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": "KXITFMATCH-26SEP29MEHBUL",
+        "seriesTicker": "KXITFMATCH",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXITFMATCH-26SEP29MEHBUL",
+        "observedAt": "2026-09-28T14:29:06.807Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "4862d27fa4c585fad954e5db3b10129632bb0a6816400973aba817a0a1663a62",
+        "rawMetadata": {
+          "title": "Mehrotra vs Bulte",
+          "category": "Sports",
+          "sub_title": "Mehrotra vs Bulte (Sep 29)",
+          "event_ticker": "KXITFMATCH-26SEP29MEHBUL",
+          "series_ticker": "KXITFMATCH",
+          "strike_period": "",
+          "exchange_index": 3,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "ITF",
+            "competition_scope": "Game"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://www.itftennis.com/en/",
+              "name": "ITF"
+            },
+            {
+              "url": "https://www.flashscoreusa.com/tennis/itf-men-singles/",
+              "name": "Flashscore"
+            },
+            {
+              "url": "https://www.foxsports.com",
+              "name": "Fox Sports"
+            },
+            {
+              "url": "https://www.espn.com",
+              "name": "ESPN"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": "KXAUDUSDAW-26OCT02",
+        "seriesTicker": "KXAUDUSDAW",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXAUDUSDAW-26OCT02",
+        "observedAt": "2026-09-28T14:29:07.137Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "7c6efdd551433940c40a35ca1a1a26fbd115b543e19a01e30b3a0d991375f9f6",
+        "rawMetadata": {
+          "title": "AUDUSD price on Oct 02 at 5:00 PM EDT",
+          "category": "Financials",
+          "sub_title": "Oct 02, 2026 at 5pm ET",
+          "event_ticker": "KXAUDUSDAW-26OCT02",
+          "series_ticker": "KXAUDUSDAW",
+          "strike_period": "",
+          "exchange_index": 0,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "cadence": "weekly"
+          },
+          "mutually_exclusive": false,
+          "settlement_sources": [
+            {
+              "url": "https://app.pyth.com/explore/FX.AUD%2FUSD?returnUrl=%2Fexplore%3Fsearch%3Daudusd%26state%3Dstable",
+              "name": "Pyth - AUDUSD"
+            }
+          ],
+          "collateral_return_type": "DIRECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXAUDUSDAW",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:07.137Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "57aa954d11d9cb996dc7d8371cf6b38ad662814f77edd89c88f21db000bb1333",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:07.137Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXAUDUSDAW",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXAUDUSDAW",
+        "observedAt": "2026-09-28T14:29:07.137Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "58dc8c0f154c1b910a8b5adfc26712cd140adf192c0c877e2cb175827077a47a",
+        "rawMetadata": {
+          "tags": [
+            "Foreign Exchange"
+          ],
+          "title": "AUDUSD Weekly",
+          "ticker": "KXAUDUSDAW",
+          "category": "Financials",
+          "fee_type": "quadratic",
+          "frequency": "weekly",
+          "categories": [
+            "Financials"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/FXAUDUSD.pdf",
+          "exchange_index": 0,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-23T14:19:46.704902Z",
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/FXAUDUSD.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://app.pyth.com/explore/FX.AUD%2FUSD?returnUrl=%2Fexplore%3Fsearch%3Daudusd%26state%3Dstable",
+              "name": "Pyth - AUDUSD"
+            }
+          ],
+          "additional_prohibitions": [
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": "KXATPMATCH-26SEP29MEDRUB",
+        "seriesTicker": "KXATPMATCH",
+        "sourceType": "official_event_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/events/KXATPMATCH-26SEP29MEDRUB",
+        "observedAt": "2026-09-28T14:29:07.498Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": null,
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "353cffc2e10bb4ca67418cb889af7f94f6a0360954d33766c660eff174950687",
+        "rawMetadata": {
+          "title": "Medvedev vs Rublev",
+          "category": "Sports",
+          "sub_title": "Medvedev vs Rublev (Sep 29)",
+          "event_ticker": "KXATPMATCH-26SEP29MEDRUB",
+          "series_ticker": "KXATPMATCH",
+          "strike_period": "",
+          "exchange_index": 3,
+          "last_updated_ts": "0001-01-01T00:00:00Z",
+          "product_metadata": {
+            "competition": "ATP Hangzhou",
+            "competition_scope": "Game"
+          },
+          "mutually_exclusive": true,
+          "settlement_sources": [
+            {
+              "url": "https://www.atptour.com/",
+              "name": "ATP"
+            }
+          ],
+          "collateral_return_type": "MECNET"
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXATPMATCH",
+        "sourceType": "official_series_api",
+        "sourceUrl": "https://external-api.kalshi.com/trade-api/v2/series/KXATPMATCH",
+        "observedAt": "2026-09-28T14:29:07.498Z",
+        "effectiveFrom": null,
+        "effectiveTo": null,
+        "feeType": "quadratic_with_maker_fees",
+        "feeMultiplier": "1.0000",
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "61cc201437386611deb2d58027f1f03f5302fa11307529719669405e6cd5d72f",
+        "rawMetadata": {
+          "tags": [
+            "Tennis"
+          ],
+          "title": "ATP Tennis Match",
+          "ticker": "KXATPMATCH",
+          "category": "Sports",
+          "fee_type": "quadratic_with_maker_fees",
+          "frequency": "custom",
+          "categories": [
+            "Sports"
+          ],
+          "contract_url": "https://assets.kalshi.com/regulatory/product-certifications/ACHIEVEMENTS.pdf",
+          "exchange_index": 3,
+          "fee_multiplier": 1,
+          "last_updated_ts": "2026-09-24T19:09:06.028275Z",
+          "product_metadata": {
+            "scope": "Game",
+            "important_info": {
+              "id": "KXATPMATCH-2026-04-09",
+              "title": "",
+              "message": "",
+              "markdown": "**Important information**: If the match does not begin (signaled by a ball being played), all markets, including set winner markets, will resolve to a **fair price** for each player in accordance with the rules. If a player withdraws or forfeits after the match has begun, that player will resolve to **No** for the main match market. Any markets that can be definitively determined at that point will be settled accordingly, while any additional prop markets will resolve to a **fair price**."
+            }
+          },
+          "contract_terms_url": "https://assets.kalshi.com/contract_terms/ACHIEVEMENTS.pdf",
+          "settlement_sources": [
+            {
+              "url": "https://www.atptour.com/",
+              "name": "ATP"
+            }
+          ],
+          "additional_prohibitions": [
+            "Current players, coaches, and staff of the league, association, or organization(s) governing the event. For college leagues/associations specifically, or where otherwise appropriate (as identified by the Exchange), this applies to current players/coaches/staff of the specific sport in <event> rather than the league/association as a whole (e.g., if the Division I Gonzaga Men’s Basketball Team is playing in <event>, this prohibition will restrict trades by current players/coaches/staff on NCAA Basketball, rather than all current players/coaches/staff in any NCAA sport).",
+            "Paid employees of the league and league participants",
+            "Owners of teams and the league",
+            "and household members and immediate family of all above",
+            "Persons who are employed by any of the Source Agencies are not permitted to trade on the Contract.",
+            "Persons who hold any material, non-public information on the Underlying are not permitted to trade on the Contract."
+          ]
+        }
+      },
+      {
+        "eventTicker": null,
+        "seriesTicker": "KXATPMATCH",
+        "sourceType": "official_fee_schedule",
+        "sourceUrl": "https://kalshi.com/docs/kalshi-fee-schedule.pdf",
+        "observedAt": "2026-09-28T14:29:07.498Z",
+        "effectiveFrom": "2026-07-07T00:00:00.000Z",
+        "effectiveTo": null,
+        "feeType": "quadratic",
+        "feeMultiplier": null,
+        "makerMultiplier": null,
+        "takerMultiplier": null,
+        "rawMetadataSha256": "fe54d922c90f6f4625ade2f4af9b90ad0721b5d22d89b392d1e1b28a5a003ea0",
+        "rawMetadata": {
+          "checkedAt": "2026-09-28T14:29:07.498Z",
+          "effectiveDate": "2026-07-07",
+          "exceptionStatus": "not_determined",
+          "generalMakerFactor": "0.0175",
+          "generalTakerFactor": "0.07",
+          "historicalApplicability": "unknown"
+        }
+      }
+    ]
+  },
+  "exp003Retrospective": {
+    "compared": 0,
+    "changed": 0,
+    "changes": []
+  },
+  "gates": {
+    "sample": true,
+    "fields": true,
+    "alignment": true,
+    "direction": true,
+    "queue": false,
+    "fees": false
+  },
+  "verdict": "COLLECT MORE EVIDENCE"
+}
