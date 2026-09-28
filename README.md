@@ -24,6 +24,8 @@ trading remains demo-only.
 - `apps/worker`: executable recorder with continuous and one-shot modes.
 - `packages/kalshi`: demo authentication, REST market data, demo WebSocket
   protocol, exact normalization, and a separate credential-free public client.
+- `packages/research`: read-only production-public microstructure metrics, bounded
+  queries, and reproducible reports; see [usage](packages/research/README.md).
 - `packages/db`: Drizzle schema, SQL migrations, Postgres.js connections, and
   transactional recorder queries compatible with Neon Postgres.
 - `docs/market-data.md`: sources, fields, timing, reliability, and verification.
@@ -107,6 +109,29 @@ Those commands require a database but do not use Kalshi API keys. Research must
 filter or group by source and reject stale observations as appropriate. See
 [market-data documentation](docs/market-data.md) for SQL proving rows were written
 and for gaps, freshness, depth, trade-summary, and reconnect limitations.
+
+## Read-only microstructure research
+
+EXP-002 evaluates whether sampled spreads, displayed depth, and short-horizon
+book behavior justify a later realistic fill simulator. Its [predefined
+protocol](experiments/EXP-002-production-microstructure/README.md) is immutable.
+The research package queries only persisted production-public rows; exclusions,
+run IDs, a UTC half-open window, timing tolerances, and Git provenance are explicit.
+
+```sh
+pnpm research:microstructure --from 2026-09-27T20:00:00.000Z \
+  --to 2026-09-27T23:00:00.000Z --runs YOUR-RUN-UUID \
+  --json ../../artifacts/research/report.json --formal
+```
+
+Commit the implementation before using `--formal`. Reports include per-market
+and aggregate spreads, observed sampled persistence, displayed sizes, top-three
+YES-side imbalance, approximate forward midpoint movement and a post-quote
+adverse-selection proxy. JSON paths resolve from `packages/research`; existing
+files are never overwritten. These are not fill or trade P&L estimates. See
+[research documentation](packages/research/README.md) for query limits and units.
+The dated [EXP-002 result](experiments/EXP-002-production-microstructure/result-2026-09-27.md)
+applies the predefined criteria to a stopped two-hour production-public run.
 
 ## Existing demo CLI
 

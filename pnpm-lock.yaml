@@ -201,6 +201,34 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
 
+  packages/research:
+    dependencies:
+      '@kalshi-lab/db':
+        specifier: workspace:*
+        version: link:../db
+      drizzle-orm:
+        specifier: 0.45.3
+        version: 0.45.3(@electric-sql/pglite@0.5.8)(postgres@3.4.9)
+    devDependencies:
+      '@electric-sql/pglite':
+        specifier: 0.5.8
+        version: 0.5.8
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: 26.4.1
+        version: 26.4.1
+      eslint:
+        specifier: 10.9.1
+        version: 10.9.1(jiti@2.7.0)(supports-color@7.2.0)
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+
   packages/typescript-config: {}
 
   packages/ui:
