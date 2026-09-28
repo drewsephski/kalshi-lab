@@ -123,6 +123,12 @@ const concentration = (rows: Array<{ family: string }>): Concentration => {
   const byFamily = addCounts(rows.map((row) => ({ family: row.family, count: 1, sharePct: null }))).sort(
     (a, b) => b.count - a.count || a.family.localeCompare(b.family),
   );
+  return concentrationFromCounts(byFamily);
+};
+const concentrationFromCounts = (rows: FamilyRow[]): Concentration => {
+  const byFamily = addCounts(rows).sort(
+    (a, b) => b.count - a.count || a.family.localeCompare(b.family),
+  );
   const total = sum(byFamily.map((row) => row.count));
   return {
     byFamily,
@@ -300,7 +306,7 @@ export function combineCohortReports(
         byFamily: queueContexts,
       },
       concentration: {
-        publicTrades: concentration(publicTradeFamilies),
+        publicTrades: concentrationFromCounts(publicTradeFamilies),
         candidateOrders: concentration(candidates),
         relevantFlowCandidates: concentration(relevantFlow),
         queueSupportedHypotheticalFills: concentration(fills),

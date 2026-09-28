@@ -139,6 +139,18 @@ function report(input: {
 }
 
 test("combined replication sums only the two cohort-scoped windows", () => {
+  const exp005 = report({
+    from: "2026-09-28T16:00:00.000Z",
+    to: "2026-09-28T16:20:00.000Z",
+    tradeRunId: "t2",
+    bookRunId: "b2",
+    tradeId: "trade-2",
+    candidateId: "candidate-2",
+    filled: false,
+    snapshots: 50,
+    family: "soccer-BELFRA",
+  });
+  exp005.fees.concentration.publicTrades.byFamily[0]!.count = 3;
   const combined = combineCohortReports(
     report({
       from: "2026-09-28T14:18:00.000Z",
@@ -151,17 +163,7 @@ test("combined replication sums only the two cohort-scoped windows", () => {
       snapshots: 25,
       family: "weather-MIA",
     }),
-    report({
-      from: "2026-09-28T16:00:00.000Z",
-      to: "2026-09-28T16:20:00.000Z",
-      tradeRunId: "t2",
-      bookRunId: "b2",
-      tradeId: "trade-2",
-      candidateId: "candidate-2",
-      filled: false,
-      snapshots: 50,
-      family: "soccer-BELFRA",
-    }),
+    exp005,
   );
   assert.equal(combined.collection.trades, 2);
   assert.equal(combined.collection.bookRuns.reduce((n, row) => n + row.snapshots, 0), 75);
@@ -170,6 +172,14 @@ test("combined replication sums only the two cohort-scoped windows", () => {
   assert.equal(combined.queue.queueSupportedHypotheticalFills, 1);
   assert.equal(combined.fees.queueSupportedContexts.total, 1);
   assert.equal(combined.fees.concentration.publicTrades.byFamily.length, 2);
+  assert.equal(combined.fees.concentration.publicTrades.largestFamilySharePct, 75);
+  assert.deepEqual(
+    combined.fees.concentration.publicTrades.byFamily.map(({ family, count }) => ({ family, count })),
+    [
+      { family: "soccer-BELFRA", count: 3 },
+      { family: "weather-MIA", count: 1 },
+    ],
+  );
   assert.equal(combined.provenance.from, "2026-09-28T14:18:00.000Z");
   assert.equal(combined.provenance.toExclusive, "2026-09-28T16:20:00.000Z");
   assert.notEqual(combined.provenance.bookDataSha256, "b1");
