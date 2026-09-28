@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { resolve } from "node:path";
+import { relative, resolve } from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { parseArgs } from "node:util";
 
@@ -36,7 +36,7 @@ type QueueRow = {
 type AlignmentRow = { tradeId: string; preBookId: string | null; postBookId: string | null };
 type Report = {
   provenance: Record<string, unknown>;
-  collection: { trades: number; collectorRuns: Array<{ id: string; gitCommit: string; gitDirty: boolean }> };
+  collection: { trades: number; collectorRuns: Array<{ id: string; gitCommit: string; gitDirty: boolean; config: Record<string, unknown> }> };
   alignment: Record<string, unknown>;
   queue: Record<string, unknown>;
   fees: { queueSupportedContexts: unknown; concentration: unknown; sourceSnapshots: unknown[] };
@@ -90,7 +90,9 @@ async function main() {
   if (!values.manifest || !values.json)
     throw new Error("Usage: research:replication --manifest PATH --json PATH [--formal]");
   const root = resolve(import.meta.dirname, "../../..");
-  const manifestPath = resolve(root, values.manifest);
+  const manifestPath = resolve(process.cwd(), values.manifest);
+  const manifestGitPath = relative(root, manifestPath);
+  if (manifestGitPath.startsWith("../")) throw new Error("Selection manifest must be inside the repository.");
   const bytes = await readFile(manifestPath);
   const selection = JSON.parse(bytes.toString("utf8")) as Selection;
   if (
@@ -115,7 +117,7 @@ async function main() {
   const protocolBytes = execFileSync("git", ["show", `${PROTOCOL_SHA}:${PROTOCOL_PATH}`], { cwd: root });
   if (!protocolBytes.equals(await readFile(resolve(root, PROTOCOL_PATH))))
     throw new Error("EXP-005 protocol differs from the committed protocol.");
-  const selectionBytes = execFileSync("git", ["show", `HEAD:${values.manifest}`], { cwd: root });
+  const selectionBytes = execFileSync("git", ["show", `HEAD:${manifestGitPath}`], { cwd: root });
   if (!selectionBytes.equals(bytes))
     throw new Error("Formal selection manifest must be committed before analysis.");
   if (values.formal) {
@@ -205,7 +207,7 @@ async function main() {
         protocolSha256: createHash("sha256").update(protocolBytes).digest("hex"),
         analysisCommit,
         gitDirty: false,
-        manifestPath: values.manifest,
+        manifestPath: manifestGitPath,
         manifestSha256: createHash("sha256").update(bytes).digest("hex"),
         reportSha256: Object.fromEntries(Object.entries(reports).map(([name, report]) => [name, sha(report)])),
       },
@@ -215,12 +217,13 @@ async function main() {
       gates,
       verdict,
     };
-    await writeFile(resolve(root, values.json), JSON.stringify(result, null, 2), { flag: "wx" });
+    const outputPath = resolve(process.cwd(), values.json);
+    await writeFile(outputPath, JSON.stringify(result, null, 2), { flag: "wx" });
     console.log(JSON.stringify({
       exp004: { trades: exp004.collection.trades, queue: exp004.queue },
       exp005: { trades: exp005.collection.trades, queue: exp005.queue },
       combined: { trades: combinedReport.collection.trades, queue: combinedReport.queue },
-      output: values.json,
+      output: relative(root, outputPath),
     }));
   } finally {
     await rm(temp, { recursive: true, force: true });

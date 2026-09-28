@@ -119,6 +119,20 @@ export function createTradeStore<T extends PgQueryResultHKT>(
         .set({ heartbeatAt: new Date(), error })
         .where(eq(tradeCollectorRuns.id, runId));
     },
+    async updateCollectionMetrics(runId: string, metrics: Record<string, number>) {
+      if (
+        Object.values(metrics).some(
+          (value) => !Number.isSafeInteger(value) || value < 0,
+        )
+      )
+        throw new Error("Invalid collection metrics.");
+      await db
+        .update(tradeCollectorRuns)
+        .set({
+          config: sql`${tradeCollectorRuns.config} || ${JSON.stringify({ collectionMetrics: metrics })}::jsonb`,
+        })
+        .where(eq(tradeCollectorRuns.id, runId));
+    },
     async finishRun(
       runId: string,
       status: "completed" | "stopped" | "failed",

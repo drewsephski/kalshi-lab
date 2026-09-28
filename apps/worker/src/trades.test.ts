@@ -35,6 +35,19 @@ test("paged trade retrieval deduplicates IDs and returns timestamp order", async
   assert.equal(requests[1]!.searchParams.get("cursor"), "next");
   assert.equal(requests[1]!.searchParams.get("min_ts"), "999");
 });
+test("paged trade retrieval reports every successfully fetched page", async () => {
+  let pages = 0;
+  const client = new KalshiPublicMarketDataClient({
+    fetch: async () =>
+      Response.json(
+        pages === 0
+          ? { trades: [row("a", 2)], cursor: "next" }
+          : { trades: [row("b", 1)], cursor: "" },
+      ),
+  });
+  await fetchTradeWindow(client, "T", 0, () => pages++);
+  assert.equal(pages, 2);
+});
 test("repeating cursor is a continuity failure", async () => {
   const client = new KalshiPublicMarketDataClient({
     fetch: async () => Response.json({ trades: [row("a", 1)], cursor: "loop" }),
