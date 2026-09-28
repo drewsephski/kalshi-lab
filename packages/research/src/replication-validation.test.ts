@@ -20,8 +20,14 @@ const run = {
   stoppedAt: "2026-09-28T12:20:01.000Z",
 };
 
-test("committed session selection accepts only clean completed runs within its window", () => {
+test("committed session selection accepts only clean finalized runs within its window", () => {
   assert.doesNotThrow(() => assertRunInSessionWindow(run, session));
+  assert.doesNotThrow(() =>
+    assertRunInSessionWindow(
+      { ...run, status: "stopped" },
+      { ...session, kind: "book" },
+    ),
+  );
   assert.throws(
     () =>
       assertRunInSessionWindow(

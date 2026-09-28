@@ -27,7 +27,9 @@ export function assertRunInSessionWindow(
     run.id !== input.runId ||
     run.gitDirty ||
     run.gitCommit !== input.collectCommit ||
-    run.status !== "completed" ||
+    !(input.kind === "book"
+      ? ["completed", "stopped"].includes(run.status)
+      : run.status === "completed") ||
     run.error !== null
   )
     throw invalidRun;
