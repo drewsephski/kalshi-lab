@@ -18,6 +18,7 @@ import type { Ledger, MakerObservation } from "./simulation/types.ts";
 import {
   alignTrade,
   classifyFeeWindow,
+  queueAlignedTrades,
   queueConsumption,
   type EvidenceBook,
   type EvidenceTrade,
@@ -254,6 +255,8 @@ async function main() {
       yesPrice: row.yesPrice,
       quantity: row.quantity,
       aggressorSide: row.aggressorSide as EvidenceTrade["aggressorSide"],
+      takerOutcomeSide: row.takerOutcomeSide as EvidenceTrade["takerOutcomeSide"],
+      takerBookSide: row.takerBookSide as EvidenceTrade["takerBookSide"],
       sideProvenance: row.sideProvenance as EvidenceTrade["sideProvenance"],
       isBlockTrade: row.isBlockTrade,
     }));
@@ -263,6 +266,15 @@ async function main() {
         ...(tradesByTicker.get(trade.ticker) ?? []),
         trade,
       ]);
+    const queueTradesByTicker = new Map<string, EvidenceTrade[]>();
+    for (const [ticker, tickerTrades] of tradesByTicker)
+      queueTradesByTicker.set(
+        ticker,
+        queueAlignedTrades(tickerTrades, books.get(ticker) ?? []),
+      );
+    const evidenceTradesById = new Map(
+      evidenceTrades.map((trade) => [trade.tradeId, trade]),
+    );
     let pre = 0,
       post = 0,
       both = 0,
@@ -344,6 +356,7 @@ async function main() {
       fillReached = 0,
       unobservable = 0;
     const orderQueueEvidence = [] as {
+      candidateId: string;
       simulationId: string;
       ticker: string;
       eventTicker: string | null;
@@ -356,21 +369,38 @@ async function main() {
       queueFullyConsumed: boolean;
       queueSupportedHypotheticalFill: boolean;
       supportingTradeIds: string[];
+      relevantExecutedQuantity: string;
+      ourOneContractThresholdReached: boolean;
+      relevantDirectedTrades: {
+        tradeId: string;
+        executedAt: string;
+        yesPrice: string;
+        quantity: string;
+        takerOutcomeSide: EvidenceTrade["takerOutcomeSide"];
+        takerBookSide: EvidenceTrade["takerBookSide"];
+        aggressorSide: EvidenceTrade["aggressorSide"];
+        preBookId: string;
+        postBookId: string;
+      }[];
       unknownReason: string | null;
     }[];
+    const alignmentsById = new Map(
+      tradeAlignments.map((alignment) => [alignment.tradeId, alignment]),
+    );
     for (const order of posted) {
       const expiryTime = new Date(
         Date.parse(order.scheduledActiveAt) + order.expiryMs,
       );
       const evidence = queueConsumption({
         queueAhead: order.displayedQueueAhead,
-        orderedTrades: tradesByTicker.get(order.ticker) ?? [],
+        orderedTrades: queueTradesByTicker.get(order.ticker) ?? [],
         limitPrice: order.entryLimitPrice,
         side: "yes_buy",
         activationTime: new Date(order.orderActiveAt!),
         expiryTime,
       });
       orderQueueEvidence.push({
+        candidateId: order.simulationId,
         simulationId: order.simulationId,
         ticker: order.ticker,
         eventTicker: order.eventTicker ?? null,
@@ -384,6 +414,23 @@ async function main() {
         queueFullyConsumed: evidence.queueFullyConsumed,
         queueSupportedHypotheticalFill: evidence.ourFillReached,
         supportingTradeIds: evidence.supportingTradeIds,
+        relevantExecutedQuantity: evidence.queueConsumed,
+        ourOneContractThresholdReached: evidence.ourFillReached,
+        relevantDirectedTrades: evidence.supportingTradeIds.map((tradeId) => {
+          const trade = evidenceTradesById.get(tradeId)!;
+          const alignment = alignmentsById.get(tradeId)!;
+          return {
+            tradeId,
+            executedAt: trade.executedAt.toISOString(),
+            yesPrice: trade.yesPrice,
+            quantity: trade.quantity,
+            takerOutcomeSide: trade.takerOutcomeSide ?? null,
+            takerBookSide: trade.takerBookSide ?? null,
+            aggressorSide: trade.aggressorSide,
+            preBookId: alignment.preBookId!,
+            postBookId: alignment.postBookId!,
+          };
+        }),
         unknownReason: evidence.unknownReason,
       });
       if (evidence.supportingTradeIds.length) flow++;
@@ -520,7 +567,7 @@ async function main() {
           ? "PROCEED TO MAKER-SIMULATOR-V2"
           : "COLLECT MORE EVIDENCE";
     const legacy = values["exp003-ledger"]
-      ? await readExp003(values["exp003-ledger"], tradesByTicker)
+      ? await readExp003(values["exp003-ledger"], queueTradesByTicker)
       : { compared: 0, changed: 0, changes: [] };
     const report = {
       provenance: {
@@ -543,6 +590,7 @@ async function main() {
         events: events.length,
         seriesFamilies: [...families],
         trades: trades.length,
+        nonBlockTrades: trades.filter((trade) => !trade.isBlockTrade).length,
         uniqueTradeIds: new Set(trades.map((t) => t.providerTradeId)).size,
         duplicatesSuppressed: runs.reduce(
           (n, run) => n + run.duplicatesSeen,
@@ -561,16 +609,32 @@ async function main() {
               Number.NEGATIVE_INFINITY,
             )
           : null,
-        collectorRuns: runs.map((r) => ({
-          id: r.id,
-          startedAt: r.startedAt,
-          stoppedAt: r.stoppedAt,
-          status: r.status,
-          error: r.error,
-          gitCommit: r.gitCommit,
-          gitDirty: r.gitDirty,
-          config: r.config,
-        })),
+        collectorRuns: runs.map((r) => {
+          const runTrades = trades.filter(
+            (trade) => trade.collectionRunId === r.id,
+          );
+          return {
+            id: r.id,
+            startedAt: r.startedAt,
+            stoppedAt: r.stoppedAt,
+            status: r.status,
+            error: r.error,
+            gitCommit: r.gitCommit,
+            gitDirty: r.gitDirty,
+            tradesWritten: r.tradesWritten,
+            duplicatesSeen: r.duplicatesSeen,
+            selectedTrades: runTrades.length,
+            selectedNonBlockTrades: runTrades.filter(
+              (trade) => !trade.isBlockTrade,
+            ).length,
+            paginationPages: Number(
+              (r.config.collectionMetrics as
+                | { paginationPages?: number }
+                | undefined)?.paginationPages ?? 0,
+            ),
+            config: r.config,
+          };
+        }),
         bookRuns: (bookData?.runs ?? []).map((r) => ({
           id: r.id,
           startedAt: r.startedAt,
@@ -654,8 +718,16 @@ async function main() {
           effectiveTo: f.effectiveTo,
           feeType: f.feeType,
           feeMultiplier: f.feeMultiplier,
+          makerFeeApplicable:
+            f.makerMultiplier === null
+              ? null
+              : Number(f.makerMultiplier) !== 0,
           makerMultiplier: f.makerMultiplier,
           takerMultiplier: f.takerMultiplier,
+          evidenceLayer:
+            f.sourceType === "official_fee_schedule"
+              ? "formula_known_applicability_unproven"
+              : "official_applicability_evidence",
           rawResponseHash: hash(f.rawMetadata),
           rawMetadataSha256: hash(f.rawMetadata),
           rationale:

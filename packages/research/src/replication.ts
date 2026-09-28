@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { relative, resolve } from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { parseArgs } from "node:util";
+import { assertRunInSessionWindow } from "./replication-validation.ts";
 
 const PROTOCOL_PATH = "experiments/EXP-005-independent-replication/README.md";
 const PROTOCOL_SHA = "6985257e03f42faa88c35b602cad2198ee56ceb7";
@@ -36,7 +37,12 @@ type QueueRow = {
 type AlignmentRow = { tradeId: string; preBookId: string | null; postBookId: string | null };
 type Report = {
   provenance: Record<string, unknown>;
-  collection: { trades: number; collectorRuns: Array<{ id: string; gitCommit: string; gitDirty: boolean; config: Record<string, unknown> }> };
+  collection: {
+    trades: number;
+    nonBlockTrades: number;
+    collectorRuns: Array<{ id: string; gitCommit: string; gitDirty: boolean; status: string; error: string | null; startedAt: string; stoppedAt: string | null; config: Record<string, unknown> }>;
+    bookRuns: Array<{ id: string; gitCommit: string; gitDirty: boolean; status: string; error: string | null; startedAt: string; stoppedAt: string | null }>;
+  };
   alignment: Record<string, unknown>;
   queue: Record<string, unknown>;
   fees: { queueSupportedContexts: unknown; concentration: unknown; sourceSnapshots: unknown[] };
@@ -137,12 +143,22 @@ async function main() {
       if (name === "exp005") {
         const selectedRunIds = new Set(newWindow.tradeRunIds);
         const actual = report.collection.collectorRuns.filter((run) => selectedRunIds.has(run.id));
-        for (const session of included)
+        const selectedBookIds = new Set(newWindow.bookRunIds);
+        const actualBooks = report.collection.bookRuns.filter((run) => selectedBookIds.has(run.id));
+        for (const session of included) {
           for (const runId of session.tradeRunIds) {
-            const run = actual.find((candidate) => candidate.id === runId);
-            if (!run || run.gitDirty || run.gitCommit !== session.collectCommit)
-              throw new Error(`Session ${session.sessionId} has missing, dirty, or SHA-mismatched trade run ${runId}.`);
+            assertRunInSessionWindow(
+              actual.find((candidate) => candidate.id === runId),
+              { ...session, runId, kind: "trade" },
+            );
           }
+          for (const runId of session.bookRunIds) {
+            assertRunInSessionWindow(
+              actualBooks.find((candidate) => candidate.id === runId),
+              { ...session, runId, kind: "book" },
+            );
+          }
+        }
       }
     };
     const newWindow: Window = {
@@ -185,7 +201,7 @@ async function main() {
     const gates = {
       temporallySeparatedSessions: { pass: totalSessions >= 5 && exp005Sessions >= 3, total: totalSessions, exp005: exp005Sessions, requiredTotal: 5, requiredExp005: 3 },
       independentFamilies: { pass: familyTradeCount >= 5 && (maxFamilyShare ?? 100) <= 50, represented: familyTradeCount, largestFamilySharePct: maxFamilyShare, requiredFamilies: 5, maxSharePct: 50 },
-      newUniqueNonBlockTrades: { pass: exp005.collection.trades >= 2500, actual: exp005.collection.trades, required: 2500 },
+      newUniqueNonBlockTrades: { pass: exp005.collection.nonBlockTrades >= 2500, actual: exp005.collection.nonBlockTrades, required: 2500 },
       combinedCandidateOrders: { pass: combinedCandidates >= 150, actual: combinedCandidates, required: 150 },
       combinedRelevantFlowCandidates: { pass: combinedFlow >= 50, actual: combinedFlow, required: 50 },
       combinedQueueSupportedFills: { pass: combinedFillCount >= 10 && fillFamilies.size >= 3, actual: combinedFillCount, supportingFamilies: fillFamilies.size, requiredFills: 10, requiredFamilies: 3 },
